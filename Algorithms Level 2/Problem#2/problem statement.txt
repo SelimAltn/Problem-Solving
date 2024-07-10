@@ -1,0 +1,31 @@
+Bir C++ programı yazarak, 1'den başlayarak kullanıcının girdiği bir sayıya kadar olan asal sayıları bulan ve ekrana yazdıran bir program oluşturunuz. Program, kullanıcının girdiği sayıya kadar olan asal sayıları bulmalı ve bu asal sayıları ekrana listelemelidir.
+# Program Çıktısı Örneği:
+
+Varsayalım ki kullanıcı `20` girdi:
+
+```markdown
+enter a number :
+20
+
+asal sayilar 1 den 20 kadar :
+1
+2
+3
+5
+7
+11
+13
+17
+19
+
+```
+
+# **kontrolnoktası Fonksiyonu:**
+
+- Girilen sayının asal olup olmadığını kontrol eder.
+- Bunun için sayıyı 2'den yarısına kadar olan sayılara böler. Eğer sayı bu aralıktaki herhangi bir sayıya tam bölünüyorsa, asal değildir ve `asaldeğil` değeri döndürülür. Hiçbir sayıya bölünmezse, asal olduğu kabul edilip `asal` değeri döndürülür.
+
+# Notlar:
+
+- `kontrolnoktası` fonksiyonu, `round(number / 2)` ile sayının yarısını bulur ve asal sayı kontrolünü bu değere kadar yapar. Ancak genelde asallık kontrolü için sadece `sqrt(number)` yeterlidir.
+- `1` asal bir sayı olarak kabul edilmez. Ancak bu kod `1`'i asal olarak kabul ediyor ve yazdırıyor. Bu durum asallık tanımına göre değiştirilebilir.

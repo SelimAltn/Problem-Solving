@@ -1,0 +1,27 @@
+Bir pozitif tam sayının mükemmel sayı olup olmadığını kontrol eden  bir C++ programı yazınız.  Bir mükemmel sayı, kendisi hariç pozitif bölenlerinin toplamı sayının kendisine eşit olan sayıdır. Örneğin, 6 mükemmel bir sayıdır çünkü 1, 2 ve 3 bölenlerinin toplamı 6'ya eşittir.
+
+## Örnek Çıktı:
+
+Varsayalım ki kullanıcı sırasıyla 6, 28 ve 10 girsin:
+
+```csharp
+enter a number
+6
+6 is mukemmeldir
+
+enter a number
+28
+28 is mukemmeldir
+
+enter a number
+10
+10 is mukemmel degil
+
+```
+
+## **KontrolNoktasi Fonksiyonu:**
+
+- Verilen sayının mükemmel olup olmadığını kontrol eder.
+- Bir sayının mükemmel sayı olması için, kendisi hariç pozitif bölenlerinin toplamının sayının kendisine eşit olması gerekir.
+- Örneğin, 6 mükemmel bir sayıdır çünkü 1, 2 ve 3 bölenlerinin toplamı 6'ya eşittir.
+- Fonksiyon, mükemmel bir sayı bulursa `mukemmelSayi`, değilse `mukemmelDegil` döner.

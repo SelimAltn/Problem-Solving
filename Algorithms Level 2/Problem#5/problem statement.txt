@@ -1,0 +1,16 @@
+Bir C++ programı yazarak, kullanıcının girdiği bir sayıyı string olarak dönüştürüp, bu sayının her bir basamağını ayrı ayrı ekrana yazdıran bir program oluşturunuz.
+
+**Örnek:**
+
+- Kullanıcı `375` sayısını girdiğinde, program bu sayının her bir rakamını ayrı bir satıra yazdırmalıdır.
+
+**Örnek Çıktı:**
+
+```perl
+enter a number
+375
+3
+7
+5
+
+```

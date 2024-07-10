@@ -1,0 +1,17 @@
+Bir pozitif tam sayının mükemmel sayı olup olmadığını kontrol eden ve aynı zamanda 1'den girilen sayıya kadar olan tüm mükemmel sayıları bulan bir C++ programı yazınız.  Bir mükemmel sayı, kendisi hariç pozitif bölenlerinin toplamı sayının kendisine eşit olan sayıdır. Örneğin, 6 mükemmel bir sayıdır çünkü 1, 2 ve 3 bölenlerinin toplamı 6'ya eşittir.
+
+### Programın Çıktı Örneği:
+
+Varsayalım ki kullanıcı `28` sayısını girdi:
+
+```perl
+perlKodu kopyala
+enter a number
+28
+28 is mukemmeldir
+mukemmel sayı : 6
+mukemmel sayı : 28
+mukemmel sayı : 496
+mukemmel sayı : 8128
+
+```
