@@ -1,0 +1,28 @@
+<aside>
+❓ Bir C++ programı yazarak, kullanıcının girdiği bir sayının basamaklarını sırasıyla ekrana yazdıran bir program oluşturunuz. Ancak, sayının basamakları sola dayalı olacak şekilde yazdırılmalıdır (örneğin, 1234 sayısı için önce 1, sonra 2, 3, ve 4 yazdırılacaktır).
+
+</aside>
+
+## **Örnek:**
+
+- Kullanıcı `1234` sayısını girdiğinde, program bu sayıyı tersine çevirecek ve basamaklarını sırasıyla ekrana yazdıracaktır.
+
+**Örnek Çıktı:**
+
+```css
+cssKodu kopyala
+enter a number
+1234
+1
+2
+3
+4
+
+```
+
+## Açıklama:
+
+- **ReadNumber** fonksiyonu, kullanıcıdan bir sayı alır.
+- **sayinintersi** fonksiyonu, sayıyı tersine çevirir.
+- **PrintRakamlar** fonksiyonu, tersine çevrilmiş sayının her bir basamağını ekrana yazdırır.
+- **main** fonksiyonu, kullanıcıdan alınan sayıyı işleyip sonucu ekrana yazdırır.

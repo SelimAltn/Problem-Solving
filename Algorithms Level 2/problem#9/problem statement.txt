@@ -1,0 +1,27 @@
+<aside>
+❓ Bir C++ programı yazarak, kullanıcının girdiği bir sayının içinde her bir rakamın kaç kez tekrarlandığını bulan bir program oluşturunuz. Program, kullanıcının girdiği sayıyı almalı ve bu sayının içinde 0'dan 9'a kadar olan rakamların her birinin kaç kez geçtiğini hesaplayarak sonucu ekrana yazdırmalıdır.
+
+</aside>
+
+## **Örnek:**
+
+- Kullanıcı `122334` sayısını girdiğinde, program `1`, `2`, `3`, ve `4` rakamlarının kaç kez tekrarlandığını ekrana yazdırmalıdır.
+
+**Örnek Çıktı:**
+
+```css
+javaKodu kopyala
+enter a number
+122334
+1 sayinin tekrari = 1
+2 sayinin tekrari = 2
+3 sayinin tekrari = 2
+4 sayinin tekrari = 1
+
+```
+
+## Açıklama:
+
+- **ReadNumber** fonksiyonu, kullanıcıdan bir sayı alır.
+- **PrintTekrar** fonksiyonu, belirtilen sayıda belirtilen bir rakamın kaç kez tekrarlandığını bulur.
+- **Tekrarhesaplama** fonksiyonu, 0'dan 9'a kadar her bir rakam için tekrarlama sayısını kontrol eder ve bu bilgiyi ekrana yazdırır.

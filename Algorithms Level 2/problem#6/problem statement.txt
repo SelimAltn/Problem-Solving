@@ -1,0 +1,27 @@
+<aside>
+❓ Bir C++ programı yazarak, kullanıcının girdiği bir sayının basamakları toplamını hesaplayan bir program oluşturunuz.
+
+Bu program, kullanıcıdan bir sayı alarak, bu sayının basamaklarının toplamını hesaplar ve sonucu ekrana yazdırır. Bu programı yazabilmek için şu soruyu sorabilirsiniz:
+
+</aside>
+
+
+## **Örnek:**
+
+- Kullanıcı `1234` sayısını girdiğinde, program bu sayının basamaklarının toplamını (1 + 2 + 3 + 4 = 10) hesaplamalı ve ekrana yazdırmalıdır.
+
+**Örnek Çıktı:**
+
+```css
+enter a number
+1234
+10
+
+```
+
+## PrintSum :
+
+- **Döngü Şartı:** `number` sıfırdan büyük olduğu sürece döngü devam eder. Yani sayıdaki tüm basamaklar işlenene kadar döngü çalışır.
+- **`simdilik = number % 10`:** Sayının son basamağını bulur. `% 10` işlemi, sayının modunu alarak (kalanını hesaplayarak) son basamağı elde eder. Örneğin, `number` 1234 ise `simdilik` 4 olur.
+- **`number /= 10`:** Sayının son basamağını kaldırır. Bu işlem, sayıyı 10'a bölerek bir basamağı kaldırır. Örneğin, `number` 1234 iken bu işlemden sonra `number` 123 olur.
+- **`sum += simdilik`:** Bulunan basamak `sum` değişkenine eklenir. Bu sayede tüm basamaklar sırayla `sum` değişkenine eklenir.

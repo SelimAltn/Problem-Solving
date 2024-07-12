@@ -1,0 +1,26 @@
+<aside>
+❓ Verilen bir tam sayının palindrom olup olmadığını kontrol eden bir program yazınız. Palindrom sayılar, tersiyle aynı olan sayılardır. Program, kullanıcıdan bir sayı almalı, bu sayının palindrom olup olmadığını kontrol etmeli ve sonucu ekrana yazdırmalıdır.
+
+</aside>
+
+### Programın Çıktısı:
+
+Kullanıcı, örneğin `12321` sayısını girdiğinde, program şu şekilde bir çıktı verecektir:
+
+```csharp
+csharpKodu kopyala
+enter a number
+12321
+12321 is polindrome
+
+```
+
+Kullanıcı palindrom olmayan bir sayı, örneğin `12345` girerse, çıktı şu şekilde olacaktır:
+
+```csharp
+csharpKodu kopyala
+enter a number
+12345
+12345 is not polindrome
+
+```

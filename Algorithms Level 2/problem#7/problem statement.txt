@@ -1,0 +1,15 @@
+<aside>
+❓ Bir C++ programı yazarak, kullanıcının girdiği bir sayıyı tersine çeviren bir program oluşturunuz. Program, kullanıcının girdiği sayıyı almalı, bu sayıyı tersine çevirmeli ve sonuç olarak ters çevrilmiş sayıyı ekrana yazdırmalıdır.
+
+</aside> 
+- Kullanıcı `1234` sayısını girdiğinde, program bu sayıyı tersine çevirerek `4321` sonucunu ekrana yazdırmalıdır.
+
+**Örnek Çıktı:**
+
+```yaml
+yamlKodu kopyala
+enter a number
+1234
+4321
+
+```
