@@ -1,0 +1,40 @@
+Verilen 1 ile 26 arasında bir tam sayı için, alfabetik karakterlerle bir tersine üçgen deseni oluşturan bir program yazınız. Program, kullanıcıdan bir sayı almalı ve bu sayıyı kullanarak, A harfinden başlayıp ilgili harfe kadar olan tersine bir üçgen deseni oluşturmalıdır. Harfler her satırda azalarak yukarıdan aşağıya doğru bir desen oluşturmalıdır.
+
+# Açıklama :
+
+- **Dış Döngü (`for (int i = 65 + number - 1; i >= 65; i--)`)**:
+    - `i` değeri, ASCII tablosundaki büyük harflerin sıralamasına göre başlar. `65 + number - 1` ifadesi, kullanıcının girdiği sayıya denk gelen harfi belirler ve döngü, `A`'ya (`65` ASCII değeri) kadar geri gider.
+    - Bu döngü, her satırda hangi harfin yazdırılacağını belirler.
+- **İç Döngü (`for (int j = 1; j <= number - (65 + number - 1 - i); j++)`)**:
+    - İç döngü, her satırda kaç tane harf yazdırılacağını belirler. İlk satırda en büyük sayı kadar harf yazdırılırken, sonraki satırlarda bu sayı birer birer azalır.
+    - `char(i)` ifadesi, `i` değerini karaktere çevirerek ilgili harfi yazdırır.
+        
+        # Programın Çıktısı:
+        
+        Kullanıcı, örneğin `5` sayısını girdiğinde,  bir çıktı verecektir:
+        
+        ```css
+        cssKodu kopyala
+        enter a number
+        5
+        
+         EEEEE
+         DDDD
+         CCC
+         BB
+         A
+        
+        ```
+        
+        Kullanıcı, `3` sayısını girdiğinde ise çıktı şu şekilde olacaktır:
+        
+        ```css
+        cssKodu kopyala
+        enter a number
+        3
+        
+         CCC
+         BB
+         A
+        
+        ```

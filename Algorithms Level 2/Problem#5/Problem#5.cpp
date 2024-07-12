@@ -25,3 +25,5 @@ int main()
 {
     PrintSayilarinRakamlari(donusturme(ReadNumber("enter a number ")));
 }
+
+

@@ -1,0 +1,38 @@
+Verilen 1 ile 25 arasında bir tam sayı için, alfabetik karakterlerle bir üçgen deseni oluşturan bir program yazınız. Program, kullanıcıdan bir sayı almalı ve bu sayıyı kullanarak, A harfinden başlayıp ilgili harfe kadar bir üçgen deseni oluşturmalıdır. Her satırda, satır numarasına denk gelen harf kadar karakter yazılmalıdır.
+
+# Açıklama :
+
+- **Dış Döngü (`for (int i = 65; i <= 65 + number - 1; i++)`)**:
+    - Bu döngü, alfabetik sıraya göre `A` harfinden başlayarak kullanıcı tarafından girilen `number` kadar harf ilerler.
+    - `i`, her satırda hangi harfin yazdırılacağını belirler ve ASCII değeri kullanılarak karaktere çevrilir (`char(i)`).
+- **İç Döngü (`for (int j = 1; j <= number - (65 + number - 1 - i); j++)`)**:
+    - Bu döngü, her satırda kaç adet harf yazdırılacağını belirler. `i` değeri, kaç kez yazdırılacağını belirler. İlk satırda `A`, ikinci satırda `B` harfi iki kez yazdırılır ve bu şekilde devam eder.
+    - `char(i)` ifadesi, `i` değerini karaktere çevirerek ilgili harfi yazdırır.
+    
+    # Programın Çıktısı:
+    
+    Kullanıcı, örneğin `5` sayısını girdiğinde,  çıktı verecektir:
+    
+    ```css
+    cssKodu kopyala
+    enter a number
+    5
+    A
+    BB
+    CCC
+    DDDD
+    EEEEE
+    
+    ```
+    
+    Kullanıcı, `3` sayısını girdiğinde ise çıktı şu şekilde olacaktır:
+    
+    ```css
+    cssKodu kopyala
+    enter a number
+    3
+    A
+    BB
+    CCC
+    
+    ```

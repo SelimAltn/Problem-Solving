@@ -1,0 +1,18 @@
+Bir C++ programı yazın ve bu programda, PrintHarfTekrari adlı bir fonksiyon tanımlayın. Bu fonksiyon, büyük harflerden oluşan 3 harfli tüm olası kombinasyonları üretip ekrana yazdıracaktır. Örneğin, bu kombinasyonlar "AAA", "AAB", "AAC" ... "ZZZ" şeklinde olmalıdır. Ana programda bu fonksiyonu çağırarak ekrana çıktısını verin.
+# **Programın Çıktısı:**
+
+Program çalıştırıldığında, çıktısı şu şekilde olacaktır:
+
+```
+AAA  AAB  AAC  ...  ZZY  ZZZ
+```
+
+# **Programın Açıklaması:**
+
+1. **`PrintHarfTekrari` Fonksiyonu:**
+    - Bu fonksiyon üç adet iç içe döngü kullanarak büyük harflerden oluşan üç karakterli tüm kombinasyonları oluşturur.
+    - ASCII değerleri kullanılarak 'A' harfinden 'Z' harfine kadar tüm harfler döngüler aracılığıyla üretilir.
+    - Her döngüde, sırasıyla üç harfli bir kelime oluşturulur ve bu kelime ekrana yazdırılır.
+    - En son kelime oluşturulduktan sonra, yeni bir kombinasyon için `Kelime` değişkeni sıfırlanır.
+2. **Ana Program (`main` Fonksiyonu):**
+    - `main` fonksiyonunda, sadece `PrintHarfTekrari` fonksiyonu çağrılır ve bu fonksiyonun çıktısı ekrana yazdırılır.
