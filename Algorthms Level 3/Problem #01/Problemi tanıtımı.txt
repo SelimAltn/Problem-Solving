@@ -1,0 +1,3 @@
+### **Problem Tanımı:**
+
+Kullanıcının girdiği bir sayıyı alıp, onu metin formatında yazıya döndüren bir program yazmanız gerekmektedir. Program, 0’dan başlayarak milyarlar seviyesine kadar olan tüm sayıları desteklemelidir. Sayılar, gruplar halinde (birler, onlar, yüzler, binler, milyonlar, milyarlar) ayrılmalı .
