@@ -1,8 +1,0 @@
-Kullanıcıdan bir yıl girişi alınarak bu yılın artık yıl (leap year) olup olmadığını kontrol eden ve yıl içerisindeki:
-
-- Gün sayısı,
-- Saat sayısı,
-- Dakika sayısı,
-- Saniye sayısını
-
-hesaplayan ve ekrana yazdıran bir program yazılması istenmektedir. Program, kullanıcı `n` veya `N` girene kadar çalışmaya devam eder.

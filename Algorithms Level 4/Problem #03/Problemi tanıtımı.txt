@@ -1,9 +1,0 @@
-Bir yılın **artık yıl (Leap year)** olup olmadığını belirleyen bir program yazmamız gerekiyor.
-
-### **Artık Yıl Nedir?**
-
-- **Eğer yıl 400'e tam bölünüyorsa**, artık yıldır.
-- **Eğer yıl 4'e tam bölünüyor ama 100'e tam bölünmüyorsa**, yine artık yıldır.
-- **Diğer durumlarda artık yıl değildir.
-Leap year :366 gün içeriyor** ve Şubat ayı **29 gün süryu**
-- Şartlar tek satırda olucaklar
