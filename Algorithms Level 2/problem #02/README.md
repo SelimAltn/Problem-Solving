@@ -1,0 +1,2 @@
+### Problem Tanımı
+Bir C++ programı yazarak, 1'den başlayarak kullanıcının girdiği bir sayıya kadar olan asal sayıları bulan ve ekrana yazdıran bir program oluşturunuz. Program, kullanıcının girdiği sayıya kadar olan asal sayıları bulmalı ve bu asal sayıları ekrana listelemelidir.

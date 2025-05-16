@@ -1,2 +1,0 @@
-### Problem Tanımı
-Bir C++ programı yazarak, 1 ile 10 arasındaki sayıların çarpım tablosunu ekrana yazdıran bir program oluşturunuz. Program, çarpım tablosunu düzgün ve hizalı bir şekilde ekranda göstermelidir.
