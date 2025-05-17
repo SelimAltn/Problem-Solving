@@ -1,4 +1,0 @@
-﻿  ConsoleApplication3.cpp
-D:\programing\c++\programing kurslar\c++ kurs 5\problem#35\ConsoleApplication3\ConsoleApplication3.cpp(71,15): warning C4244: 'bağımsız değişken': 'time_t' - 'unsigned int' dönüşümü; veri kaybı olabilir
-D:\programing\c++\programing kurslar\c++ kurs 5\problem#35\ConsoleApplication3\ConsoleApplication3.cpp(70,10): warning C4101: 'Kontrol': yerel değişken başvurusu kaldırıldı
-  ConsoleApplication3.vcxproj -> D:\programing\c++\programing kurslar\c++ kurs 5\problem#35\x64\Debug\ConsoleApplication3.exe
