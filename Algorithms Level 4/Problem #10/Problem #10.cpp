@@ -25,7 +25,7 @@ short NumberOfDayesInMonth(short month, short year) {
 
 }
 
-short Dey(short day, short month, short year) {
+short NumberOfDaysFromBeginningOfYear(short day, short month, short year) {
 	short Total=0;
 	for (int i = 1; i <= month - 1; i++) {
 		Total += NumberOfDayesInMonth(i, year);
@@ -39,6 +39,6 @@ int main()
 	short day = ReadNumber("Please enter a Day", 1, 31, "only 1-31");
 	short month = ReadNumber("Please enter a month", 1, 12, "only 1-12");
 	short year = ReadNumber("Please enter a year", 1, 3000, "1-3000");
-	cout << "Number of days the begining of the year is " << Dey(day, month, year);
+	cout << "Number of days the begining of the year is " << NumberOfDaysFromBeginningOfYear(day, month, year);
 	return 0;
 }
