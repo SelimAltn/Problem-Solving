@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+
 short ReadNumber(string mesage, int from, int to, string hataMesage) {
 	short number;
 	do {

@@ -124,7 +124,7 @@ stDate CalculateVacationReturnDate(stDate DateFrom, short VacationDays)
 		if (IsBusinessDay(DateFrom)) {
 			VacationDays--;
 		}
-		if (VacationDays == 0) break; // Fazladan artmayı engeller
+		if (VacationDays == 0) break; 
 		DateFrom = IncreaseDateByOneDays(DateFrom);
 	}
 

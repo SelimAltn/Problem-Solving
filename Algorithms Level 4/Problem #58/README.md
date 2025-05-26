@@ -39,10 +39,6 @@ Bu tür kontroller, özellikle:
 
 ---
 
-![alt text](image-1-1.png)
-
----
-
 ## ✅ Örnek Çıktı
 
 ```txt
