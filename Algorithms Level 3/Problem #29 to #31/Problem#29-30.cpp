@@ -21,6 +21,10 @@ string UpperAllString(string Word) {
     }
     return Word;
 }
+char InvertLetterCase(char C) {
+    return islower(C) ? toupper(C) : tolower(C);
+}
+
 string LowerAllString(string Word) {
     for (int i = 0; i < Word.length(); i++) {
         Word[i] = tolower(Word[i]);
@@ -44,12 +48,14 @@ short CountCapitalLetters(string Word) {
     }
     return Count;
 }
-short CountLetter(string Word, char C) {
+short CountLetter(string Word, char C,bool MatchCase=true) {
     short Count = 0;
-    islower(C) ? Word = LowerAllString(Word) : Word = UpperAllString(Word);   
+    if(!MatchCase)
+        islower(C) ? Word = LowerAllString(Word) : Word = UpperAllString(Word);
     for (int i = 0; i < Word.length(); i++) {
         if (Word[i] == C)
             Count++;
+        
     }
     return Count;
 }
@@ -63,6 +69,8 @@ int main()
 
     char C = ReadChar("Please Enter Your Char ? ");
     cout << "Latter '" << C << "' Count : " << CountLetter(Word, C)<<endl;
+    cout << "Latter '" << C << "' Or '"<< InvertLetterCase(C)<<"'Count : " << CountLetter(Word, C,false)<<endl;
+
     
     
 }
