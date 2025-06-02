@@ -1,30 +1,33 @@
-# 📚 Date Library – C++ Tarih İşleme Kütüphanesi
+# 📚 Date Library – C++ Date Handling Library
 
-## 💡 Genel Bakış
+## 💡 Overview
 
-Bu kütüphane, C++ dilinde tarih ve dönem (period) işlemlerini kapsamlı ve modüler şekilde gerçekleştirmek amacıyla oluşturulmuştur. Projede daha önce ayrı ayrı geliştirilen ve test edilen problemlerden elde edilen tüm işlevler, bu kütüphane altında bütünleştirilmiş ve tekrarsız şekilde sadeleştirilmiştir.
+This library is designed to perform comprehensive and modular date and period operations in C++.  
+All functions included have been collected from previously developed and tested problems and unified under this library with a clean and non-redundant structure.
 
-## 🛠️ Kapsam ve Özellikler
+## 🛠️ Scope & Features
 
-* Tarihlerle ilgili temel işlemler (arttırma, azaltma, karşılaştırma)
-* Dönem (başlangıç–bitiş) analizleri ve çakışma kontrolü
-* İş günü, hafta sonu, yılbaşı vb. özel günlerle ilgili kontroller
-* Takvim bastırma, gün/hafata/yıl farkı hesaplamaları
-* Kullanımı kolaylaştıran okuma/yazma fonksiyonları
+* Basic date operations (increment, decrement, comparison)
+* Period (start–end) analysis and overlap checking
+* Workday, weekend, New Year’s Day, and other special day checks
+* Calendar printing, day/week/year difference calculations
+* Convenient read/write utility functions for ease of use
 
-## 🧱 Yapı
+## 🧱 Structure
 
 ```
+
 project/
 │
-├── main.cpp           # Kütüphane kullanım örnekleri
-├── Date.h             # Fonksiyon prototipleri, veri yapıları, enumlar
-└── Date.cpp           # Fonksiyonların implementasyonları
+├── main.cpp           # Usage examples of the library
+├── Date.h             # Function prototypes, data structures, enums
+└── Date.cpp           # Function implementations
+
 ```
 
-Tüm kodlar `Date` adında bir namespace altında organize edilmiştir. Bu sayede isim çakışmaları önlenmiş, modüler yapı korunmuştur.
+All code is organized under the `Date` namespace, which avoids naming conflicts and ensures modular design.
 
-## ⚙️ Kullanım
+## ⚙️ Usage
 
 ```cpp
 #include "Date.h"
@@ -33,20 +36,21 @@ using namespace Date;
 
 int main() {
     stDate today = GetTodayDate();
-    PrintDate("Bugünün tarihi:", today);
+    PrintDate("Today's date:", today);
     return 0;
 }
 ```
 
-## 🧪 Test Edilen Problemler
+## 🧪 Verified Problem Set
 
-Bu kütüphane, daha önce çözülmüş ve her biri ayrı bir `README.md` dosyası ile belgelenmiş 50'dan fazla farklı tarih probleminden derlenmiştir. Fonksiyonlar bu problemlerde test edilmiş, optimize edilmiş ve tekrar eden kodlar temizlenmiştir.
+This library has been compiled from over **50 previously solved and documented date-related problems**, each with its own dedicated `README.md`.
+All functions have been thoroughly tested, optimized, and cleaned up to eliminate code duplication.
 
-## 📌 Notlar
+## 📌 Notes
 
-* Kod yapısı C++ standartlarına uygundur.
-* Genişletilebilir ve dış projelerde kullanılabilir durumdadır.
-* Gerekli olan her şey `Date.h` ve `Date.cpp` içinde tanımlıdır. Dış bağımlılık yoktur.
+* The code structure complies with modern C++ standards.
+* It is extensible and ready for use in external projects.
+* Everything needed is defined within `Date.h` and `Date.cpp` – there are **no external dependencies**.
 
 ---
 

@@ -329,4 +329,9 @@ namespace StringLib
         }
         return S2;
     }
+    bool AreStringsEqual(string S1, string S2) {
+        S1 = LowerAllString(S1);
+        S2 = LowerAllString(S2);
+        return S1 == S2;
+    }
 }

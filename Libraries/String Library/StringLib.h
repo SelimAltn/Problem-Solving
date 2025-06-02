@@ -41,6 +41,7 @@ namespace StringLib {
     string ReplaceWordInString(string Str, string StringToReplace, string ReplaceTo, bool MatchCase = true);
     string ReplaceWordInStringUsingBuiltInFunction(string Str, string StringToReplace, string ReplaceTo);
     string RemoveAllOunctuationsFromString(string Str);
+    bool AreStringsEqual(string S1, string S2);
 
     extern const char VowelChars[10];
 }

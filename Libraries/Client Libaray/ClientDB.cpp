@@ -21,8 +21,8 @@ namespace ClientDB
     sClientData ReadClient()
     {
         sClientData Client;
-        cout << "Enter Client Account Number" << endl;
-        getline(cin >> ws, Client.AccountNumber);
+        
+        Client.AccountNumber = ReadAccountNumber();
         Client.Name = ReadString("Enter Client Name");
         Client.PinCode = ReadString("Enter Client Pin Code");
         Client.Phone = ReadString("Enter Client Phone");
@@ -39,7 +39,7 @@ namespace ClientDB
         stClientRecord += to_string(Client.AccountBalance);
         return stClientRecord;
     }
-    sClientData ConvertLinetoRecord(string LineData, string Seperator = "#//#")
+    sClientData ConvertLinetoRecord(string LineData, string Seperator)
     {
         sClientData Client;
         vector<string> vString;
@@ -167,6 +167,16 @@ namespace ClientDB
         }
         return vClints;
     }
+    void FindClient() {
+        sClientData client;
+        vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
+        string AccountNumber = ReadAccountNumber(false);
+        if (FindClientByAccountNumber(AccountNumber, vClients, client)) {
+            PrintClientData(client);
+        }
+        else
+            cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+    }
     bool FindClientByAccountNumber(string AccountNumber, vector<sClientData> vClients, sClientData &client)
     {
         for (sClientData c : vClients)
@@ -174,6 +184,18 @@ namespace ClientDB
             if (c.AccountNumber == AccountNumber)
             {
                 client = c;
+                return true;
+            }
+        }
+        return false;
+    }
+    bool IsAccountNumberExists(string AccountNumber, vector<sClientData> vClients)
+    {
+        for (sClientData c : vClients)
+        {
+            if (StringLib::AreStringsEqual(c.AccountNumber,AccountNumber))
+            {
+       
                 return true;
             }
         }
@@ -191,11 +213,32 @@ namespace ClientDB
         }
         return false;
     }
+    string ReadAccountNumber(bool Check) {
+        string AccountNumber;
+
+        if (Check) {
+            bool IsExists;
+            vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
+            do {
+                cout << "Enter Client Account Number" << endl;
+                getline(cin >> ws, AccountNumber);
+                IsExists = IsAccountNumberExists(AccountNumber, vClients);
+                if (IsExists)
+                    cout << "This account number already exists. Please enter a unique account number." << endl;
+            } while (IsExists);
+        }
+        else {
+            cout << "Enter Client Account Number" << endl;
+            getline(cin >> ws, AccountNumber);
+        }
+        return AccountNumber;
+        
+    }
 
     bool DeleteClientByAccountNumber(vector<sClientData> &vClients)
     {
         sClientData client;
-        string AccountNumber = ReadString("Please enter AccountNumber?");
+        string AccountNumber =ReadAccountNumber(false);
         char Answer;
         if (FindClientByAccountNumber(AccountNumber, vClients, client))
         {
@@ -236,7 +279,7 @@ namespace ClientDB
     bool UpdateClientByAccountNumber(vector<sClientData> &vClients)
     {
         sClientData client, newClient;
-        string AccountNumber = ReadString("Please enter AccountNumber?");
+        string AccountNumber =ReadAccountNumber(false);
         char Answer;
         if (FindClientByAccountNumber(AccountNumber, vClients, client))
         {

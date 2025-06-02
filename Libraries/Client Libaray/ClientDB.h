@@ -14,7 +14,7 @@ using namespace std;
 
 namespace ClientDB {
 
-    const string fileName = "your-default-path\\file.txt";
+    const string fileName = "D:\programing\\Algorithms & Problem-Solving\\Problem-Solving\\Algorithms Level 3\\Problem #50\\file.txt";
 
     struct sClientData {
         string AccountNumber;
@@ -27,6 +27,8 @@ namespace ClientDB {
 
     double ReadNumber(string Message);
     string ReadString(string Message);
+    void FindClient();
+    string ReadAccountNumber(bool Check = true);
     sClientData ReadClient();
     void PrintClientRecord(sClientData Client);
     string ConvertRecordToLine(sClientData Client, string Seperator = "#//#");
@@ -42,6 +44,7 @@ namespace ClientDB {
     vector<sClientData> SaveCleintsDataToFile(vector<sClientData> vClients);
 
     bool FindClientByAccountNumber(string AccountNumber, vector<sClientData> vClients, sClientData& client);
+    bool IsAccountNumberExists(string AccountNumber, vector<sClientData> vClients);
     bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector<sClientData>& vClients);
     bool DeleteClientByAccountNumber(vector<sClientData>& vClients);
 
