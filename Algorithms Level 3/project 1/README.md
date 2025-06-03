@@ -10,7 +10,7 @@ The program uses two custom libraries:
 ---
 ## 💾 Dependencies
 - [StringLib](../../Libraries/String%20Library/StringLib.h) (for string manipulation functions)
-- [ClientDB](../../Libraries/Client%20Libaray/ClientDB.h) (for ClientDB manipulation functions)
+- [ClientDB](../../Libraries/Client%20Libaray/ClientDB.h) (for ClientDB manipulation functions)+
 
 ---
 
