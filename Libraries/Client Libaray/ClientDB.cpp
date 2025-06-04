@@ -54,11 +54,13 @@ namespace ClientDB
 
     void PrintClientData(sClientData data)
     {
+        cout << "---------------------------------------------\n";
         cout << "Account Number : " << data.AccountNumber << endl;
         cout << "Pin Code : " << data.PinCode << endl;
         cout << "Name : " << data.Name << endl;
         cout << "Phone : " << data.Phone << endl;
         cout << "Account Balance : " << data.AccountBalance << endl;
+        cout << "---------------------------------------------\n";
     }
 
     void AddDataLineToFile(string ClientLine)
@@ -116,31 +118,49 @@ namespace ClientDB
         }
         return vClients;
     }
-    void PrintClientRecord(sClientData Client)
+    void PrintClientRecord(sClientData Client,bool ShortVersion)
     {
-        cout << "| " << setw(15) << left << Client.AccountNumber;
-        cout << "| " << setw(10) << left << Client.PinCode;
-        cout << "| " << setw(40) << left << Client.Name;
-        cout << "| " << setw(12) << left << Client.Phone;
-        cout << "| " << setw(12) << left << Client.AccountBalance;
+        if (!ShortVersion) {
+            cout << "| " << setw(15) << left << Client.AccountNumber;
+            cout << "| " << setw(10) << left << Client.PinCode;
+            cout << "| " << setw(40) << left << Client.Name;
+            cout << "| " << setw(12) << left << Client.Phone;
+            cout << "| " << setw(12) << left << Client.AccountBalance;
+        }
+        else {
+            cout << "| " << setw(15) << left << Client.AccountNumber;
+            cout << "| " << setw(40) << left << Client.Name;
+            cout << "| " << setw(12) << left << Client.AccountBalance;
+        }
+        
     }
-    void ShowAllClientsFromFile(vector<sClientData> vClients)
+    void ShowAllClientsFromFile(vector<sClientData> vClients, bool ShortVersion)
     {
-        cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s).";
-        cout << "\n_______________________________________________________";
-        cout << "_________________________________________\n"
-             << endl;
-        cout << "| " << left << setw(15) << "Accout Number";
-        cout << "| " << left << setw(10) << "Pin Code";
-        cout << "| " << left << setw(40) << "Client Name";
-        cout << "| " << left << setw(12) << "Phone";
-        cout << "| " << left << setw(12) << "Balance";
+        if (!ShortVersion) {
+            cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s).";
+            cout << "\n_______________________________________________________";
+            cout << "_________________________________________\n" << endl;
+            cout << "| " << left << setw(15) << "Accout Number";
+            cout << "| " << left << setw(10) << "Pin Code";
+            cout << "| " << left << setw(40) << "Client Name";
+            cout << "| " << left << setw(12) << "Phone";
+            cout << "| " << left << setw(12) << "Balance";
+        }
+        else {
+            cout << "\n\t\t\t\t\tBalances List (" << vClients.size() << ") Client(s).";
+            cout << "\n_______________________________________________________";
+            cout << "_________________________________________\n" << endl;
+            cout << "| " << left << setw(15) << "Accout Number";
+            cout << "| " << left << setw(40) << "Client Name";
+            cout << "| " << left << setw(12) << "Balance";
+
+        }
         cout << "\n_______________________________________________________";
         cout << "_________________________________________\n"
              << endl;
         for (sClientData client : vClients)
         {
-            PrintClientRecord(client);
+            PrintClientRecord(client, ShortVersion);
             cout << endl;
         }
         cout << "\n_______________________________________________________";
