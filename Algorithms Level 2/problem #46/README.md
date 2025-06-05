@@ -1,25 +1,25 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan sürekli olarak bir sayı alır ve bu sayının **mutlak değerini (absolute value)** hesaplayarak ekrana yazdırır. Program sonsuz döngü içinde çalışır ve kullanıcı çıkış yapmadığı sürece yeni girişleri kabul etmeye devam eder.
-
----
-
-### 📌 Programın İşleyişi
-
-1. `İnput()` fonksiyonu ile kullanıcıdan bir tamsayı alınır.
-2. `MutlakDiger()` fonksiyonu:
-
-   * Sayının mutlak değeri `if` yapısıyla hesaplanır:
-
-     * Eğer sayı negatifse (`number < 0`), `-1` ile çarpılır.
-     * Pozitif veya 0 ise olduğu gibi bırakılır.
-   * Hem orijinal sayı hem de sonucu ekrana yazdırılır:
-     `My abs : |orijinal| = mutlak değer`
-3. `main()` fonksiyonu `while (true)` döngüsüyle sürekli çalışır.
+This program continuously takes an integer input from the user and calculates the **absolute value** of that number, displaying it on the screen. It runs inside an infinite loop and keeps accepting new input unless the user exits manually.
 
 ---
 
-### ✅ Örnek Çıktı
+### 📌 Program Workflow
+
+1. The `Input()` function takes an integer from the user.
+2. The `AbsoluteValue()` function:
+
+   * Calculates the absolute value using an `if` structure:
+
+     * If the number is negative (`number < 0`), it is multiplied by `-1`.
+     * If it's positive or zero, it is returned as-is.
+   * Both the original number and the result are printed on the screen:
+     `My abs : |original| = absolute value`
+3. The `main()` function runs continuously in a `while (true)` loop.
+
+---
+
+### ✅ Example Output
 
 ```
 Enter a Number : 
@@ -37,11 +37,12 @@ My abs : |17| = 17
 
 ---
 
-### 🎯 Amaç
+### 🎯 Purpose
 
-Bu problem kullanıcıya:
+This problem teaches the user how to:
 
-* Koşullu ifadelerle (if-else) mutlak değer hesaplamayı,
-* Giriş/çıkış işlemleri yapmayı,
-* Döngüler ile sürekli çalışan etkileşimli program yazmayı
-  öğretir. Ayrıca matematiksel bir kavram olan **|x| = x veya -x** prensibini kod üzerinden pekiştirmeyi amaçlar.
+* Calculate absolute values using conditional statements (`if-else`),
+* Handle input/output operations,
+* Write interactive programs that run continuously using loops.
+
+Additionally, it reinforces the mathematical concept **|x| = x or -x** through code.

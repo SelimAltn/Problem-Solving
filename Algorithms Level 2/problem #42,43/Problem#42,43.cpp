@@ -1,100 +1,94 @@
 ﻿#include <iostream>
 using namespace std;
 
-void EnterAnumber(string Message,int &number)
+void EnterNumber(string message, int& number)
 {
-    cout << Message << endl;
+    cout << message << endl;
     do
     {
         cin >> number;
         if (number > 100 || number < 0)
-            cout << "enter a number betwin 0-100";
+            cout << "Enter a number between 0 and 100" << endl;
 
     } while (number > 100 || number < 0);
-    
 }
-int RandumNamber(int form ,int to)
-{
-    return rand() % (to - form + 1) + form;
 
+int GenerateRandomNumber(int from, int to)
+{
+    return rand() % (to - from + 1) + from;
 }
-void DiziOlusturma(int length ,int Dizi[])
+
+void FillArray(int length, int arr[])
 {
     for (int i = 0; i < length; i++)
     {
-        Dizi[i] = RandumNamber(1, 100);
-
+        arr[i] = GenerateRandomNumber(1, 100);
     }
 }
-void DiziYazdirma(int Dizi[],int length)
+
+void PrintArray(int arr[], int length)
 {
     cout << "{ ";
     for (int i = 0; i < length; i++)
     {
-        cout << Dizi[i] << " ";
+        cout << arr[i] << " ";
     }
     cout << "}" << endl;
-
 }
 
-void TekSayilarinSayisini(int Dizi[],int length)
+void CountOddNumbers(int arr[], int length)
 {
-    int Sayac=0;
-    int sum=0;
-    int TekSayilarinDizisi[100];
-    int TekIndex = 0;
-    for (int i = 0; i < length; i++)
-    {
-        if (Dizi[i] % 2 != 0)
-        {
-            Sayac++;
-            sum += Dizi[i];
-            TekSayilarinDizisi[TekIndex++] = Dizi[i];
-
-        }
-
-    }
-    cout << "Tek Sayilarin Dizisi : ";
-    DiziYazdirma(TekSayilarinDizisi, Sayac);
-    cout << "Bu dizide Tek Sayilarin Sayısının : " << Sayac << endl;
-    cout << "Bu dizide Tek Sayilarin Toplami : " << sum << endl;
-
-
-}
-void CiftSayilarinSayisini(int Dizi[], int length)
-{
-    int Sayac = 0;
+    int count = 0;
     int sum = 0;
-    int CiftSayilarinDizisi[100];
-    int CiftIndex = 0;
+    int oddNumbers[100];
+    int oddIndex = 0;
+
     for (int i = 0; i < length; i++)
     {
-        if (Dizi[i] % 2 == 0)
+        if (arr[i] % 2 != 0)
         {
-            Sayac++;
-            sum += Dizi[i];
-            CiftSayilarinDizisi[CiftIndex++] = Dizi[i];
-
+            count++;
+            sum += arr[i];
+            oddNumbers[oddIndex++] = arr[i];
         }
-
     }
-    cout << "Cift Sayilarin Dizisi : ";
-    DiziYazdirma(CiftSayilarinDizisi, Sayac);
-    cout << "Bu dizide Cift Sayilarin Sayısının : " << Sayac << endl;
-    cout << "Bu dizide Cift Sayilarin Toplami : " << sum << endl;
 
-
+    cout << "Odd Numbers Array: ";
+    PrintArray(oddNumbers, count);
+    cout << "Count of Odd Numbers: " << count << endl;
+    cout << "Sum of Odd Numbers: " << sum << endl;
 }
+
+void CountEvenNumbers(int arr[], int length)
+{
+    int count = 0;
+    int sum = 0;
+    int evenNumbers[100];
+    int evenIndex = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        if (arr[i] % 2 == 0)
+        {
+            count++;
+            sum += arr[i];
+            evenNumbers[evenIndex++] = arr[i];
+        }
+    }
+
+    cout << "Even Numbers Array: ";
+    PrintArray(evenNumbers, count);
+    cout << "Count of Even Numbers: " << count << endl;
+    cout << "Sum of Even Numbers: " << sum << endl;
+}
+
 int main()
 {
-    
-    int Number ,Arr[100];
-    EnterAnumber("İstediniz Matrisin Sayisini Giriniz", Number);
-    DiziOlusturma(Number, Arr);
-    DiziYazdirma(Arr, Number);
-    TekSayilarinSayisini(Arr, Number);
-    cout << endl<<endl;
-    CiftSayilarinSayisini(Arr, Number);
-   
+    int number, arr[100];
+    EnterNumber("Enter the number of elements for the array:", number);
+    FillArray(number, arr);
+    PrintArray(arr, number);
+    CountOddNumbers(arr, number);
+    cout << endl << endl;
+    CountEvenNumbers(arr, number);
 }
-

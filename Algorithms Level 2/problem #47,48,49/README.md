@@ -1,38 +1,38 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan ondalıklı (float) bir sayı alarak bu sayıya uygulanan üç farklı **yuvarlama işlemini** simüle eder:
+This program takes a decimal (float) number from the user and simulates three different **rounding operations** on it:
 
-1. **Round (Matematiksel Yuvarlama)**
-2. **Floor (Aşağı Yuvarlama)**
-3. **Ceil (Yukarı Yuvarlama)**
+1. **Round (Mathematical Rounding)**
+2. **Floor (Rounding Down)**
+3. **Ceil (Rounding Up)**
 
-Kullanıcı menüden bir işlem seçer ve sonuç ona göre hesaplanıp ekrana yazdırılır. Sayı negatif veya pozitif olsa bile kurallar doğru şekilde uygulanır.
-not : bu Problem toplam #47+#48+#49 temsil eder 
+The user selects an operation from the menu, and the result is calculated and printed accordingly. The rules are correctly applied whether the number is negative or positive.
+Note: This problem represents the combination of #47 + #48 + #49.
 
 ---
 
-### 📌 Programın İşleyişi:
+### 📌 Program Workflow:
 
-* Kullanıcıdan ondalıklı bir sayı alınır (örneğin: `-2.7`, `3.14`, `5.5`).
-* Sayı tam ve küsuratlı kısmına ayrılır.
-* Kullanıcı aşağıdaki işlemlerden birini seçer:
+* A decimal number is taken from the user (e.g., `-2.7`, `3.14`, `5.5`).
+* The number is separated into its integer and fractional parts.
+* The user selects one of the following operations:
 
   1. **Round:**
 
-     * `x.5` ve üstü değerler bir üst tam sayıya, altı ise bir alt tam sayıya yuvarlanır.
-     * Örn: `3.7` → `4`, `2.3` → `2`, `-2.5` → `-3`
-  2. **Floor (Float olarak adlandırılmış):**
+     * Values of `x.5` and above are rounded up to the next integer, values below `x.5` are rounded down.
+     * Example: `3.7` → `4`, `2.3` → `2`, `-2.5` → `-3`
+  2. **Floor (Referred to as "Float"):**
 
-     * Sayı daima aşağıya yuvarlanır (en yakın küçük tam sayı).
-     * Örn: `3.7` → `3`, `-2.3` → `-3`
+     * The number is always rounded down (towards the nearest smaller integer).
+     * Example: `3.7` → `3`, `-2.3` → `-3`
   3. **Ceil:**
 
-     * Sayı daima yukarıya yuvarlanır (en yakın büyük tam sayı).
-     * Örn: `3.1` → `4`, `-2.8` → `-2`
+     * The number is always rounded up (towards the nearest greater integer).
+     * Example: `3.1` → `4`, `-2.8` → `-2`
 
 ---
 
-### ✅ Örnek Çıktı
+### ✅ Example Output
 
 ```
 ****************************************
@@ -44,7 +44,7 @@ MENU :
 1
 Enter A number
 -3.6
-İn Rounbd :  = -4
+In Round :  = -4
 ```
 
 ```
@@ -57,7 +57,7 @@ MENU :
 2
 Enter A number
 3.7
-İn Float :  = 3
+In Float :  = 3
 ```
 
 ```
@@ -70,11 +70,11 @@ MENU :
 3
 Enter A number
 -2.2
-İn Ceil :  = -2
+In Ceil :  = -2
 ```
 
 ---
 
-### 🎯 Amaç
+### 🎯 Purpose
 
-Ondalıklı sayılarla çalışma, sayıyı tam ve küsurat kısmına ayırma, farklı yuvarlama kurallarını uygulama ve koşullu yapıların kontrolünü geliştirmektir. Özellikle **matematiksel yuvarlama işlemlerini elle gerçekleştirme** mantığını öğretmeyi hedefler.
+To work with floating-point numbers, separate a number into its integer and decimal parts, apply different rounding rules, and improve control over conditional structures. The main objective is to teach the logic of **manually implementing mathematical rounding operations**.

@@ -1,116 +1,103 @@
 ﻿#include <iostream>
 using namespace std;
 
-void EnterAnumber(string Message, int& number)
+void ReadNumber(string message, int& number)
 {
-    cout << Message << endl;
+    cout << message << endl;
     do
     {
         cin >> number;
         if (number > 100 || number < 0)
-            cout << "enter a number betwin 0-100";
+            cout << "Enter a number between 0 and 100" << endl;
 
     } while (number > 100 || number < 0);
-
 }
 
-
-
-int RandumNamber(int form, int to)
+int GenerateRandomNumber(int from, int to)
 {
-    int randum;
+    int random;
     do
     {
-        randum = rand() % (to - form + 1) + form;
+        random = rand() % (to - from + 1) + from;
 
-        
-    } while (randum == 0);
-    return randum;
-
+    } while (random == 0);
+    return random;
 }
 
-
-void DiziOlusturma(int length, int Dizi[])
+void FillArray(int length, int arr[])
 {
     for (int i = 0; i < length; i++)
     {
-        Dizi[i] = RandumNamber(-100, 100);
-
+        arr[i] = GenerateRandomNumber(-100, 100);
     }
 }
 
-
-void DiziYazdirma(int Dizi[], int length)
+void PrintArray(int arr[], int length)
 {
     cout << "{ ";
     for (int i = 0; i < length; i++)
     {
-        cout << Dizi[i] << " ";
+        cout << arr[i] << " ";
     }
     cout << "}" << endl;
-
 }
-void PozitifSayilerininSayaci(int arr[], int length)
+
+void CountPositiveNumbers(int arr[], int length)
 {
-    int sayac = 0;
-    int pozitifİndex=0;
-    int Pozitif[100];
-    int sum=0;
+    int count = 0;
+    int positiveIndex = 0;
+    int positives[100];
+    int sum = 0;
+
     for (int i = 0; i < length; i++)
     {
         if (arr[i] > 0)
         {
-            sayac++;
-            Pozitif[pozitifİndex ++] = arr[i];
+            count++;
+            positives[positiveIndex++] = arr[i];
             sum += arr[i];
-
         }
-
     }
 
-    cout << "Pozitif Sayilar : ";
-    DiziYazdirma(Pozitif, pozitifİndex);
+    cout << "Positive Numbers: ";
+    PrintArray(positives, positiveIndex);
     cout << endl;
-    cout << "pozitif Sayıların Sayısı : " << sayac << endl;
-    cout << "Poziti Sayıların Toplamı : " << sum << endl;
-
+    cout << "Count of Positive Numbers: " << count << endl;
+    cout << "Sum of Positive Numbers: " << sum << endl;
 }
-void NegatifSayilerininSayaci(int arr[], int length)
+
+void CountNegativeNumbers(int arr[], int length)
 {
-    int sayac = 0;
-    int Negatifİndex=0;
-    int Negatif[100];
+    int count = 0;
+    int negativeIndex = 0;
+    int negatives[100];
     int sum = 0;
+
     for (int i = 0; i < length; i++)
     {
         if (arr[i] < 0)
         {
-            sayac++;
-            Negatif[Negatifİndex ++] = arr[i];
+            count++;
+            negatives[negativeIndex++] = arr[i];
             sum += arr[i];
-
         }
-
     }
 
-    cout << "Negatif Sayilar : ";
-    DiziYazdirma(Negatif, Negatifİndex);
+    cout << "Negative Numbers: ";
+    PrintArray(negatives, negativeIndex);
     cout << endl;
-    cout << "Negatif Sayıların Sayısı : " << sayac << endl;
-    cout << "Negatif Sayıların Toplamı : " << sum << endl;
-
+    cout << "Count of Negative Numbers: " << count << endl;
+    cout << "Sum of Negative Numbers: " << sum << endl;
 }
-
 
 int main()
 {
-    int Length;
+    int length;
     int arr[100];
-    EnterAnumber("istediniz Arri Uzunlu Giriniz :\n ", Length);
-    DiziOlusturma(Length, arr);
-    DiziYazdirma(arr, Length);
-    PozitifSayilerininSayaci(arr, Length);
-    NegatifSayilerininSayaci(arr, Length);
-}
 
- 
+    ReadNumber("Enter desired array length:", length);
+    FillArray(length, arr);
+    PrintArray(arr, length);
+    CountPositiveNumbers(arr, length);
+    CountNegativeNumbers(arr, length);
+}

@@ -1,7 +1,7 @@
 ﻿ #include <iostream>
 using namespace std;
 
-int İnput(string message)
+int ReadNumber(string message)
 {
 	int number;
 	cout << message<<endl;
@@ -10,10 +10,10 @@ int İnput(string message)
 	return number;
 }
 
-void MutlakDiger()
+void Abs()
 {
-	int number = İnput("Enter a Number : ");
-	int eskiNumber = number;
+	int number = ReadNumber("Enter a Number : ");
+	int Temp = number;
 	if (number < 0)
 		number *= -1;
 	else if (number > 0)
@@ -21,7 +21,7 @@ void MutlakDiger()
 	else
 		number = 0;
 
-	cout << "My abs : |" << eskiNumber<<"| = " << number << endl;
+	cout << "My abs : |" << Temp<<"| = " << number << endl;
 }
 
 
@@ -30,7 +30,7 @@ int main()
 {
 	while (true)
 	{
-		MutlakDiger();
+		Abs();
 
 	}
 }

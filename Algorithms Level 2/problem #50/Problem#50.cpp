@@ -1,18 +1,18 @@
 ﻿#include <iostream>
 using namespace std;
 
-int ReadNumber(string messag)
+int ReadNumber(string message)
 {
-	int number=0;
-	cout << messag << endl;
-	cin >> number;
-	return number;
+	int Number=0;
+	cout << message << endl;
+	cin >> Number;
+	return Number;
 }
 
 void Sqrt()
 {
-	float number = ReadNumber("Kokumu Almak İstediniz Sayi Giriniz : ");
-	cout << " --> = " << pow(number,0.5)<<endl;
+	float Number = ReadNumber("Enter the number you want to find the root of");
+	cout << " --> = " << pow(Number,0.5)<<endl;
 }
 int main()
 {

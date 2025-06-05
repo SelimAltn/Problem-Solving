@@ -1,43 +1,41 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan sürekli olarak bir sayı alır ve o sayının **karekökünü (√)** hesaplayarak ekrana yazdırır. Program, sonsuz döngü ile çalışır ve kullanıcı yeni giriş yaptıkça karekök hesaplamaya devam eder.
-
----
-
-### 📌 Programın İşleyişi
-
-1. `ReadNumber()` fonksiyonu kullanıcıdan bir sayı alır.
-2. `Sqrt()` fonksiyonu:
-
-   * Girilen sayının karekökü `pow(number, 0.5)` ifadesi ile hesaplanır.
-   * Sonuç ekrana yazdırılır.
-3. `main()` fonksiyonu `while (true)` döngüsü ile sürekli `Sqrt()` fonksiyonunu çağırır.
-
-> Not: `pow(a, 0.5)` → `√a` işlemini temsil eder.
+This program continuously takes a number from the user and calculates its **square root (√)**, displaying the result on the screen. It runs in an infinite loop and keeps calculating square roots as long as the user provides input.
 
 ---
 
-### ✅ Örnek Çıktı
+### 📌 Program Workflow
+
+1. The `ReadNumber()` function gets a number from the user.
+2. The `Sqrt()` function:
+
+   * Calculates the square root using the expression `pow(number, 0.5)`.
+   * Prints the result to the screen.
+3. The `main()` function continuously calls the `Sqrt()` function using a `while (true)` loop.
+
+> Note: `pow(a, 0.5)` → represents the operation `√a`.
+
+---
+
+### ✅ Example Output
 
 ```
-Kokumu Almak İstediniz Sayi Giriniz : 
+Enter the number you want to find the root of: 
 25
  --> = 5
 
-Kokumu Almak İstediniz Sayi Giriniz : 
+Enter the number you want to find the root of: 
 2
  --> = 1.41421
 ```
 
 ---
 
-### 🎯 Amaç
+### 🎯 Purpose
 
-Bu problem kullanıcıya:
+This problem aims to teach the user:
 
-* Matematiksel fonksiyon kullanımı (`pow`) ile karekök hesaplamayı,
-* Sürekli çalışan kullanıcı etkileşimli sistem oluşturmayı,
-* Temel `float` ve `cin` kullanımıyla sayı işlemlerini öğrenmeyi
-  amaçlar.
+* How to calculate square roots using mathematical functions (`pow`),
+* How to build an interactive system that runs continuously,
+* How to perform numeric operations using basic `float` and `cin` usage.
 
-Ayrıca `pow(x, 0.5)` yerine dilersen `sqrt(x)` fonksiyonu da doğrudan kullanılabilir (`<cmath>` kütüphanesiyle).

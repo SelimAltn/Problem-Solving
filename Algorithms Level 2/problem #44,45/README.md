@@ -1,65 +1,69 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan 0 ile 100 arasında bir sayı alarak bu uzunlukta **pozitif ve negatif değerler içerebilecek** rastgele bir dizi oluşturur. Ardından bu diziyi analiz ederek:
+This program takes a number between 0 and 100 from the user and creates a **random array** of that length, which can contain both **positive and negative values**. It then analyzes the array to:
 
-* Pozitif sayıların bir alt dizisini oluşturur,
-* Negatif sayıların bir alt dizisini oluşturur,
-* Her bir grubun sayısını ve toplam değerini hesaplar ve ekrana yazdırır.
-
----
-
-### 📌 Programın İşleyişi
-
-1. **Giriş**:
-
-   * Kullanıcıdan `0–100` arasında dizi uzunluğu alınır.
-2. **Dizi Üretimi**:
-
-   * `DiziOlusturma()` fonksiyonu `-100` ile `100` aralığında rastgele sayılar üretir.
-   * `0` sayısı üretilmez (kontrol vardır).
-3. **Pozitif Sayı Analizi**:
-
-   * `PozitifSayilerininSayaci()` fonksiyonu:
-
-     * Pozitif elemanları yeni diziye aktarır.
-     * Toplam sayı ve toplam değeri hesaplar.
-4. **Negatif Sayı Analizi**:
-
-   * `NegatifSayilerininSayaci()` fonksiyonu:
-
-     * Negatif elemanları yeni diziye aktarır.
-     * Toplam sayı ve toplam değeri hesaplar.
-5. **Çıktı**:
-
-   * Rastgele üretilen dizinin tamamı ve alt diziler formatlı olarak yazdırılır.
+* Create a sub-array of the positive numbers,
+* Create a sub-array of the negative numbers,
+* Calculate and display the count and sum of each group.
 
 ---
 
-### ✅ Örnek Çıktı
+### 📌 Program Workflow
+
+1. **Input**:
+
+   * The user is prompted to enter an array length between `0–100`.
+
+2. **Array Generation**:
+
+   * The `FillArray()` function generates random numbers between `-100` and `100`.
+   * The number `0` is excluded from generation (via control).
+
+3. **Positive Number Analysis**:
+
+   * The `CountPositiveNumbers()` function:
+
+     * Transfers all positive elements into a new array.
+     * Calculates the total count and total sum of the values.
+
+4. **Negative Number Analysis**:
+
+   * The `CountNegativeNumbers()` function:
+
+     * Transfers all negative elements into a new array.
+     * Calculates the total count and total sum of the values.
+
+5. **Output**:
+
+   * The entire randomly generated array and the sub-arrays are displayed in a formatted manner.
+
+---
+
+### ✅ Example Output
 
 ```
-istediniz Arri Uzunlu Giriniz :
+Enter desired array length:
 15
 { 50 -22 18 74 -61 99 -13 87 -4 -98 1 62 41 -17 8 }
 
-Pozitif Sayilar : { 50 18 74 99 87 1 62 41 8 }
-pozitif Sayıların Sayısı : 9
-Poziti Sayıların Toplamı : 440
+Positive Numbers: { 50 18 74 99 87 1 62 41 8 }
+Count of Positive Numbers: 9
+Sum of Positive Numbers: 440
 
-Negatif Sayilar : { -22 -61 -13 -4 -98 -17 }
-Negatif Sayıların Sayısı : 6
-Negatif Sayıların Toplamı : -215
+Negative Numbers: { -22 -61 -13 -4 -98 -17 }
+Count of Negative Numbers: 6
+Sum of Negative Numbers: -215
 ```
 
 ---
 
-### 🎯 Amaç
+### 🎯 Purpose
 
-Bu problem kullanıcıya:
+This problem helps the user develop skills in:
 
-* Pozitif ve negatif sayıların ayrımını yapma,
-* Alt diziler oluşturma ve veri filtreleme,
-* Toplam ve sayım yapma işlemleri,
-* Fonksiyonel tasarım ve temiz çıktı üretimi
+* Differentiating between positive and negative numbers,
+* Creating sub-arrays and filtering data,
+* Performing counting and summing operations,
+* Functional design and clean output formatting,
 
-gibi önemli algoritmik yetenekleri kazandırır. Aynı zamanda **koşullu dizi bölme** ve **istatistiksel veri analizi** pratiği sunar.
+while also practicing **conditional array splitting** and **basic statistical data analysis**.

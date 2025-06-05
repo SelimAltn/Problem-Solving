@@ -1,10 +1,10 @@
  #include <iostream>
 using namespace std;
 
-float ReadNumber(string mmessage,int &Number)
+float ReadNumber(string message,int &Number)
 {
 	float number;
-	cout << mmessage << endl;
+	cout << message << endl;
 	cin >> number;
 	Number = int(number);
 	return number-int(number);
@@ -13,7 +13,7 @@ float ReadNumber(string mmessage,int &Number)
 void Round()
 {
 	int Number=0;
-	float number = ReadNumber("Enter A number",Number);//-->virgulden Sonraki OLan Sayılar
+	float number = ReadNumber("Enter A number",Number);
 	if (Number > 0) {
 		if (number < 0.5) {
 			cout << "İn Rounbd : ";
@@ -21,17 +21,17 @@ void Round()
 		}
 		else if (number >= 0.5) {
 			Number++;
-			cout << "İn Rounbd : ";
+			cout << "In Rounbd : ";
 			cout << " =" << (Number) << endl;
 		}
 	}
 	else if (Number < 0) {
 		if (number <= -0.5) {
-			cout << "İn Rounbd : ";
+			cout << "In Rounbd : ";
 			cout << " =" << Number-1 << endl;
 		}
 		else {
-			cout << "İn Rounbd : ";
+			cout << "In Rounbd : ";
 			cout << " =" << Number << endl;
 		}
 	}
@@ -39,14 +39,14 @@ void Round()
 void Float()
 {
 	int Number = 0;
-	float number = ReadNumber("Enter A number", Number);//-->virgulden Sonraki OLan Sayılar
+	float number = ReadNumber("Enter A number", Number);
 	if (Number > 0) {
-		cout << "İn Float : ";
+		cout << "In Float : ";
 		cout << " =" << Number << endl;
 
 	}
 	else if (Number < 0) {
-		cout << "İn Float : ";
+		cout << "In Float : ";
 		cout << " =" << Number-1 << endl;
 
 
@@ -55,18 +55,18 @@ void Float()
 void Ceil()
 {
 	int Number = 0;
-	float number = ReadNumber("Enter A number", Number);//-->virgulden Sonraki OLan Sayılar
+	float number = ReadNumber("Enter A number", Number);
 	if (number == 0) {
-		cout << "İn Ceil : ";
+		cout << "In Ceil : ";
 		cout << " =" << Number  << endl;
 	}
 	else if (Number > 0) {
-		cout << "İn Ceil : ";
+		cout << "In Ceil : ";
 		cout << " =" << Number+1 << endl;
 
 	}
 	else if (Number < 0) {
-		cout << "İn Ceil : ";
+		cout << "In Ceil : ";
 		cout << " =" << Number << endl;
 
 
@@ -101,7 +101,7 @@ int main()
 
 		}
 		else {
-			cout << "Hata giriş Yaptınız için Çıkış Yapılcak\n\a";
+			cout << "You have made an invalid input, the program will now exit.\n\a";
 
 			return 0;
 
