@@ -14,7 +14,7 @@ using namespace std;
 
 namespace ClientDB {
 
-    const string fileName ="D:\programing\\Algorithms & Problem-Solving\\Problem-Solving\\Algorithms Level 3\\Problem #50\\file.txt";
+    const string fileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication5\\File.txt";
 
 
     struct sClientData {
@@ -25,14 +25,17 @@ namespace ClientDB {
         double AccountBalance;
         bool MarkForDelete = false;
     };
+    
 
     double ReadNumber(string Message);
     string ReadString(string Message);
+    short ReadNumber(string message, short from, short to, string ErorMessage);
     void FindClient();
     string ReadAccountNumber(bool Check = true);
     sClientData ReadClient();
     void PrintClientRecord(sClientData Client, bool ShortVersion = false);
     string ConvertRecordToLine(sClientData Client, string Seperator = "#//#");
+
     sClientData ConvertLinetoRecord(string LineData, string Seperator = "#//#");
 
     void PrintClientData(sClientData data);
@@ -51,6 +54,13 @@ namespace ClientDB {
 
     sClientData ChangeClientRecord(string AccountNumber);
     bool UpdateClientByAccountNumber(vector<sClientData>& vClients);
+    sClientData DepositClient(sClientData Client, double Balance);
+    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance = false);
+    void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber);
+    void DepositProcess();
+    void PullingProcess();
+    double CalculateTotalBalances(vector<sClientData> vClients);
+    void TotalBalances();
 }
 
 #endif // CLIENT_DB_H

@@ -18,6 +18,16 @@ namespace ClientDB
         getline(cin, Str);
         return Str;
     }
+    short ReadNumber(string message, short from, short to, string ErorMessage) {
+        short number;
+        do {
+            cout << message << endl;
+            cin >> number;
+            if (number < from || number > to)
+                cout << ErorMessage << endl;
+        } while (number < from || number > to);
+        return number;
+    }
     sClientData ReadClient()
     {
         sClientData Client;
@@ -51,6 +61,7 @@ namespace ClientDB
         Client.AccountBalance = stod(vString[4]);
         return Client;
     }
+    
 
     void PrintClientData(sClientData data)
     {
@@ -326,5 +337,91 @@ namespace ClientDB
             cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
             return false;
         }
+    }
+    sClientData DepositClient(sClientData Client, double Balance) {
+
+        Client.AccountBalance += Balance;
+        return Client;
+    }
+    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance) {
+        double Balance = 0.0;
+        do {
+            cout << message << endl;
+            cin >> Balance;
+            if (Balance < from || Balance > to) {
+                if (forMaxBalance)
+                    cout << ErorMessage << to << endl;
+                else
+                    cout << ErorMessage << endl;
+            }
+        } while (Balance < from || Balance > to);
+        return Balance;
+    }
+    void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber) {
+        for (sClientData& C : vClients)
+        {
+            if (C.AccountNumber == AccountNumber)
+            {
+                C = client;
+                break;
+            }
+        }
+        SaveCleintsDataToFile(vClients);
+        PrintClientData(client);
+    }
+    void DepositProcess() {
+        cout << "========================================\n";
+        cout << "\t\Deposit Screen\n";
+        cout << "========================================\n";
+        string AccountNumber = ReadAccountNumber(false);
+
+        sClientData client;
+        vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
+        if (FindClientByAccountNumber(AccountNumber, vClients, client)) {
+            cout << "The Following are the Client details : \n";
+            PrintClientData(client);
+            client = DepositClient(client,ReadBalance("Place Enter deposit amount", 1, 1000000, "Enter an amount greater than zero"));
+            cout << "Transaction completed \n";
+            cout << endl;
+            AfterDepositWithdrawalProcess(vClients, client, AccountNumber);
+
+        }
+        else
+            cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+    }
+    void PullingProcess() {
+        cout << "========================================\n";
+        cout << "\t\Pulling Screen\n";
+        cout << "========================================\n";
+        string AccountNumber = ReadAccountNumber(false);
+
+        sClientData client;
+        vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
+        if (FindClientByAccountNumber(AccountNumber, vClients, client)) {
+            cout << "The Following are the Client details : \n";
+            PrintClientData(client);
+            double Balance = ReadBalance("Place Enter Pulling amount", 1, client.AccountBalance, "Amount Exceeds the balance, you can withdraw up to : ", true);
+            Balance *= -1;
+            client = DepositClient(client, Balance);
+            cout << "Transaction completed \n";
+            cout << endl;
+            AfterDepositWithdrawalProcess(vClients, client, AccountNumber);
+        }
+        else
+            cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
+    }
+    double CalculateTotalBalances(vector<sClientData> vClients) {
+        double total = 0.0;
+        for (sClientData client : vClients)
+        {
+            total += client.AccountBalance;
+        }
+        return total;
+    }
+
+    void TotalBalances() {
+        vector<sClientData> vClientData = LoadCleintsDataFromFileToVector();
+        ShowAllClientsFromFile(vClientData, true);
+        cout << "\t\t\t\tTotal Balcese = " << CalculateTotalBalances(vClientData) << endl;;
     }
 }
