@@ -14,7 +14,7 @@ using namespace std;
 
 namespace ClientDB {
 
-    const string fileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication5\\File.txt";
+        const string fileName ="D:\programing\\Algorithms & Problem-Solving\\Problem-Solving\\Algorithms Level 3\\Problem #50\\file.txt";
 
 
     struct sClientData {
