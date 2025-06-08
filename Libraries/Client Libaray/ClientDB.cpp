@@ -74,10 +74,10 @@ namespace ClientDB
         cout << "---------------------------------------------\n";
     }
 
-    void AddDataLineToFile(string ClientLine)
+    void AddDataLineToFile(string ClientLine,string FileName)
     {
         fstream MyFile;
-        MyFile.open(fileName, ios::out | ios::app);
+        MyFile.open(FileName, ios::out | ios::app);
         if (MyFile.is_open())
         {
             MyFile << ClientLine << endl;
@@ -93,7 +93,7 @@ namespace ClientDB
         cout << "Adding New Client \n";
         sClientData data = ReadClient();
         string LineData = ConvertRecordToLine(data);
-        AddDataLineToFile(LineData);
+        AddDataLineToFile(LineData, ClientFileName);
     }
     void AddClients()
     {
@@ -110,7 +110,7 @@ namespace ClientDB
         vector<sClientData> vClients;
         fstream MyFile;
 
-        MyFile.open(fileName, ios::in);
+        MyFile.open(ClientFileName, ios::in);
 
         if (MyFile.is_open())
         {
@@ -182,7 +182,7 @@ namespace ClientDB
     vector<sClientData> SaveCleintsDataToFile(vector<sClientData> vClints)
     {
         fstream MyFile;
-        MyFile.open(fileName, ios::out);
+        MyFile.open(ClientFileName, ios::out);
         string DataLine;
         if (MyFile.is_open())
         {
@@ -265,7 +265,12 @@ namespace ClientDB
         return AccountNumber;
         
     }
-
+    void DeleteClient(vector<sClientData>& vClients) {
+        cout << "========================================\n";
+        cout << "\t\Delete Screen\n";
+        cout << "========================================\n";
+        DeleteClientByAccountNumber(vClients);
+    }
     bool DeleteClientByAccountNumber(vector<sClientData> &vClients)
     {
         sClientData client;
@@ -306,6 +311,12 @@ namespace ClientDB
         cout << "Enter AccountBalance? ";
         cin >> Client.AccountBalance;
         return Client;
+    }
+    void UpdateClient(vector<sClientData>& vClients) {
+        cout << "========================================\n";
+        cout << "\t\ Update Screen\n";
+        cout << "========================================\n";
+        UpdateClientByAccountNumber(vClients);
     }
     bool UpdateClientByAccountNumber(vector<sClientData> &vClients)
     {
@@ -422,6 +433,6 @@ namespace ClientDB
     void TotalBalances() {
         vector<sClientData> vClientData = LoadCleintsDataFromFileToVector();
         ShowAllClientsFromFile(vClientData, true);
-        cout << "\t\t\t\tTotal Balcese = " << CalculateTotalBalances(vClientData) << endl;;
+        cout << "\t\t\t\tTotal Balcese = " << CalculateTotalBalances(vClientData) << endl;
     }
 }

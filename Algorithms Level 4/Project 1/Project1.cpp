@@ -21,7 +21,7 @@ void PrintMenu() {
     cout << "\t [8] Logout." << endl;
     cout << "========================================\n";
 }   
-void PrintSubMenu() {
+void PrintTransactionsMenu() {
     system("cls");
     cout << "========================================\n";
     cout << "\t\Transactions Menue Screen\n";
@@ -55,11 +55,167 @@ const unsigned int PERMISSON_FindClient      = 1 << 4;     // 00010000 = 16
 const unsigned int PERMISSON_Transactions    = 1 << 5;     // 00100000 = 32
 const unsigned int PERMISSON_ManageUsers     = 1 << 6;     // 01000000 = 64
 
-
+bool IsPowerOfTwo(unsigned int n) {
+    return n != 0 && (n & (n - 1)) == 0;
+}
 struct sUser {
     string UserName, Password;
-    unsigned int permissions;
+    int permissions;
 };
+sUser ConvertUserLinetoRecord(string LineData, string Seperator = "#//#")
+{
+    sUser User;
+    vector<string> vString;
+    vString = StringLib::SplitString(LineData, Seperator);
+    User.UserName = vString[0];
+    User.Password = vString[1];
+    if (stoi(vString[2]) == -1) {
+        User.permissions = -1;
+    }
+    else {
+        unsigned int Permissions = stoi(vString[2]);
+        User.permissions = Permissions;
+    }
+    
+    return User;
+} 
+vector<sUser> LoadUserDataFromFileToVector()
+{
+    vector<sUser> vUser;
+    fstream MyFile;
+
+    MyFile.open(FileName, ios::in);
+
+    if (MyFile.is_open())
+    {
+        string Line;
+
+        while (getline(MyFile, Line))
+        {
+            vUser.push_back(ConvertUserLinetoRecord(Line));
+        }
+
+        MyFile.close();
+    }
+    else
+    {
+        cout << "Unable to open file." << endl;
+    }
+    return vUser;
+}
+bool IsUserNameExists(string UserName, vector<sUser> vUser)
+{
+    for (sUser u : vUser)
+    {
+        if (StringLib::AreStringsEqual(u.UserName, UserName))
+        {
+
+            return true;
+        }
+    }
+    return false;
+}
+string ReadUserName(bool Check=true) {
+    string UserName;
+
+    if (Check) {
+        bool IsExists;
+        vector<sUser> vClients = LoadUserDataFromFileToVector();
+        do {
+            cout << "Enter User Name" << endl;
+            getline(cin >> ws, UserName);
+            IsExists = IsUserNameExists(UserName, vClients);
+            if (IsExists)
+                cout << "This User Name already exists. Please enter a unique Name." << endl;
+        } while (IsExists);
+    }
+    else {
+        cout << "Enter User Name" << endl;
+        getline(cin >> ws, UserName);
+    }
+    return UserName;
+}
+
+
+string ConvertUserRecordToLine(sUser User, string Seperator = "#//#") {
+    string stClientRecord = "";
+    stClientRecord += User.UserName + Seperator;
+    stClientRecord += User.Password + Seperator;
+    stClientRecord += to_string(User.permissions);
+    return stClientRecord;
+}
+
+
+bool GetAnswer(string message) {
+
+    string input;
+    char Answer;
+    do {
+        cout << message << endl;
+        getline(cin, input);
+        if (!input.empty()) {
+            Answer = tolower(input[0]);
+        }
+        else {
+            Answer = ' ';
+        }
+
+        if (Answer != 'y' && Answer != 'n')
+            cout << "Only (Y/y) or (N/n) allowed!" << endl;
+
+    } while (Answer != 'y' && Answer != 'n');
+    return Answer == 'y';
+}
+int ReadPermission() {
+    unsigned int Permissions=0 ;
+    if (GetAnswer("Do yo want to give full accsess (y/n) ? "))
+        return -1;
+    cout << "Do yo want to give to " << endl;
+    if (GetAnswer("Show Client List (y/n) ? "))
+        Permissions += PERMISSION_ShowClientList;
+    if (GetAnswer("Add New Client (y/n) ? "))
+        Permissions += PERMISSION_AddNewClient;
+    if (GetAnswer("Delete Client (y/n) ? "))
+        Permissions += PERMISSON_DeleteClient;
+    if (GetAnswer("Update Client (y/n) ? "))
+        Permissions += PERMISSON_UpdateClient;
+    if (GetAnswer("FindClient Client (y/n) ? "))
+        Permissions += PERMISSON_FindClient;
+    if (GetAnswer("Transactions (y/n) ? "))
+        Permissions += PERMISSON_Transactions;
+    if (GetAnswer("MangeUser (y/n) ? "))
+        Permissions += PERMISSON_ManageUsers;
+    return Permissions;
+         
+}
+sUser ReadUser() {
+    sUser user;
+    user.UserName = ReadUserName();
+    user.Password = ClientDB::ReadString("Enter Password ? ");
+    user.permissions = ReadPermission();
+    return user;
+}
+
+void AddNewUser() {
+    cout << "Adding New User \n";
+    sUser data = ReadUser();
+    string LineData = ConvertUserRecordToLine(data);
+    ClientDB::AddDataLineToFile(LineData, FileName);
+}
+void AddUsers() {
+    cout << "========================================\n";
+    cout << "\t\Add User Screen\n";
+    cout << "========================================\n";
+    char AddMore;
+    do
+    {
+        AddNewUser();
+        cout << "Client Added Successfully do you want to add more clients ? Y / N ? ";
+        cin >> AddMore;
+    } while (toupper(AddMore) == 'Y');
+}
+
+
 void Bank(sUser AktivUser);
 vector<sUser> LoadUserDataFromFileToVector();
 // Authorization control function
@@ -125,7 +281,13 @@ void MangeUsersScreen(sUser AktivUser) {
         {
         case 1:
             system("cls");
-            HasUserPermission(AktivUser, 1) ? ListUser() : AccessDenied();
+            ListUser();
+            system("pause");
+            system("cls");
+            break;
+        case 2:
+            system("cls");
+            AddUsers();
             system("pause");
             system("cls");
             break;
@@ -142,49 +304,7 @@ void MangeUsersScreen(sUser AktivUser) {
 
     
 }
-bool IsPowerOfTwo(unsigned int n) {
-    return n != 0 && (n & (n - 1)) == 0;
-}
-sUser ConvertUserLinetoRecord(string LineData, string Seperator = "#//#")
-{
-    sUser User;
-    vector<string> vString;
-    vString = StringLib::SplitString(LineData, Seperator);
-    User.UserName = vString[0];
-    User.Password = vString[1];
-    unsigned int Permissions = stoi(vString[2]);
-    if (IsPowerOfTwo(Permissions) || vString[2] == "-1") {
-        User.permissions = Permissions;
-    }
-    else {
-        User.permissions = 0;
-    }
-    return User;
-}
-vector<sUser> LoadUserDataFromFileToVector()
-{
-    vector<sUser> vUser;
-    fstream MyFile;
 
-    MyFile.open(FileName, ios::in);
-
-    if (MyFile.is_open())
-    {
-        string Line;
-
-        while (getline(MyFile, Line))
-        {
-            vUser.push_back(ConvertUserLinetoRecord(Line));
-        }
-
-        MyFile.close();
-    }
-    else
-    {
-        cout << "Unable to open file." << endl;
-    }
-    return vUser;
-}
 
 
 bool FindUser(string UserName,string Password,vector <sUser> vUser,sUser &user){ 
@@ -204,7 +324,7 @@ void Login(vector<sUser>vUser) {
     bool chek=false;
     sUser AktivUser;
     do {
-        UserName = ClientDB::ReadString("Enter User Name ? ");
+        UserName = ReadUserName(false);
         Password = ClientDB::ReadString("Enter Password ? ");
         chek = FindUser(UserName, Password, vUser, AktivUser);
         if (!chek) {
@@ -227,13 +347,10 @@ void LoginScreen() {
     Login(vUser);
 }
 
-
-
-
 void Transactions(sUser AktivUser) {
     short choice;
     while (1) {
-        PrintSubMenu();
+        PrintTransactionsMenu();
         choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 4]", 1, 4, "Only [1-4]");
         switch (choice) {
         case 1:
@@ -273,43 +390,44 @@ void Bank(sUser AktivUser) {
         vector<ClientDB::sClientData> vClientData = ClientDB::LoadCleintsDataFromFileToVector();
         switch (choice) {
         case 1:
-            system("cls");   
-            ClientDB::ShowAllClientsFromFile(vClientData);
+            system("cls");
+            HasUserPermission(AktivUser, 1) ? ClientDB::ShowAllClientsFromFile(vClientData) : AccessDenied();
             system("pause"); 
             system("cls");  
             break;
         case 2:
             system("cls");  
-            ClientDB::AddClients();
+            HasUserPermission(AktivUser, 2) ? ClientDB::AddClients() : AccessDenied();
             system("pause"); 
             system("cls");
             break;
         case 3:
             system("cls");
-            ClientDB::DeleteClientByAccountNumber(vClientData);
+            HasUserPermission(AktivUser, 4) ? ClientDB::DeleteClient(vClientData) : AccessDenied();
+
             system("pause");
             system("cls");
             break;
         case 4:
             system("cls");
-            ClientDB::UpdateClientByAccountNumber(vClientData);
+            HasUserPermission(AktivUser, 8) ? ClientDB::UpdateClient(vClientData) : AccessDenied();
             system("pause");
             system("cls");
             break;
         case 5:
             system("cls");
-            ClientDB::FindClient();
+            HasUserPermission(AktivUser, 16) ? ClientDB::FindClient() : AccessDenied();
             system("pause");
             system("cls");
             break;
         case 6:
-            PrintSubMenu();
-            Transactions(AktivUser);
+            PrintTransactionsMenu();
+            HasUserPermission(AktivUser, 32) ? Transactions(AktivUser) : AccessDenied();
             system("pause");
             break;
         case 7:
             system("cls");
-            MangeUsersScreen(AktivUser);
+            HasUserPermission(AktivUser, 64) ? MangeUsersScreen(AktivUser) : AccessDenied();
             system("pause");
             break;
         case 8:
