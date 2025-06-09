@@ -5,7 +5,7 @@
 #include "../../Libraries/String Library/StringLib.cpp"
 #include <cstdlib> 
 const string FileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication5\\User.txt";
-
+const string AdminUserName = "Selim";
 void PrintMenu() {
 
     cout << "========================================\n";
@@ -55,13 +55,35 @@ const unsigned int PERMISSON_FindClient      = 1 << 4;     // 00010000 = 16
 const unsigned int PERMISSON_Transactions    = 1 << 5;     // 00100000 = 32
 const unsigned int PERMISSON_ManageUsers     = 1 << 6;     // 01000000 = 64
 
+
+
 bool IsPowerOfTwo(unsigned int n) {
     return n != 0 && (n & (n - 1)) == 0;
 }
 struct sUser {
     string UserName, Password;
     int permissions;
+    bool MarkForDelete = false;
 };
+bool FindUser(string UserName, string Password, vector <sUser> vUser, sUser& user) {
+    for (sUser U : vUser) {
+        if (U.UserName == UserName && U.Password == Password) {
+            user = U;
+            return true;
+        }
+    }
+    return false;
+}
+bool FindUserWithUserName(string UserName, vector <sUser> vUser, sUser& user) {
+    for (sUser U : vUser) {
+        if (StringLib::AreStringsEqual(UserName, U.UserName)) {
+            user = U;
+            return true;
+        }
+    }
+    return false;
+}
+
 sUser ConvertUserLinetoRecord(string LineData, string Seperator = "#//#")
 {
     sUser User;
@@ -78,7 +100,55 @@ sUser ConvertUserLinetoRecord(string LineData, string Seperator = "#//#")
     }
     
     return User;
-} 
+}
+bool MarkClientForDeleteByUserName(string UserName, vector<sUser>& vUsers)
+{
+    for (sUser& c : vUsers)
+    {
+        if (c.UserName == UserName)
+        {
+            c.MarkForDelete = true;
+            return true;
+        }
+    }
+    return false;
+}
+string ConvertUserRecordToLine(sUser User, string Seperator = "#//#") {
+    string stClientRecord = "";
+    stClientRecord += User.UserName + Seperator;
+    stClientRecord += User.Password + Seperator;
+    stClientRecord += to_string(User.permissions);
+    return stClientRecord;
+}
+
+vector<sUser> SaveUserDataToFile(vector<sUser> vUser)
+{
+    fstream MyFile;
+    MyFile.open(FileName, ios::out);
+    string DataLine;
+    if (MyFile.is_open())
+    {
+        for (sUser s : vUser)
+        {
+            if (s.MarkForDelete == false)
+            {
+                DataLine = ConvertUserRecordToLine(s);
+                MyFile << DataLine << endl;
+            }
+        }
+        MyFile.close();
+    }
+    return vUser;
+}
+void PrintUserData(sUser data)
+{
+    cout << "---------------------------------------------\n";
+    cout << "User Name : " << data.UserName << endl;
+    cout << "Password : " << data.Password << endl;
+    cout << "Permissions : " << data.permissions << endl;
+    cout << "---------------------------------------------\n";
+}
+
 vector<sUser> LoadUserDataFromFileToVector()
 {
     vector<sUser> vUser;
@@ -135,14 +205,50 @@ string ReadUserName(bool Check=true) {
     }
     return UserName;
 }
+bool DeleteUser(vector<sUser> vUser, sUser AktivUser) {
+    string UserName = ReadUserName(false);
+    sUser DeletedUser;
+    if (UserName == AdminUserName && AktivUser.UserName!= AdminUserName) {
+        cout << "\a \a \a \n " << endl;
+        cout << "You cannot delete the admin account. Please do not attempt such nonsense again, and this matter will be reported to the admin. \n";
+        return false;
+    }
+    if (UserName == AdminUserName && AktivUser.UserName == AdminUserName) {
+        cout << "Admin account Indeliblen \n";
+        return false;
+    }
+    if (FindUserWithUserName(UserName, vUser, DeletedUser)) {
+        if (DeletedUser.UserName == AktivUser.UserName) {
+            cout << "It is not possible for us to delete your account from the account you logged in to." << endl;
+            return false;
+        }
+        char Answer;
 
+        PrintUserData(DeletedUser);
+        cout << "Are you sure you want delete this client? y/n \n ?";
+        cin >> Answer;
+        if (Answer == 'Y' || Answer == 'y')
+        {
+            MarkClientForDeleteByUserName(DeletedUser.UserName, vUser);
+            SaveUserDataToFile(vUser);
+            // Refresh Clients
+            vUser = LoadUserDataFromFileToVector();
+            cout << "\n\nClient Deleted Successfully.";
+        }
+    }
+    else {
+        cout << "\ User Name (" << UserName << ") is Not Found!";
+        return false;
+    }
+}
 
-string ConvertUserRecordToLine(sUser User, string Seperator = "#//#") {
-    string stClientRecord = "";
-    stClientRecord += User.UserName + Seperator;
-    stClientRecord += User.Password + Seperator;
-    stClientRecord += to_string(User.permissions);
-    return stClientRecord;
+void DeleteUserScreen(vector<sUser> vUser, sUser AktivUser) {
+    cout << "========================================\n";
+    cout << "\t\Delete User Screen\n";
+    cout << "========================================\n";
+    DeleteUser(vUser,AktivUser);
+    
+
 }
 
 
@@ -168,8 +274,6 @@ bool GetAnswer(string message) {
 }
 int ReadPermission() {
     unsigned int Permissions=0 ;
-    if (GetAnswer("Do yo want to give full accsess (y/n) ? "))
-        return -1;
     cout << "Do yo want to give to " << endl;
     if (GetAnswer("Show Client List (y/n) ? "))
         Permissions += PERMISSION_ShowClientList;
@@ -192,7 +296,11 @@ sUser ReadUser() {
     sUser user;
     user.UserName = ReadUserName();
     user.Password = ClientDB::ReadString("Enter Password ? ");
-    user.permissions = ReadPermission();
+    if (GetAnswer("Do yo want to give full accsess (y/n) ? "))
+        user.permissions = -1;
+    else 
+        user.permissions = ReadPermission();
+    
     return user;
 }
 
@@ -271,8 +379,22 @@ void AccessDenied() {
     cout << "--------------------------------------------\n";
     cout << "\a\a\n";
 }
+void FindUserScreen(vector<sUser> vUser) {
+    cout << "========================================\n";
+    cout << "\t\Find User Screen\n";
+    cout << "========================================\n";
+    sUser FoundUser;
+    string UserName = ReadUserName(false);
+    if (FindUserWithUserName(UserName, vUser, FoundUser)) {
+        PrintUserData(FoundUser);
+    }
+    else {
+        cout << "\ User Name (" << UserName << ") is Not Found!";
+        
+    }
+}
 void MangeUsersScreen(sUser AktivUser) {
-    
+    vector<sUser> vUser = LoadUserDataFromFileToVector();
     short choice;
     while (1) {
         PrintMangeUserMenu();
@@ -291,6 +413,18 @@ void MangeUsersScreen(sUser AktivUser) {
             system("pause");
             system("cls");
             break;
+        case 3:
+            system("cls");
+            DeleteUserScreen(vUser,AktivUser);
+            system("pause");
+            system("cls");
+            break;
+        case 5:
+            system("cls");
+            FindUserScreen(vUser);
+            system("pause");
+            system("cls");
+            break;
         case 6:
             system("cls");
             Bank(AktivUser);
@@ -306,16 +440,6 @@ void MangeUsersScreen(sUser AktivUser) {
 }
 
 
-
-bool FindUser(string UserName,string Password,vector <sUser> vUser,sUser &user){ 
-    for (sUser U : vUser) {
-        if (U.UserName == UserName && U.Password == Password) {
-            user = U;
-            return true;
-        }
-    }
-    return false;
-}
 
 
 
