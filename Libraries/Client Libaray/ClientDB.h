@@ -28,6 +28,7 @@ namespace ClientDB {
     
 
     double ReadNumber(string Message);
+    void PrintPageInformation(string message);
     string ReadString(string Message);
     short ReadNumber(string message, short from, short to, string ErorMessage);
     void FindClient();
@@ -42,7 +43,7 @@ namespace ClientDB {
     void AddDataLineToFile(string ClientLine, string FileName);
     void AddNewClient();
     void AddClients();
-
+    void ShowAllClientsScreen(vector<sClientData> vClients);
     void ShowAllClientsFromFile(vector<sClientData> vClients, bool ShortVersion=false);
     vector<sClientData> LoadCleintsDataFromFileToVector();
     vector<sClientData> SaveCleintsDataToFile(vector<sClientData> vClients);

@@ -6,11 +6,10 @@
 #include <cstdlib> 
 const string FileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication5\\User.txt";
 const string AdminUserName = "Selim";
+void ListUser();
 void PrintMenu() {
 
-    cout << "========================================\n";
-    cout << "\t\tMain Menue Screen\n";
-    cout << "========================================\n";
+    ClientDB::PrintPageInformation("Main Menue Screen");
     cout << "\t [1] Show Client List." << endl;
     cout << "\t [2] Add New Client." << endl;
     cout << "\t [3] Delete Client." << endl;
@@ -19,34 +18,29 @@ void PrintMenu() {
     cout << "\t [6] Transactions." << endl;
     cout << "\t [7] Mange Users." << endl;
     cout << "\t [8] Logout." << endl;
-    cout << "========================================\n";
+    cout << "=======================================================================\n";
 }   
 void PrintTransactionsMenu() {
     system("cls");
-    cout << "========================================\n";
-    cout << "\t\Transactions Menue Screen\n";
-    cout << "========================================\n";
+    ClientDB::PrintPageInformation("Transactions Menue Screen");
     cout << "\t [1] Depostit." << endl;
     cout << "\t [2] Withdraw." << endl;
     cout << "\t [3] Total Balances." << endl;
     cout << "\t [4] Main Menue." << endl;
-    cout << "========================================\n";
+    cout << "=======================================================================\n";
 }
 void PrintMangeUserMenu() {
-    cout << "========================================\n";
-    cout << "\t\Mange User Screen\n";
-    cout << "========================================\n";
+    ClientDB::PrintPageInformation("Mange User Screen");
     cout << "\t [1] List User." << endl;
     cout << "\t [2] Add New User." << endl;
     cout << "\t [3] Delete User." << endl;
     cout << "\t [4] Update User." << endl;
     cout << "\t [5] Find User." << endl;
     cout << "\t [6] Main Menue." << endl;
-    cout << "========================================\n";
+    cout << "=======================================================================\n";
 }
 
 //**------------------- Bank 3 ----------------------**
-unsigned int allPermissions = -1;
 const unsigned int PERMISSION_ShowClientList = 1 << 0;     // 0001 = 1
 const unsigned int PERMISSION_AddNewClient   = 1 << 1;     // 0010 = 2
 const unsigned int PERMISSON_DeleteClient    = 1 << 2;     // 0100 = 4 
@@ -67,9 +61,11 @@ struct sUser {
 };
 bool FindUser(string UserName, string Password, vector <sUser> vUser, sUser& user) {
     for (sUser U : vUser) {
-        if (U.UserName == UserName && U.Password == Password) {
-            user = U;
-            return true;
+        if (U.Password == Password) {
+            if (StringLib::AreStringsEqual(U.UserName, UserName)) {
+                user = U;
+                return true;
+            }
         }
     }
     return false;
@@ -208,12 +204,13 @@ string ReadUserName(bool Check=true) {
 bool DeleteUser(vector<sUser> vUser, sUser AktivUser) {
     string UserName = ReadUserName(false);
     sUser DeletedUser;
-    if (UserName == AdminUserName && AktivUser.UserName!= AdminUserName) {
+
+    if (StringLib::AreStringsEqual(UserName, AdminUserName) && !StringLib::AreStringsEqual(AktivUser.UserName, AdminUserName)) {
         cout << "\a \a \a \n " << endl;
         cout << "You cannot delete the admin account. Please do not attempt such nonsense again, and this matter will be reported to the admin. \n";
         return false;
     }
-    if (UserName == AdminUserName && AktivUser.UserName == AdminUserName) {
+    if (StringLib::AreStringsEqual(UserName, AdminUserName) && StringLib::AreStringsEqual(AktivUser.UserName, AdminUserName)) {
         cout << "Admin account Indeliblen \n";
         return false;
     }
@@ -234,6 +231,7 @@ bool DeleteUser(vector<sUser> vUser, sUser AktivUser) {
             // Refresh Clients
             vUser = LoadUserDataFromFileToVector();
             cout << "\n\nClient Deleted Successfully.";
+            return true;
         }
     }
     else {
@@ -243,9 +241,8 @@ bool DeleteUser(vector<sUser> vUser, sUser AktivUser) {
 }
 
 void DeleteUserScreen(vector<sUser> vUser, sUser AktivUser) {
-    cout << "========================================\n";
-    cout << "\t\Delete User Screen\n";
-    cout << "========================================\n";
+    ClientDB::PrintPageInformation("Delete User Screen");
+    ListUser();
     DeleteUser(vUser,AktivUser);
     
 
@@ -311,9 +308,7 @@ void AddNewUser() {
     ClientDB::AddDataLineToFile(LineData, FileName);
 }
 void AddUsers() {
-    cout << "========================================\n";
-    cout << "\t\Add User Screen\n";
-    cout << "========================================\n";
+    ClientDB::PrintPageInformation("Add Users Screen");
     char AddMore;
     do
     {
@@ -341,25 +336,26 @@ void RevokePermission(sUser& user, unsigned int permission) {
 void PrintUserRecord(sUser User)
 {
     cout << "| " << setw(15) << left << User.UserName;
-    cout << "| " << setw(15) << left << User.Password;
-    cout << "| " << setw(15) << left << User.permissions;
+    cout << "| " << setw(20) << left << User.Password;
+    cout << "| " << setw(20) << left << User.permissions;
     
 
 }
+void ListUserScreen() {
+    ClientDB::PrintPageInformation("List User Screen");
+    ListUser();
+}
 void ListUser() {
     vector<sUser>vUser = LoadUserDataFromFileToVector();
-    cout << "========================================\n";
-    cout << "\t\List User Screen\n";
-    cout << "========================================\n";
-    cout << "\n\t\t\t\t\tClient List (" << vUser.size() << ") Client(s).";
+    cout << "\n\t\t \tClient List (" << vUser.size() << ") Client(s).";
     cout << "\n_______________________________________________________";
-    cout << "_________________________________________\n" << endl;
+    cout << "__________________\n" << endl;
     cout << "| " << left << setw(15) << "User Name";
-    cout << "| " << left << setw(15) << "Password";
-    cout << "| " << left << setw(15) << "Permission";
+    cout << "| " << left << setw(20) << "Password";
+    cout << "| " << left << setw(20) << "Permission";
     
     cout << "\n_______________________________________________________";
-    cout << "_________________________________________\n"
+    cout << "__________________\n"
         << endl;
     for (sUser User : vUser)
     {
@@ -367,7 +363,7 @@ void ListUser() {
         cout << endl;
     }
     cout << "\n_______________________________________________________";
-    cout << "_________________________________________\n"<< endl;
+    cout << "__________________\n";
 
 }
 void AccessDenied() {
@@ -380,9 +376,7 @@ void AccessDenied() {
     cout << "\a\a\n";
 }
 void FindUserScreen(vector<sUser> vUser) {
-    cout << "========================================\n";
-    cout << "\t\Find User Screen\n";
-    cout << "========================================\n";
+    ClientDB::PrintPageInformation("Find User Screen");
     sUser FoundUser;
     string UserName = ReadUserName(false);
     if (FindUserWithUserName(UserName, vUser, FoundUser)) {
@@ -392,6 +386,89 @@ void FindUserScreen(vector<sUser> vUser) {
         cout << "\ User Name (" << UserName << ") is Not Found!";
         
     }
+}
+sUser ChangeUserRecord(sUser& orig) {
+    sUser UpdatedUser= orig;
+    cout << "[DEBUG] Entered ChangeUserRecord\n";
+    if (GetAnswer("Do you want to change all information?")) {
+        return ReadUser();
+    }
+    if (GetAnswer("Do you want to change account name ?")) {
+        UpdatedUser.UserName = ReadUserName();
+    }
+    if (GetAnswer("Do you want to change Password ?")) {
+        UpdatedUser.Password = ClientDB::ReadString("Enter Password ? ");
+    }
+    if (GetAnswer("Do you want to change permissions ?")) {
+        UpdatedUser.permissions = ReadPermission();
+    }
+    return UpdatedUser;
+}
+bool UpateUser(vector<sUser>& vUser, sUser& AktivUser) {
+    string UserName = ReadUserName(false);
+    string Password;
+    sUser UpdatedUser;
+
+    if (StringLib::AreStringsEqual(UserName, AdminUserName) && !StringLib::AreStringsEqual(AktivUser.UserName, AdminUserName)) {
+        cout << "\a \a \a \n " << endl;
+        cout << "You cannot Update the admin account. Please do not attempt such nonsense again, and this matter will be reported to the admin. \n";
+        return false;
+    }
+    if (StringLib::AreStringsEqual(UserName, AdminUserName) && StringLib::AreStringsEqual(AktivUser.UserName, AdminUserName)) {
+        cout << "Only the password can be updated for the admin account. \n";
+        Password = ClientDB::ReadString("Enter Password ? ");
+        if (GetAnswer("Are you sure you want to change?")) {
+            AktivUser.Password = Password;
+            for (sUser& U : vUser)
+            {
+                if (U.UserName == AdminUserName)
+                {
+                    U.Password = Password;
+                    break;
+                }
+            }
+            SaveUserDataToFile(vUser);
+            cout << "\n Admin Password Updated Successfully.";
+            return true;
+        }
+        else
+            return false;
+    }
+    if (FindUserWithUserName(UserName, vUser, UpdatedUser)) {
+        if (UpdatedUser.UserName == AktivUser.UserName) {
+            cout << "It is not possible for us to Update your account from the account you logged in to." << endl;
+            return false;
+        }
+        char Answer;
+
+        PrintUserData(UpdatedUser);
+        if (GetAnswer("Are you sure you want Updated this User? y/n ? "))
+        {
+            for (sUser& U : vUser)
+            {
+                if (U.UserName == UserName)
+                {
+                    U = ChangeUserRecord(U);
+                    break;
+                }
+            }
+            SaveUserDataToFile(vUser);
+            // Refresh Clients
+            vUser = LoadUserDataFromFileToVector();
+            cout << "\n User Updated Successfully.";
+            return true;
+        }
+    }
+    else {
+        cout << "\ User Name (" << UserName << ") is Not Found!";
+        return false;
+    }
+}
+
+void UpdetUserScreen(vector<sUser>& vUser, sUser& AktivUser) {
+    ClientDB::PrintPageInformation("Update User Screen");
+    UpateUser(vUser, AktivUser);
+
 }
 void MangeUsersScreen(sUser AktivUser) {
     vector<sUser> vUser = LoadUserDataFromFileToVector();
@@ -403,7 +480,7 @@ void MangeUsersScreen(sUser AktivUser) {
         {
         case 1:
             system("cls");
-            ListUser();
+            ListUserScreen();
             system("pause");
             system("cls");
             break;
@@ -416,6 +493,12 @@ void MangeUsersScreen(sUser AktivUser) {
         case 3:
             system("cls");
             DeleteUserScreen(vUser,AktivUser);
+            system("pause");
+            system("cls");
+            break;
+        case 4:
+            system("cls");
+            UpdetUserScreen(vUser, AktivUser);
             system("pause");
             system("cls");
             break;
@@ -434,15 +517,7 @@ void MangeUsersScreen(sUser AktivUser) {
         }
 
     }
-    
-
-    
 }
-
-
-
-
-
 void Login(vector<sUser>vUser) {
     string UserName, Password;
     bool chek=false;
@@ -456,18 +531,13 @@ void Login(vector<sUser>vUser) {
         }
 
     } while (!chek);
-    
-
     Bank(AktivUser);
-    
 }
 
 void LoginScreen() {
     vector<sUser>vUser = LoadUserDataFromFileToVector();
     system("cls");
-    cout << "========================================\n";
-    cout << "\t\Login Screen\n";
-    cout << "========================================\n";
+    ClientDB::PrintPageInformation("Login Screen");
     Login(vUser);
 }
 
@@ -515,43 +585,43 @@ void Bank(sUser AktivUser) {
         switch (choice) {
         case 1:
             system("cls");
-            HasUserPermission(AktivUser, 1) ? ClientDB::ShowAllClientsFromFile(vClientData) : AccessDenied();
+            HasUserPermission(AktivUser, PERMISSION_ShowClientList) ? ClientDB::ShowAllClientsScreen(vClientData) : AccessDenied();
             system("pause"); 
             system("cls");  
             break;
         case 2:
             system("cls");  
-            HasUserPermission(AktivUser, 2) ? ClientDB::AddClients() : AccessDenied();
+            HasUserPermission(AktivUser, PERMISSION_AddNewClient) ? ClientDB::AddClients() : AccessDenied();
             system("pause"); 
             system("cls");
             break;
         case 3:
             system("cls");
-            HasUserPermission(AktivUser, 4) ? ClientDB::DeleteClient(vClientData) : AccessDenied();
+            HasUserPermission(AktivUser, PERMISSON_DeleteClient) ? ClientDB::DeleteClient(vClientData) : AccessDenied();
 
             system("pause");
             system("cls");
             break;
         case 4:
             system("cls");
-            HasUserPermission(AktivUser, 8) ? ClientDB::UpdateClient(vClientData) : AccessDenied();
+            HasUserPermission(AktivUser, PERMISSON_UpdateClient) ? ClientDB::UpdateClient(vClientData) : AccessDenied();
             system("pause");
             system("cls");
             break;
         case 5:
             system("cls");
-            HasUserPermission(AktivUser, 16) ? ClientDB::FindClient() : AccessDenied();
+            HasUserPermission(AktivUser, PERMISSON_FindClient) ? ClientDB::FindClient() : AccessDenied();
             system("pause");
             system("cls");
             break;
         case 6:
             PrintTransactionsMenu();
-            HasUserPermission(AktivUser, 32) ? Transactions(AktivUser) : AccessDenied();
+            HasUserPermission(AktivUser, PERMISSON_Transactions) ? Transactions(AktivUser) : AccessDenied();
             system("pause");
             break;
         case 7:
             system("cls");
-            HasUserPermission(AktivUser, 64) ? MangeUsersScreen(AktivUser) : AccessDenied();
+            HasUserPermission(AktivUser, PERMISSON_ManageUsers) ? MangeUsersScreen(AktivUser) : AccessDenied();
             system("pause");
             break;
         case 8:
@@ -560,9 +630,7 @@ void Bank(sUser AktivUser) {
             break;
         }
     }
-
 }
-
 
 int main() {
     LoginScreen();

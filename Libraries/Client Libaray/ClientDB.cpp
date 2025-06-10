@@ -2,6 +2,7 @@
 #include "../../Libraries/String Library/StringLib.h"
 
 
+
 namespace ClientDB
 {
     double ReadNumber(string Message)
@@ -10,6 +11,11 @@ namespace ClientDB
         cout << Message << endl;
         cin >> Number;
         return Number;
+    }
+    void PrintPageInformation(string message) {
+        cout << "=======================================================================\n";
+        cout << "\t\t \t" << message << endl;
+        cout << "=======================================================================\n";
     }
     string ReadString(string Message)
     {
@@ -97,6 +103,7 @@ namespace ClientDB
     }
     void AddClients()
     {
+        PrintPageInformation("Add Clients Screen");
         char AddMore;
         do
         {
@@ -144,6 +151,10 @@ namespace ClientDB
             cout << "| " << setw(12) << left << Client.AccountBalance;
         }
         
+    }
+    void ShowAllClientsScreen(vector<sClientData> vClients) {
+        PrintPageInformation("Show All Clients Screen ");
+        ShowAllClientsFromFile(vClients);
     }
     void ShowAllClientsFromFile(vector<sClientData> vClients, bool ShortVersion)
     {
@@ -199,6 +210,7 @@ namespace ClientDB
         return vClints;
     }
     void FindClient() {
+        PrintPageInformation("Find Client Screen");
         sClientData client;
         vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
         string AccountNumber = ReadAccountNumber(false);
@@ -266,9 +278,7 @@ namespace ClientDB
         
     }
     void DeleteClient(vector<sClientData>& vClients) {
-        cout << "========================================\n";
-        cout << "\t\Delete Screen\n";
-        cout << "========================================\n";
+        PrintPageInformation("Delete Client Screen");
         DeleteClientByAccountNumber(vClients);
     }
     bool DeleteClientByAccountNumber(vector<sClientData> &vClients)
@@ -313,9 +323,7 @@ namespace ClientDB
         return Client;
     }
     void UpdateClient(vector<sClientData>& vClients) {
-        cout << "========================================\n";
-        cout << "\t\ Update Screen\n";
-        cout << "========================================\n";
+        PrintPageInformation("Update Screen");
         UpdateClientByAccountNumber(vClients);
     }
     bool UpdateClientByAccountNumber(vector<sClientData> &vClients)
@@ -381,9 +389,7 @@ namespace ClientDB
         PrintClientData(client);
     }
     void DepositProcess() {
-        cout << "========================================\n";
-        cout << "\t\Deposit Screen\n";
-        cout << "========================================\n";
+        PrintPageInformation("Deposit Screen");
         string AccountNumber = ReadAccountNumber(false);
 
         sClientData client;
@@ -401,9 +407,7 @@ namespace ClientDB
             cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
     }
     void PullingProcess() {
-        cout << "========================================\n";
-        cout << "\t\Pulling Screen\n";
-        cout << "========================================\n";
+        PrintPageInformation("Pulling Screen");
         string AccountNumber = ReadAccountNumber(false);
 
         sClientData client;
