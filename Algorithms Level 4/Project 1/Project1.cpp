@@ -4,6 +4,8 @@
 #include "../../Libraries/String Library/StringLib.h"
 #include "../../Libraries/String Library/StringLib.cpp"
 #include <cstdlib> 
+
+
 const string FileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication5\\User.txt";
 const string AdminUserName = "Selim";
 enum class AppState {
