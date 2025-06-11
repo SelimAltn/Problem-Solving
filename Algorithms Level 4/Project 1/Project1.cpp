@@ -6,6 +6,42 @@
 #include <cstdlib> 
 const string FileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication5\\User.txt";
 const string AdminUserName = "Selim";
+enum class AppState {
+    Login,
+    Bank,
+    ManageUsers,
+    Transactions,
+    Exit
+};
+enum class Permissions : unsigned int {
+    None = 0,
+    ShowClientList = 1 << 0, // 1
+    AddNewClient = 1 << 1, // 2
+    DeleteClient = 1 << 2, // 4
+    UpdateClient = 1 << 3, // 8
+    FindClient = 1 << 4, // 16
+    Transactions = 1 << 5, // 32
+    ManageUsers = 1 << 6, // 64
+    FullAccess = static_cast<unsigned int>(-1) // 4294967295
+};
+struct sUser {
+    string UserName, Password;
+    int permissions;
+    bool MarkForDelete = false;
+};
+// Authorization control function
+bool HasUserPermission(sUser user, unsigned int permission) {
+    return (user.permissions & static_cast<unsigned int>(permission)) != 0
+        || user.permissions == static_cast<unsigned int>(Permissions::FullAccess);
+}
+// Add authorization
+void GrantPermission(sUser& user, unsigned int permission) {
+    user.permissions |= permission;
+}
+// Remove authorization
+void RevokePermission(sUser& user, unsigned int permission) {
+    user.permissions &= ~permission;
+}
 void ListUser();
 void PrintMenu() {
 
@@ -40,25 +76,8 @@ void PrintMangeUserMenu() {
     cout << "=======================================================================\n";
 }
 
-//**------------------- Bank 3 ----------------------**
-const unsigned int PERMISSION_ShowClientList = 1 << 0;     // 0001 = 1
-const unsigned int PERMISSION_AddNewClient   = 1 << 1;     // 0010 = 2
-const unsigned int PERMISSON_DeleteClient    = 1 << 2;     // 0100 = 4 
-const unsigned int PERMISSON_UpdateClient    = 1 << 3;     // 1000 = 8 
-const unsigned int PERMISSON_FindClient      = 1 << 4;     // 00010000 = 16
-const unsigned int PERMISSON_Transactions    = 1 << 5;     // 00100000 = 32
-const unsigned int PERMISSON_ManageUsers     = 1 << 6;     // 01000000 = 64
 
 
-
-bool IsPowerOfTwo(unsigned int n) {
-    return n != 0 && (n & (n - 1)) == 0;
-}
-struct sUser {
-    string UserName, Password;
-    int permissions;
-    bool MarkForDelete = false;
-};
 bool FindUser(string UserName, string Password, vector <sUser> vUser, sUser& user) {
     for (sUser U : vUser) {
         if (U.Password == Password) {
@@ -240,7 +259,8 @@ bool DeleteUser(vector<sUser> vUser, sUser AktivUser) {
     }
 }
 
-void DeleteUserScreen(vector<sUser> vUser, sUser AktivUser) {
+void DeleteUserScreen( sUser AktivUser) {
+    vector<sUser> vUser = LoadUserDataFromFileToVector();
     ClientDB::PrintPageInformation("Delete User Screen");
     ListUser();
     DeleteUser(vUser,AktivUser);
@@ -250,7 +270,6 @@ void DeleteUserScreen(vector<sUser> vUser, sUser AktivUser) {
 
 
 bool GetAnswer(string message) {
-
     string input;
     char Answer;
     do {
@@ -270,33 +289,36 @@ bool GetAnswer(string message) {
     return Answer == 'y';
 }
 int ReadPermission() {
-    unsigned int Permissions=0 ;
+    sUser tempUser;
+    tempUser.permissions = 0;
+
+    if (GetAnswer("Do yo want to give full accsess (y/n) ? ")) {
+        tempUser.permissions = static_cast<unsigned int>(Permissions::FullAccess);
+        return tempUser.permissions;
+    }
     cout << "Do yo want to give to " << endl;
     if (GetAnswer("Show Client List (y/n) ? "))
-        Permissions += PERMISSION_ShowClientList;
+        GrantPermission(tempUser, static_cast<unsigned int>(Permissions::ShowClientList));
     if (GetAnswer("Add New Client (y/n) ? "))
-        Permissions += PERMISSION_AddNewClient;
+        GrantPermission(tempUser, static_cast<unsigned int>(Permissions::AddNewClient));
     if (GetAnswer("Delete Client (y/n) ? "))
-        Permissions += PERMISSON_DeleteClient;
-    if (GetAnswer("Update Client (y/n) ? "))
-        Permissions += PERMISSON_UpdateClient;
-    if (GetAnswer("FindClient Client (y/n) ? "))
-        Permissions += PERMISSON_FindClient;
-    if (GetAnswer("Transactions (y/n) ? "))
-        Permissions += PERMISSON_Transactions;
-    if (GetAnswer("MangeUser (y/n) ? "))
-        Permissions += PERMISSON_ManageUsers;
-    return Permissions;
-         
+        GrantPermission(tempUser, static_cast<unsigned int>(Permissions::DeleteClient));
+    if (GetAnswer("Update Client (y/n)? "))
+        GrantPermission(tempUser, static_cast<unsigned int>(Permissions::UpdateClient));
+    if (GetAnswer("Find Client (y/n)? "))
+        GrantPermission(tempUser, static_cast<unsigned int>(Permissions::FindClient));
+    if (GetAnswer("Transactions (y/n)? "))
+        GrantPermission(tempUser, static_cast<unsigned int>(Permissions::Transactions));
+    if (GetAnswer("Manage Users (y/n)? "))
+        GrantPermission(tempUser, static_cast<unsigned int>(Permissions::ManageUsers));
+    return tempUser.permissions;
+
 }
 sUser ReadUser() {
     sUser user;
     user.UserName = ReadUserName();
     user.Password = ClientDB::ReadString("Enter Password ? ");
-    if (GetAnswer("Do yo want to give full accsess (y/n) ? "))
-        user.permissions = -1;
-    else 
-        user.permissions = ReadPermission();
+    user.permissions = ReadPermission();
     
     return user;
 }
@@ -319,20 +341,8 @@ void AddUsers() {
 }
 
 
-void Bank(sUser AktivUser);
 vector<sUser> LoadUserDataFromFileToVector();
-// Authorization control function
-bool HasUserPermission(sUser user, unsigned int permission) {
-    return (user.permissions & permission) !=0 ||(user.permissions ==(unsigned int)- 1) ;
-}
-// Add authorization
-void GrantPermission(sUser& user, unsigned int permission) {
-    user.permissions |= permission;
-}
-// Remove authorization
-void RevokePermission(sUser& user, unsigned int permission) {
-    user.permissions &= ~permission;
-}
+
 void PrintUserRecord(sUser User)
 {
     cout << "| " << setw(15) << left << User.UserName;
@@ -375,7 +385,8 @@ void AccessDenied() {
     cout << "--------------------------------------------\n";
     cout << "\a\a\n";
 }
-void FindUserScreen(vector<sUser> vUser) {
+void FindUserScreen() {
+    vector<sUser> vUser = LoadUserDataFromFileToVector();
     ClientDB::PrintPageInformation("Find User Screen");
     sUser FoundUser;
     string UserName = ReadUserName(false);
@@ -389,7 +400,7 @@ void FindUserScreen(vector<sUser> vUser) {
 }
 sUser ChangeUserRecord(sUser& orig) {
     sUser UpdatedUser= orig;
-    cout << "[DEBUG] Entered ChangeUserRecord\n";
+
     if (GetAnswer("Do you want to change all information?")) {
         return ReadUser();
     }
@@ -417,7 +428,7 @@ bool UpateUser(vector<sUser>& vUser, sUser& AktivUser) {
     if (StringLib::AreStringsEqual(UserName, AdminUserName) && StringLib::AreStringsEqual(AktivUser.UserName, AdminUserName)) {
         cout << "Only the password can be updated for the admin account. \n";
         Password = ClientDB::ReadString("Enter Password ? ");
-        if (GetAnswer("Are you sure you want to change?")) {
+        if (GetAnswer("Are you sure you want Updated this User? y/n ? ")) {
             AktivUser.Password = Password;
             for (sUser& U : vUser)
             {
@@ -442,11 +453,12 @@ bool UpateUser(vector<sUser>& vUser, sUser& AktivUser) {
         char Answer;
 
         PrintUserData(UpdatedUser);
+        
         if (GetAnswer("Are you sure you want Updated this User? y/n ? "))
         {
             for (sUser& U : vUser)
             {
-                if (U.UserName == UserName)
+                if (StringLib::AreStringsEqual(U.UserName,UserName))
                 {
                     U = ChangeUserRecord(U);
                     break;
@@ -465,173 +477,152 @@ bool UpateUser(vector<sUser>& vUser, sUser& AktivUser) {
     }
 }
 
-void UpdetUserScreen(vector<sUser>& vUser, sUser& AktivUser) {
+void UpdetUserScreen(sUser& AktivUser) {
+    vector<sUser> vUser = LoadUserDataFromFileToVector();
     ClientDB::PrintPageInformation("Update User Screen");
     UpateUser(vUser, AktivUser);
 
 }
-void MangeUsersScreen(sUser AktivUser) {
-    vector<sUser> vUser = LoadUserDataFromFileToVector();
+AppState MangeUsersScreen(sUser AktivUser, vector<sUser> &vUser) {
     short choice;
-    while (1) {
-        PrintMangeUserMenu();
-        choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 6]", 1, 6, "Only [1-7]");
-        switch (choice)
-        {
-        case 1:
-            system("cls");
-            ListUserScreen();
-            system("pause");
-            system("cls");
-            break;
-        case 2:
-            system("cls");
-            AddUsers();
-            system("pause");
-            system("cls");
-            break;
-        case 3:
-            system("cls");
-            DeleteUserScreen(vUser,AktivUser);
-            system("pause");
-            system("cls");
-            break;
-        case 4:
-            system("cls");
-            UpdetUserScreen(vUser, AktivUser);
-            system("pause");
-            system("cls");
-            break;
-        case 5:
-            system("cls");
-            FindUserScreen(vUser);
-            system("pause");
-            system("cls");
-            break;
-        case 6:
-            system("cls");
-            Bank(AktivUser);
-            system("pause");
-            system("cls");
-            break;
-        }
-
+    PrintMangeUserMenu();
+    choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 6]", 1, 6, "Only [1-7]");
+    switch (choice)
+    {
+    case 1:
+        system("cls"); ListUserScreen();            break;
+    case 2:
+        system("cls"); AddUsers();                  break;
+    case 3:
+        system("cls"); DeleteUserScreen(AktivUser); break;
+    case 4:
+        system("cls"); UpdetUserScreen(AktivUser);  break;
+    case 5:
+        system("cls"); FindUserScreen();            break;
+    case 6:
+        system("cls");
+        return AppState::Bank;
     }
+    system("pause");
+    system("cls");
+    vUser = LoadUserDataFromFileToVector();
+    return AppState::ManageUsers;
+
 }
-void Login(vector<sUser>vUser) {
+AppState LoginScreen(sUser &ActiveUser,vector<sUser>&vUser) {
     string UserName, Password;
+    system("cls");
+    ClientDB::PrintPageInformation("Login Screen");
     bool chek=false;
-    sUser AktivUser;
     do {
         UserName = ReadUserName(false);
         Password = ClientDB::ReadString("Enter Password ? ");
-        chek = FindUser(UserName, Password, vUser, AktivUser);
+        chek = FindUser(UserName, Password, vUser, ActiveUser);
         if (!chek) {
             cout << "Invaild password / User Name" << endl;
         }
 
     } while (!chek);
-    Bank(AktivUser);
+    return  AppState::Bank;
 }
 
-void LoginScreen() {
-    vector<sUser>vUser = LoadUserDataFromFileToVector();
-    system("cls");
-    ClientDB::PrintPageInformation("Login Screen");
-    Login(vUser);
-}
-
-void Transactions(sUser AktivUser) {
+AppState Transactions(sUser AktivUser) {
     short choice;
-    while (1) {
-        PrintTransactionsMenu();
-        choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 4]", 1, 4, "Only [1-4]");
-        switch (choice) {
-        case 1:
-            system("cls");
-            ClientDB::DepositProcess();
-            system("pause");
-            system("cls");
-            break;
-        case 2:
-            system("cls");
-            ClientDB::PullingProcess();
-            system("pause");
-            system("cls");
-            break;
-        case 3:
-            system("cls");
-            ClientDB::TotalBalances();
-            system("pause");
-            system("cls");
-            break;
-        case 4:
-            system("cls");
-            Bank(AktivUser);
-            system("pause");
-            system("cls");
-            break;
-        }
+    PrintTransactionsMenu();
+    choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 4]", 1, 4, "Only [1-4]");
+    switch (choice) {
+    case 1:
+        system("cls"); ClientDB::DepositProcess(); break;
+    case 2:
+        system("cls"); ClientDB::PullingProcess(); break;
+    case 3:
+        system("cls"); ClientDB::TotalBalances() ; break;
+    case 4:
+        system("cls"); return AppState::Bank;
     }
+    system("pause");
+    system("cls");
+    return AppState::Transactions;
 }
 
-void Bank(sUser AktivUser) {
+AppState BankScreen(sUser &AktivUser , vector<ClientDB::sClientData> &vClientData) {
     short choice;
-    while (1) {
+    system("cls");
+    PrintMenu();
+    choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 8]", 1, 8, "Only [1-8]");
+    vClientData = ClientDB::LoadCleintsDataFromFileToVector();
+    switch (choice) {
+    case 1:
         system("cls");
-        PrintMenu();
-        choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 8]", 1, 8, "Only [1-8]");
-        vector<ClientDB::sClientData> vClientData = ClientDB::LoadCleintsDataFromFileToVector();
-        switch (choice) {
-        case 1:
-            system("cls");
-            HasUserPermission(AktivUser, PERMISSION_ShowClientList) ? ClientDB::ShowAllClientsScreen(vClientData) : AccessDenied();
-            system("pause"); 
-            system("cls");  
+        HasUserPermission(AktivUser, static_cast<unsigned int>(Permissions::ShowClientList)) ? ClientDB::ShowAllClientsScreen(vClientData) : AccessDenied();
+        break;
+    case 2:
+        system("cls");
+        HasUserPermission(AktivUser, static_cast<unsigned int>(Permissions::AddNewClient)) ? ClientDB::AddClients() : AccessDenied();
+        break;
+    case 3:
+        system("cls");
+        HasUserPermission(AktivUser, static_cast<unsigned int>(Permissions::DeleteClient)) ? ClientDB::DeleteClient(vClientData) : AccessDenied();
+        break;
+    case 4:
+        system("cls");
+        HasUserPermission(AktivUser, static_cast<unsigned int>(Permissions::UpdateClient)) ? ClientDB::UpdateClient(vClientData) : AccessDenied();
+        break;
+    case 5:
+        system("cls");
+        HasUserPermission(AktivUser, static_cast<unsigned int>(Permissions::FindClient)) ? ClientDB::FindClient() : AccessDenied();
+        break;
+    case 6:
+        system("cls");
+        if (HasUserPermission(AktivUser, static_cast<unsigned int>(Permissions::Transactions))) {
+            return AppState::Transactions;
+        }
+        else
+            AccessDenied();
+        break;
+    case 7:
+        system("cls");
+        if (HasUserPermission(AktivUser, static_cast<unsigned int>(Permissions::ManageUsers))) {
+            return AppState::ManageUsers;
+        }
+        else {
+            AccessDenied();
+        }
+        break;
+    case 8:
+        return AppState::Login;
+    }
+    vClientData = ClientDB::LoadCleintsDataFromFileToVector();
+    system("pause");
+    system("cls");
+    return AppState::Bank;
+}
+void RunApp() {
+    AppState State = AppState::Login;
+    sUser ActiveUser;
+    vector<sUser> users = LoadUserDataFromFileToVector();
+    vector<ClientDB::sClientData> vClientData = ClientDB::LoadCleintsDataFromFileToVector();
+    while (State != AppState::Exit) {
+        switch (State)
+        {
+        case AppState::Login:
+            State = LoginScreen(ActiveUser, users); break;
+        case AppState::Bank:
+            State = BankScreen(ActiveUser,vClientData); break;
+        case AppState::ManageUsers:
+            State = MangeUsersScreen(ActiveUser,users); break;
+        case AppState::Transactions:
+            State = Transactions(ActiveUser); break;
             break;
-        case 2:
-            system("cls");  
-            HasUserPermission(AktivUser, PERMISSION_AddNewClient) ? ClientDB::AddClients() : AccessDenied();
-            system("pause"); 
-            system("cls");
+        case AppState::Exit:
             break;
-        case 3:
-            system("cls");
-            HasUserPermission(AktivUser, PERMISSON_DeleteClient) ? ClientDB::DeleteClient(vClientData) : AccessDenied();
-
-            system("pause");
-            system("cls");
-            break;
-        case 4:
-            system("cls");
-            HasUserPermission(AktivUser, PERMISSON_UpdateClient) ? ClientDB::UpdateClient(vClientData) : AccessDenied();
-            system("pause");
-            system("cls");
-            break;
-        case 5:
-            system("cls");
-            HasUserPermission(AktivUser, PERMISSON_FindClient) ? ClientDB::FindClient() : AccessDenied();
-            system("pause");
-            system("cls");
-            break;
-        case 6:
-            PrintTransactionsMenu();
-            HasUserPermission(AktivUser, PERMISSON_Transactions) ? Transactions(AktivUser) : AccessDenied();
-            system("pause");
-            break;
-        case 7:
-            system("cls");
-            HasUserPermission(AktivUser, PERMISSON_ManageUsers) ? MangeUsersScreen(AktivUser) : AccessDenied();
-            system("pause");
-            break;
-        case 8:
-            system("cls");
-            LoginScreen();
+        default:
             break;
         }
     }
 }
 
 int main() {
-    LoginScreen();
+    RunApp();
 }
+
