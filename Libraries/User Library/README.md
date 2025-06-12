@@ -103,7 +103,7 @@ int main() {
 ## 📎 Dependencies
 
 * 🔧 [ClientDB.h](../../Libraries/Client%20Libaray/ClientDB.h) – for input and file utilities
-*- 🧰 [StringLib.h](../../Libraries/String%20Library/StringLib.h) – for case-insensitive string comparisons
+* 🧰 [StringLib.h](../../Libraries/String%20Library/StringLib.h) – for case-insensitive string comparisons
 
 ---
 

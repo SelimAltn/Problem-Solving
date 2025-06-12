@@ -49,6 +49,7 @@ namespace ClientDB {
     vector<sClientData> SaveCleintsDataToFile(vector<sClientData> vClients);
 
     bool FindClientByAccountNumber(string AccountNumber, vector<sClientData> vClients, sClientData& client);
+    bool ChekClientPinCode(string AccountNumber, string PinCode, vector<sClientData> vClients);
     bool IsAccountNumberExists(string AccountNumber, vector<sClientData> vClients);
     bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector<sClientData>& vClients);
     void DeleteClient(vector<sClientData>& vClients);
