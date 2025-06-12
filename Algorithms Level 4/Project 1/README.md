@@ -35,8 +35,8 @@ This version introduces a **multi-user login system** with a flexible **permissi
 
 This project is a continuation of the following earlier work:
 
-- 📁 [Project 1 – Basic Bank System](../../Algorithms%20Level%203/project%201/README.md)
-- 📁 [Project 2 – Transactions Upgrade](../../Algorithms%20Level%203/project%202/README.md)
+- 📁 [Project 1 – Console Bank Management System](../../Algorithms%20Level%203/project%201/README.md)
+- 📁 [Project 2 – Console Bank Management System – Transactions Upgrade](../../Algorithms%20Level%203/project%202/README.md)
 
 ## 📚 Used Libraries
 
