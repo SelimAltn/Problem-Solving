@@ -15,6 +15,7 @@ using namespace std;
 namespace ClientDB {
 
     const string ClientFileName ="D:\programing\\Algorithms & Problem-Solving\\Problem-Solving\\Algorithms Level 3\\Problem #50\\file.txt";
+    const double MaximumAmounTCanBeWithdrawnFromAnATM = 10000;
 
 
     struct sClientData {
@@ -32,6 +33,7 @@ namespace ClientDB {
     string ReadString(string Message);
     short ReadNumber(string message, short from, short to, string ErorMessage);
     void FindClient();
+    bool ChekClientPinCode(string AccountNumber, string PinCode, vector<sClientData> vClients);
     string ReadAccountNumber(bool Check = true);
     sClientData ReadClient();
     void PrintClientRecord(sClientData Client, bool ShortVersion = false);
@@ -49,18 +51,19 @@ namespace ClientDB {
     vector<sClientData> SaveCleintsDataToFile(vector<sClientData> vClients);
 
     bool FindClientByAccountNumber(string AccountNumber, vector<sClientData> vClients, sClientData& client);
-    bool ChekClientPinCode(string AccountNumber, string PinCode, vector<sClientData> vClients);
     bool IsAccountNumberExists(string AccountNumber, vector<sClientData> vClients);
     bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector<sClientData>& vClients);
     void DeleteClient(vector<sClientData>& vClients);
     bool DeleteClientByAccountNumber(vector<sClientData>& vClients);
-
+    bool GetAnswer(string message);
     sClientData ChangeClientRecord(string AccountNumber);
     void UpdateClient(vector<sClientData>& vClients);
     bool UpdateClientByAccountNumber(vector<sClientData>& vClients);
     sClientData DepositClient(sClientData Client, double Balance);
-    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance = false);
-    void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber);
+    bool HasSufficientBalance(sClientData client, double Balance);
+    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance = false,bool ATM =false);
+    double CheckBalance(sClientData client);
+    void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber, bool PrintClientInformation = false);
     void DepositProcess();
     void PullingProcess();
     double CalculateTotalBalances(vector<sClientData> vClients);

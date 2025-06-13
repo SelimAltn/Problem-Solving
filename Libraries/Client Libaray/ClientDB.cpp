@@ -1,6 +1,7 @@
 #include "ClientDB.h"
 #include "../../Libraries/String Library/StringLib.h"
 
+
 namespace ClientDB
 {
     double ReadNumber(string Message)
@@ -10,8 +11,7 @@ namespace ClientDB
         cin >> Number;
         return Number;
     }
-    void PrintPageInformation(string message)
-    {
+    void PrintPageInformation(string message) {
         cout << "=======================================================================\n";
         cout << "\t\t \t" << message << endl;
         cout << "=======================================================================\n";
@@ -23,11 +23,9 @@ namespace ClientDB
         getline(cin, Str);
         return Str;
     }
-    short ReadNumber(string message, short from, short to, string ErorMessage)
-    {
+    short ReadNumber(string message, short from, short to, string ErorMessage) {
         short number;
-        do
-        {
+        do {
             cout << message << endl;
             cin >> number;
             if (number < from || number > to)
@@ -38,7 +36,7 @@ namespace ClientDB
     sClientData ReadClient()
     {
         sClientData Client;
-
+        
         Client.AccountNumber = ReadAccountNumber();
         Client.Name = ReadString("Enter Client Name");
         Client.PinCode = ReadString("Enter Client Pin Code");
@@ -68,6 +66,7 @@ namespace ClientDB
         Client.AccountBalance = stod(vString[4]);
         return Client;
     }
+    
 
     void PrintClientData(sClientData data)
     {
@@ -80,7 +79,7 @@ namespace ClientDB
         cout << "---------------------------------------------\n";
     }
 
-    void AddDataLineToFile(string ClientLine, string FileName)
+    void AddDataLineToFile(string ClientLine,string FileName)
     {
         fstream MyFile;
         MyFile.open(FileName, ios::out | ios::app);
@@ -136,51 +135,46 @@ namespace ClientDB
         }
         return vClients;
     }
-    void PrintClientRecord(sClientData Client, bool ShortVersion)
+    void PrintClientRecord(sClientData Client,bool ShortVersion)
     {
-        if (!ShortVersion)
-        {
+        if (!ShortVersion) {
             cout << "| " << setw(15) << left << Client.AccountNumber;
             cout << "| " << setw(10) << left << Client.PinCode;
             cout << "| " << setw(40) << left << Client.Name;
             cout << "| " << setw(12) << left << Client.Phone;
             cout << "| " << setw(12) << left << Client.AccountBalance;
         }
-        else
-        {
+        else {
             cout << "| " << setw(15) << left << Client.AccountNumber;
             cout << "| " << setw(40) << left << Client.Name;
             cout << "| " << setw(12) << left << Client.AccountBalance;
         }
+        
     }
-    void ShowAllClientsScreen(vector<sClientData> vClients)
-    {
+    void ShowAllClientsScreen(vector<sClientData> vClients) {
         PrintPageInformation("Show All Clients Screen ");
         ShowAllClientsFromFile(vClients);
     }
     void ShowAllClientsFromFile(vector<sClientData> vClients, bool ShortVersion)
     {
-        if (!ShortVersion)
-        {
+        if (!ShortVersion) {
             cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s).";
             cout << "\n_______________________________________________________";
-            cout << "_________________________________________\n"
-                 << endl;
+            cout << "_________________________________________\n" << endl;
             cout << "| " << left << setw(15) << "Accout Number";
             cout << "| " << left << setw(10) << "Pin Code";
             cout << "| " << left << setw(40) << "Client Name";
             cout << "| " << left << setw(12) << "Phone";
             cout << "| " << left << setw(12) << "Balance";
         }
-        else
-        {
+        else {
             cout << "\n\t\t\t\t\tBalances List (" << vClients.size() << ") Client(s).";
             cout << "\n_______________________________________________________";
-            cout << "_________________________________________\n"
-                 << endl;
+            cout << "_________________________________________\n" << endl;
             cout << "| " << left << setw(15) << "Accout Number";
             cout << "| " << left << setw(40) << "Client Name";
             cout << "| " << left << setw(12) << "Balance";
+
         }
         cout << "\n_______________________________________________________";
         cout << "_________________________________________\n"
@@ -214,14 +208,12 @@ namespace ClientDB
         }
         return vClints;
     }
-    void FindClient()
-    {
+    void FindClient() {
         PrintPageInformation("Find Client Screen");
         sClientData client;
         vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
         string AccountNumber = ReadAccountNumber(false);
-        if (FindClientByAccountNumber(AccountNumber, vClients, client))
-        {
+        if (FindClientByAccountNumber(AccountNumber, vClients, client)) {
             PrintClientData(client);
         }
         else
@@ -239,14 +231,10 @@ namespace ClientDB
         }
         return false;
     }
-    bool ChekClientPinCode(string AccountNumber, string PinCode, vector<sClientData> vClients)
-    {
-        for (sClientData c : vClients)
-        {
-            if (StringLib::AreStringsEqual(c.AccountNumber, AccountNumber))
-            {
-                if (c.PinCode == PinCode)
-                {
+    bool ChekClientPinCode(string AccountNumber,string PinCode, vector<sClientData> vClients) {
+        for (sClientData c : vClients) {
+            if (StringLib::AreStringsEqual(c.AccountNumber,AccountNumber)) {
+                if (c.PinCode == PinCode) {
                     return true;
                 }
                 return false;
@@ -258,9 +246,9 @@ namespace ClientDB
     {
         for (sClientData c : vClients)
         {
-            if (StringLib::AreStringsEqual(c.AccountNumber, AccountNumber))
+            if (StringLib::AreStringsEqual(c.AccountNumber,AccountNumber))
             {
-
+       
                 return true;
             }
         }
@@ -278,16 +266,13 @@ namespace ClientDB
         }
         return false;
     }
-    string ReadAccountNumber(bool Check)
-    {
+    string ReadAccountNumber(bool Check) {
         string AccountNumber;
 
-        if (Check)
-        {
+        if (Check) {
             bool IsExists;
             vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
-            do
-            {
+            do {
                 cout << "Enter Client Account Number" << endl;
                 getline(cin >> ws, AccountNumber);
                 IsExists = IsAccountNumberExists(AccountNumber, vClients);
@@ -295,22 +280,21 @@ namespace ClientDB
                     cout << "This account number already exists. Please enter a unique account number." << endl;
             } while (IsExists);
         }
-        else
-        {
+        else {
             cout << "Enter Client Account Number" << endl;
             getline(cin >> ws, AccountNumber);
         }
         return AccountNumber;
+        
     }
-    void DeleteClient(vector<sClientData> &vClients)
-    {
+    void DeleteClient(vector<sClientData>& vClients) {
         PrintPageInformation("Delete Client Screen");
         DeleteClientByAccountNumber(vClients);
     }
     bool DeleteClientByAccountNumber(vector<sClientData> &vClients)
     {
         sClientData client;
-        string AccountNumber = ReadAccountNumber(false);
+        string AccountNumber =ReadAccountNumber(false);
         char Answer;
         if (FindClientByAccountNumber(AccountNumber, vClients, client))
         {
@@ -348,15 +332,14 @@ namespace ClientDB
         cin >> Client.AccountBalance;
         return Client;
     }
-    void UpdateClient(vector<sClientData> &vClients)
-    {
+    void UpdateClient(vector<sClientData>& vClients) {
         PrintPageInformation("Update Screen");
         UpdateClientByAccountNumber(vClients);
     }
     bool UpdateClientByAccountNumber(vector<sClientData> &vClients)
     {
         sClientData client, newClient;
-        string AccountNumber = ReadAccountNumber(false);
+        string AccountNumber =ReadAccountNumber(false);
         char Answer;
         if (FindClientByAccountNumber(AccountNumber, vClients, client))
         {
@@ -384,32 +367,59 @@ namespace ClientDB
             return false;
         }
     }
-    sClientData DepositClient(sClientData Client, double Balance)
-    {
+    sClientData DepositClient(sClientData Client, double Balance) {
 
         Client.AccountBalance += Balance;
         return Client;
     }
-    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance)
-    {
+    bool HasSufficientBalance(sClientData client,double Balance) {
+        return Balance <= client.AccountBalance;
+    }
+    bool GetAnswer(string message) {
+        string input;
+        char Answer;
+        do {
+            cout << message << endl;
+            getline(cin, input);
+            if (!input.empty()) {
+                Answer = tolower(input[0]);
+            }
+            else {
+                Answer = ' ';
+            }
+
+            if (Answer != 'y' && Answer != 'n')
+                cout << "Only (Y/y) or (N/n) allowed!" << endl;
+
+        } while (Answer != 'y' && Answer != 'n');
+        return Answer == 'y';
+    }
+    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance,bool ATM) {
         double Balance = 0.0;
-        do
-        {
+        do {
             cout << message << endl;
             cin >> Balance;
-            if (Balance < from || Balance > to)
-            {
+            if (Balance < from || Balance > to) {
                 if (forMaxBalance)
                     cout << ErorMessage << to << endl;
                 else
                     cout << ErorMessage << endl;
             }
         } while (Balance < from || Balance > to);
+        if (ATM && Balance > MaximumAmounTCanBeWithdrawnFromAnATM) {
+            cout << "You can withdraw up to 10000 from an ATM. To withdraw more, please go to the bank."<<endl;
+            if (GetAnswer("Do you approve of withdrawal?"+ to_string(MaximumAmounTCanBeWithdrawnFromAnATM))) {
+                return MaximumAmounTCanBeWithdrawnFromAnATM;
+            }
+            else {
+                return 0;
+            }
+            
+        }
         return Balance;
     }
-    void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber)
-    {
-        for (sClientData &C : vClients)
+    void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber,bool PrintClientInformation) {
+        for (sClientData& C : vClients)
         {
             if (C.AccountNumber == AccountNumber)
             {
@@ -418,36 +428,37 @@ namespace ClientDB
             }
         }
         SaveCleintsDataToFile(vClients);
-        PrintClientData(client);
+        if(PrintClientInformation)
+            PrintClientData(client);
     }
-    void DepositProcess()
-    {
+    double CheckBalance(sClientData client) {
+        return client.AccountBalance;
+    }
+    void DepositProcess() {
         PrintPageInformation("Deposit Screen");
         string AccountNumber = ReadAccountNumber(false);
 
         sClientData client;
         vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
-        if (FindClientByAccountNumber(AccountNumber, vClients, client))
-        {
+        if (FindClientByAccountNumber(AccountNumber, vClients, client)) {
             cout << "The Following are the Client details : \n";
             PrintClientData(client);
-            client = DepositClient(client, ReadBalance("Place Enter deposit amount", 1, 1000000, "Enter an amount greater than zero"));
+            client = DepositClient(client,ReadBalance("Place Enter deposit amount", 1, 1000000, "Enter an amount greater than zero"));
             cout << "Transaction completed \n";
             cout << endl;
-            AfterDepositWithdrawalProcess(vClients, client, AccountNumber);
+            AfterDepositWithdrawalProcess(vClients, client, AccountNumber,true);
+
         }
         else
             cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
     }
-    void PullingProcess()
-    {
+    void PullingProcess() {
         PrintPageInformation("Pulling Screen");
         string AccountNumber = ReadAccountNumber(false);
 
         sClientData client;
         vector<sClientData> vClients = LoadCleintsDataFromFileToVector();
-        if (FindClientByAccountNumber(AccountNumber, vClients, client))
-        {
+        if (FindClientByAccountNumber(AccountNumber, vClients, client)) {
             cout << "The Following are the Client details : \n";
             PrintClientData(client);
             double Balance = ReadBalance("Place Enter Pulling amount", 1, client.AccountBalance, "Amount Exceeds the balance, you can withdraw up to : ", true);
@@ -455,13 +466,12 @@ namespace ClientDB
             client = DepositClient(client, Balance);
             cout << "Transaction completed \n";
             cout << endl;
-            AfterDepositWithdrawalProcess(vClients, client, AccountNumber);
+            AfterDepositWithdrawalProcess(vClients, client, AccountNumber,true);
         }
         else
             cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
     }
-    double CalculateTotalBalances(vector<sClientData> vClients)
-    {
+    double CalculateTotalBalances(vector<sClientData> vClients) {
         double total = 0.0;
         for (sClientData client : vClients)
         {
@@ -470,8 +480,7 @@ namespace ClientDB
         return total;
     }
 
-    void TotalBalances()
-    {
+    void TotalBalances() {
         vector<sClientData> vClientData = LoadCleintsDataFromFileToVector();
         ShowAllClientsFromFile(vClientData, true);
         cout << "\t\t\t\tTotal Balcese = " << CalculateTotalBalances(vClientData) << endl;
