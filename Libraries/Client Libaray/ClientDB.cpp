@@ -394,7 +394,7 @@ namespace ClientDB
         } while (Answer != 'y' && Answer != 'n');
         return Answer == 'y';
     }
-    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance,bool ATM) {
+    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance) {
         double Balance = 0.0;
         do {
             cout << message << endl;
@@ -406,16 +406,7 @@ namespace ClientDB
                     cout << ErorMessage << endl;
             }
         } while (Balance < from || Balance > to);
-        if (ATM && Balance > MaximumAmounTCanBeWithdrawnFromAnATM) {
-            cout << "You can withdraw up to 10000 from an ATM. To withdraw more, please go to the bank."<<endl;
-            if (GetAnswer("Do you approve of withdrawal?"+ to_string(MaximumAmounTCanBeWithdrawnFromAnATM))) {
-                return MaximumAmounTCanBeWithdrawnFromAnATM;
-            }
-            else {
-                return 0;
-            }
-            
-        }
+        
         return Balance;
     }
     void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber,bool PrintClientInformation) {

@@ -61,7 +61,7 @@ namespace ClientDB {
     bool UpdateClientByAccountNumber(vector<sClientData>& vClients);
     sClientData DepositClient(sClientData Client, double Balance);
     bool HasSufficientBalance(sClientData client, double Balance);
-    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance = false,bool ATM =false);
+    double ReadBalance(string message, short from, short to, string ErorMessage, bool forMaxBalance = false);
     double CheckBalance(sClientData client);
     void AfterDepositWithdrawalProcess(vector<sClientData> vClients, sClientData client, string AccountNumber, bool PrintClientInformation = false);
     void DepositProcess();

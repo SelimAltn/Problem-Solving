@@ -4,6 +4,7 @@
 #include "../../Libraries/String Library/StringLib.h"
 #include "../../Libraries/String Library/StringLib.cpp"
 #include <cstdlib> 
+#include <cmath>  
 const string FileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication6\\User.txt";
 enum class AppState {
     Login,
@@ -15,7 +16,7 @@ enum class AppState {
     LogOut,
     Exit
 };
-
+const double MaximumAmounTCanBeWithdrawnFromAnATM = 10000;
 AppState ChekClientPinCodeForLogin(ClientDB::sClientData& ActiveClient, vector<ClientDB::sClientData>& vClient) {
     for (int i = 3; i > 0; --i) {
         string PinCode = ClientDB::ReadString("Enter Pin Code ? ");
@@ -85,12 +86,75 @@ AppState QuickWithdrawScreen(ClientDB::sClientData &Client, vector<ClientDB::sCl
     
 
 }
-AppState NormalWithdrawScreen(ClientDB::sClientData Client, vector<ClientDB::sClientData>& vClient) {
+double ReadTheAmountToBeDepositedForATM(int MultiplesToBeChecked) {
+    double Balance = 0.0;
+    double result;
+    do {
+        cout << "Click on the amount you want to deposit" << endl;
+        cin >> Balance;
+        if (Balance < MultiplesToBeChecked || Balance > MaximumAmounTCanBeWithdrawnFromAnATM)
+            cout << "The maximum amount that can be deposited from an ATM is "<<MaximumAmounTCanBeWithdrawnFromAnATM << endl;
+        result = fmod(Balance, MultiplesToBeChecked);
+        if (result !=0)
+            cout << "The amount that can be withdrawn must only be a multiple of " << MultiplesToBeChecked << endl;
+
+
+    } while (Balance < MultiplesToBeChecked || Balance > MaximumAmounTCanBeWithdrawnFromAnATM || result != 0);
+    return Balance;
+}
+AppState DepozitScreen(ClientDB::sClientData &client, vector<ClientDB::sClientData>& vClient) {
+    ClientDB::PrintPageInformation("Depozit Screen ");
+    double Balance = ReadTheAmountToBeDepositedForATM(50);
+    ClientDB::sClientData tempClient;
+    tempClient = ClientDB::DepositClient(client, Balance);
+    client.AccountBalance = tempClient.AccountBalance;
+    cout << "Your deposit has been completed successfully." << endl;
+    ClientDB::AfterDepositWithdrawalProcess(vClient, client, client.AccountNumber); 
+    return AppState::ATM;
+}
+double ReadBalanceForATM(string message, short from, short to, string ErorMessage,int MultiplesToBeChecked) {
+    double Balance = 0.0;
+    double result;
+    do {
+        cout << message << endl;
+        cin >> Balance;
+        if (Balance < from || Balance > to) 
+              cout << ErorMessage << to << endl;
+        result = fmod(Balance, MultiplesToBeChecked);
+        if (result != 0)
+            cout << "The amount that can be withdrawn must only be a multiple of " << MultiplesToBeChecked << endl;
+        if (to == 0) {
+            if (ClientDB::GetAnswer("Would you like to return to the main menu?")) {
+
+                return 0;
+            }
+        }
+        
+        
+    } while (Balance < from || Balance > to||result!=0);
+    if (Balance > MaximumAmounTCanBeWithdrawnFromAnATM) {
+        cout << "You can withdraw a maximum of " << MaximumAmounTCanBeWithdrawnFromAnATM << " from an ATM.";
+        if (ClientDB::GetAnswer("Press y to withdraw " + to_string(MaximumAmounTCanBeWithdrawnFromAnATM)))
+            return MaximumAmounTCanBeWithdrawnFromAnATM;
+        else 
+            return 0;
+            
+    }
+
+    return Balance;
+}
+AppState NormalWithdrawScreen(ClientDB::sClientData &Client, vector<ClientDB::sClientData>& vClient) {
     ClientDB::PrintPageInformation("Normal Withdraw Screen ");
     ClientDB::sClientData tempClient;
-    double balance = ClientDB::ReadBalance("Enter the pie you want to shoot", 0,Client.AccountBalance , "Maximum amount that can be withdrawn from an ATM is : ", true);
+    double balance = ReadBalanceForATM("Enter the pie you want to shoot", 0,Client.AccountBalance , "insufficient balance",50);
+    if (balance == 0) {
+        cout << "You are directed to the main menu"<<endl;
+        return AppState::ATM;
+    }
     balance *= -1;
     // 50 nin katları kontrolu ekle
+    tempClient = ClientDB::DepositClient(Client, balance);
+    Client.AccountBalance = tempClient.AccountBalance;
     cout << "Your withdrawal has been completed successfully" << endl;
     ClientDB::AfterDepositWithdrawalProcess(vClient, Client, Client.AccountNumber);
     return AppState::ATM;
@@ -102,6 +166,7 @@ AppState CheckBalanceScreen(ClientDB::sClientData client) {
     return AppState::ATM;
 
 }
+
 AppState AtmScreen() {
     PrintAtmMenu();
     short choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 5]", 1, 5, "Only [1-5]");
@@ -133,8 +198,8 @@ AppState AtmScreen() {
 void RunApp() {
     AppState State = AppState::Login;
     ClientDB::sClientData ActiveClient;
-    vector<ClientDB::sClientData> vClient = ClientDB::LoadCleintsDataFromFileToVector();
     while (State != AppState::Exit) {
+        vector<ClientDB::sClientData> vClient = ClientDB::LoadCleintsDataFromFileToVector();
         switch (State) {
         case AppState::Login:
             system("cls");
@@ -154,9 +219,19 @@ void RunApp() {
             State = NormalWithdrawScreen(ActiveClient, vClient); 
             system("pause");
             break;
+        case AppState::Deposit:
+            system("cls");
+            State = DepozitScreen(ActiveClient, vClient);
+            system("pause");
+            break;
         case AppState::CheckBalance:
             system("cls");
             State = CheckBalanceScreen(ActiveClient);
+            system("pause");
+            break;
+        case AppState::LogOut :
+            system("cls");
+            State = AppState::Login;
             system("pause");
             break;
 
