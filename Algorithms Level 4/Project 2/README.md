@@ -9,12 +9,9 @@ The previous projects focused on **bank employees and user permissions**.
 
 ## 📌 Background
 
-* **Project 1 & 2:** Bank employees could add, update, delete, and search clients. 
-* [Project1](../../Algorithms%20Level%203/project%201/README.md)
-* [Project2](../../Algorithms%20Level%203/project%202/README.md)
+* **Project 1 & 2:** Bank employees could add, update, delete, and search clients.  &emsp; [Project1](../../Algorithms%20Level%203/project%201/README.md)  &emsp; [Project2](../../Algorithms%20Level%203/project%202/README.md)
 
-* **Project 3:** User system with permissions for bank employees.
-* [Project3](../../Algorithms%20Level%204/Project%201/README.md)
+* **Project 3:** User system with permissions for bank employees.&emsp; [Project3](../../Algorithms%20Level%204/Project%201/README.md)
 
 * **Project 4 (this project):** A full **ATM system** where bank clients can log in with their account number + PIN and perform transactions.
 
