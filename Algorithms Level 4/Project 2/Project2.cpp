@@ -5,7 +5,7 @@
 #include "../../Libraries/String Library/StringLib.cpp"
 #include <cstdlib> 
 #include <cmath>  
-const string FileName = "D:\\programing\\c++\\programing kurslar\\c++ kurs 8\\ConsoleApplication6\\User.txt";
+const string FileName = "D:\programing\\Algorithms & Problem-Solving\\Problem-Solving\\Algorithms Level 3\\Problem #50\\file.txt";
 enum class AppState {
     Login,
     ATM,
@@ -64,14 +64,20 @@ void PrintQuickWithdrawalAmounts() {
     cout << "[3] : 150" << "\t\t\t [4] : 200" << endl;
     cout << "[5] : 300" << "\t\t\t [6] : 400" << endl;
     cout << "[7] : 500" << "\t\t\t [8] : 1000" << endl;
+    cout << "[9] : Press to return to the main menu " << endl;
+    cout << "[10] : Logout " << endl;
 }
 AppState QuickWithdrawScreen(ClientDB::sClientData &Client, vector<ClientDB::sClientData> &vClient) {
     ClientDB::PrintPageInformation("Quick Withdraw Screen");
     ClientDB::sClientData tempClient;
     PrintQuickWithdrawalAmounts();
-    short choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 8]", 1, 8, "Only [1-8]");
+    short choice = ClientDB::ReadNumber("Choose What do you want to do [1 to 10]", 1, 10, "Only [1-10]");
     double Balance = QuikWithdrawOptions[choice - 1];
     Balance *= -1;
+    if (choice == 9)
+        return AppState::ATM;
+    if (choice == 10)
+        return AppState::LogOut;
     if (HasSufficientBalance(Client, QuikWithdrawOptions[choice - 1])) {
         tempClient = ClientDB::DepositClient(Client,Balance);
         Client.AccountBalance = tempClient.AccountBalance;

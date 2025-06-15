@@ -223,7 +223,7 @@ namespace ClientDB
     {
         for (sClientData c : vClients)
         {
-            if (c.AccountNumber == AccountNumber)
+            if (StringLib::AreStringsEqual(AccountNumber,c.AccountNumber))
             {
                 client = c;
                 return true;
