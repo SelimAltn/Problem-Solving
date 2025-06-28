@@ -1,16 +1,16 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan **1 ile 25 arasında** bir sayı alır ve bu sayı kadar, **'A' harfinden başlayarak** artan şekilde büyük harflerden oluşan bir karakter deseni oluşturur.
+This program takes a number from the user between **1 and 25**, and generates a character pattern consisting of uppercase letters starting from **'A'**, increasing incrementally.
 
-📌 **Programın Kuralları:**
+📌 **Program Rules:**
 
-* Giriş aralığı: 1 ≤ sayı ≤ 25
-* Her satırda, o satıra karşılık gelen büyük harf (`A`, `B`, `C`...) tekrar edilerek yazdırılır.
-* Harf sayısı her satırda artar ve üçgen şeklinde bir yapı oluşur.
+* Input range: 1 ≤ number ≤ 25
+* Each line prints the corresponding uppercase letter (`A`, `B`, `C`...) repeated as many times as the line number.
+* The number of characters increases with each line, forming a triangle-like structure.
 
 ---
 
-### ✅ Örnek Çıktı
+### ✅ Sample Output
 
 ```
 enter a number 
@@ -23,6 +23,6 @@ DDDD
 
 ---
 
-### 🎯 Amaç
+### 🎯 Purpose
 
-ASCII karakterleriyle işlem yapmayı, iç içe döngü mantığını ve artan yapıda karakter desenleri oluşturmayı öğretmektir.
+The aim is to teach working with ASCII characters, nested loop logic, and generating incrementally structured character patterns.
