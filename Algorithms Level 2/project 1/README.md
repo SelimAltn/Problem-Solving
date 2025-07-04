@@ -1,119 +1,123 @@
-### 🎮 Proje: Taş-Kağıt-Makas Oyunu (Konsol Versiyonu)
+İşte metnin İngilizce çevirisi:
 
 ---
 
-### 📌 Problem Tanımı
-
-Bu proje, kullanıcının bilgisayara karşı **"Taş-Kağıt-Makas"** oyunu oynayabileceği basit bir konsol tabanlı uygulamadır. Oyun kaç tur oynanacağı ile başlar, her turda kullanıcı ve bilgisayar seçim yapar, sonuçlar karşılaştırılır ve sonunda detaylı bir özet ekranı sunulur.
+### 🎮 Project: Rock-Paper-Scissors Game (Console Version)
 
 ---
 
-### 🛠️ Programın Temel Özellikleri
+### 📌 Problem Description
 
-#### 🔸 Giriş ve Karşılama:
-
-* Oyuncuya hoş geldin mesajı gösterilir.
-* Oyuncudan **1–10 arası tur sayısı** istenir.
-
-#### 🔸 Oyun Mekaniği:
-
-* Her turda kullanıcıdan bir seçim alınır:
-
-  * `1 = Taş`
-  * `2 = Kağıt`
-  * `3 = Makas`
-* Bilgisayar rastgele bir seçim yapar (`rand()` fonksiyonu ile).
-* Seçimler karşılaştırılır ve sonuç anında gösterilir.
-* Kazanan tura göre skorlar güncellenir.
-* Ekran rengi:
-
-  * Yeşil: Kullanıcı kazandı
-  * Kırmızı: Bilgisayar kazandı
-  * Sarı: Berabere
-
-#### 🔸 Oyun Sonu Özeti:
-
-* Toplam tur sayısı
-* Kullanıcının kazandığı tur sayısı
-* Bilgisayarın kazandığı tur sayısı
-* Beraberlik sayısı
-* Son kazanan (kim daha çok kazandıysa)
-
-#### 🔸 Tekrar Oynama:
-
-* Oyun bittikten sonra kullanıcıya tekrar oynamak isteyip istemediği sorulur.
-* Eğer isterse ekran temizlenir (`system("cls")`) ve yeni oyun başlatılır.
+This project is a simple console-based application where the user can play **"Rock-Paper-Scissors"** against the computer. The game begins by asking how many rounds will be played. In each round, both the user and the computer make a choice, results are compared, and a detailed summary screen is shown at the end.
 
 ---
 
-### ✅ Örnek Oyun Akışı
+### 🛠️ Core Features of the Program
+
+#### 🔸 Introduction and Greeting:
+
+* A welcome message is displayed to the player.
+* The player is asked to enter the **number of rounds (between 1 and 10)**.
+
+#### 🔸 Game Mechanics:
+
+* In each round, the user makes a selection:
+
+  * `1 = Rock`
+  * `2 = Paper`
+  * `3 = Scissors`
+* The computer makes a random selection (using the `rand()` function).
+* Selections are compared and the result is shown immediately.
+* Scores are updated based on the winner of each round.
+* Screen color feedback:
+
+  * Green: User wins
+  * Red: Computer wins
+  * Yellow: Draw
+
+#### 🔸 End-of-Game Summary:
+
+* Total number of rounds
+* Number of rounds the user won
+* Number of rounds the computer won
+* Number of draws
+* Final winner (whoever won more rounds)
+
+#### 🔸 Play Again Option:
+
+* After the game ends, the user is asked whether they want to play again.
+* If yes, the screen is cleared (`system("cls")`) and a new game begins.
+
+---
+
+### ✅ Sample Game Flow
 
 ```
 --------------------------------------------
-Taş-Makas-Kağaıt Oyunla Hoşgeldiniz 
+Welcome to the Rock-Paper-Scissors Game
 --------------------------------------------
-Lütfen Kaç Kere Oynamak İstediniz tur Sayısını Giriniz : 3
+Please enter the number of rounds you want to play: 3
 
------------ 1. TUR --------------
-{ 1.TAŞ 2.KAĞIT 3.MAKAS }
-Oynamak İstediniz Seçimi Numara Olarak Yazınız : 1
-          (1.Player Kazandı)
-1.Player :TAŞ ------  2.Player : MAKAS
+----------- ROUND 1 --------------
+{ 1.ROCK 2.PAPER 3.SCISSORS }
+Enter your choice as a number: 1
+          (Player 1 Won)
+Player 1: ROCK ------  Player 2: SCISSORS
 
------------ 2. TUR --------------
-{ 1.TAŞ 2.KAĞIT 3.MAKAS }
-Oynamak İstediniz Seçimi Numara Olarak Yazınız : 2
-          (BİLGİSAYAR Kazandı)
-1.Player :KAĞIT ------  2.Player : MAKAS
+----------- ROUND 2 --------------
+{ 1.ROCK 2.PAPER 3.SCISSORS }
+Enter your choice as a number: 2
+          (COMPUTER Won)
+Player 1: PAPER ------  Player 2: SCISSORS
 
------------ 3. TUR --------------
-{ 1.TAŞ 2.KAĞIT 3.MAKAS }
-Oynamak İstediniz Seçimi Numara Olarak Yazınız : 2
-          (Berabere)
-1.Player :KAĞIT ------  2.Player : KAĞIT
+----------- ROUND 3 --------------
+{ 1.ROCK 2.PAPER 3.SCISSORS }
+Enter your choice as a number: 2
+          (Draw)
+Player 1: PAPER ------  Player 2: PAPER
 
 ---------------------------------------------
-               Oyunun Özeti : 
+               Game Summary:
 ---------------------------------------------
-Tur  Sayısı :    3
-1.Player Oyun Kazanma Sayısı :   1
-2.Player Oyun Kazanma Sayısı :   1
-Berabere Oyun Sayısı :   1
-Son Kazanan :    Beraberlik
-Yeni Oyun Oynamak İstiyormusunuz ? (evet : 1 , Hayır :0 )
+Total Rounds:    3
+Player 1 Wins:   1
+Player 2 Wins:   1
+Draws:           1
+Final Winner:    Draw
+Do you want to play again? (yes: 1 , no: 0)
 ```
 
 ---
 
-### 🎯 Amaç
+### 🎯 Objective
 
-Bu proje şu kazanımları hedefler:
+This project aims to reinforce the following concepts:
 
-* Koşullu yapılar (`if-else`)
-* Rastgele sayı üretimi (`rand`)
-* Döngüler ve kullanıcı etkileşimi
-* Fonksiyonel programlama (görev ayrımı)
-* Renkli ekran çıkışı (`system("color")`)
-* Konsol temizleme ve tekrar oynama yapısı (`system("cls")`)
-* Basit yapay zekaya karşı oyun mantığı
-
----
-
-### 🧠 Geliştirilebilecek Özellikler
-
-* Skorların dosyaya kaydedilmesi
-* Kullanıcının adıyla giriş yapması
-* Gelişmiş grafik veya GUI versiyonu (SFML, SDL vs.)
-* Karakter animasyonu veya ses efekti desteği
+* Conditional structures (`if-else`)
+* Random number generation (`rand`)
+* Loops and user interaction
+* Functional programming (separation of concerns)
+* Colored console output (`system("color")`)
+* Console clearing and replay logic (`system("cls")`)
+* Basic AI-driven game logic
 
 ---
 
-### 🗂️ Dosya Bilgisi
+### 🧠 Potential Improvements
 
-* **Dosya Adı**: `tas_kagit_makas.cpp`
-* **Kategori**: Konsol Oyun Projesi
-* **Seviye**: Başlangıç-Orta
+* Saving scores to a file
+* Logging in with the user’s name
+* Advanced graphics or GUI version (SFML, SDL, etc.)
+* Character animation or sound effect support
 
 ---
 
-> Bu proje, C++ öğrenmeye başlayanlar için hem eğlenceli hem de kapsamlı bir pekiştirme uygulamasıdır. Mantık, koşul, rastgelelik ve kullanıcı arayüzü deneyimi açısından oldukça öğreticidir.
+### 🗂️ File Info
+
+* **File Name**: `tas_kagit_makas.cpp`
+* **Category**: Console Game Project
+* **Level**: Beginner–Intermediate
+
+---
+
+> This project is both fun and comprehensive for beginners learning C++. It is highly educational in terms of logic, conditions, randomness, and user interface experience.
