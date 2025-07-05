@@ -1,120 +1,120 @@
-### 🧮 Proje: Matematik Test Oyunu (Soru Üretici & Değerlendirici)
+### 🧮 Project: Math Quiz Game (Question Generator & Evaluator)
 
 ---
 
-### 📌 Problem Tanımı
+### 📌 Problem Description
 
-Bu C++ konsol projesi, kullanıcıya dinamik olarak matematiksel işlemlerden oluşan sorular üretir ve cevaplarını değerlendirir. Kullanıcıdan seviyeye ve soru türüne göre rastgele oluşturulmuş işlemleri çözmesi beklenir. Sonuç olarak, toplam doğru/yanlış cevap sayısı ile birlikte başarı durumu gösterilir.
-
----
-
-### 🛠️ Programın Temel Özellikleri
-
-#### 🔹 Oyun Akışı:
-
-1. **Soru Sayısı Girişi**
-   Kullanıcıdan 1–1000 arasında kaç soru çözmek istediği alınır.
-2. **Seviye ve Soru Tipi Seçimi**
-
-   * Seviye:
-
-     * 1: Kolay (0–15)
-     * 2: Orta (16–70)
-     * 3: Zor (70–120)
-     * 4: Karışık (0–120)
-   * Soru Tipi:
-
-     * 1: Toplama
-     * 2: Çıkarma
-     * 3: Çarpma
-     * 4: Bölme
-     * 5: Karışık
-3. **Soru Üretimi ve Değerlendirme**
-   Her soru:
-
-   * Rastgele sayılarla oluşturulur.
-   * İşleme göre sonuç hesaplanır.
-   * Kullanıcıdan cevap alınır.
-   * Doğruysa skor artar, yanlışsa renk değişerek uyarı verilir.
-4. **Sonuç Ekranı**
-
-   * Toplam soru sayısı
-   * Doğru cevap sayısı
-   * Yanlış cevap sayısı
-   * Başarılı veya başarısız değerlendirmesi (renkli çıktı)
+This C++ console project dynamically generates mathematical questions for the user and evaluates their answers. The user is expected to solve randomly generated operations based on selected difficulty and question type. At the end, the program displays a summary including the number of correct/incorrect answers and an overall performance evaluation.
 
 ---
 
-### ✅ Örnek Oyun Akışı
+### 🛠️ Core Features of the Program
+
+#### 🔹 Game Flow:
+
+1. **Question Count Input**
+   The user is asked how many questions they want to answer (between 1–1000).
+
+2. **Difficulty and Question Type Selection**
+
+   * **Difficulty Levels:**
+
+     * 1: Easy (0–15)
+     * 2: Medium (16–70)
+     * 3: Hard (70–120)
+     * 4: Mixed (0–120)
+   * **Question Types:**
+
+     * 1: Addition
+     * 2: Subtraction
+     * 3: Multiplication
+     * 4: Division
+     * 5: Mixed
+
+3. **Question Generation and Evaluation**
+   For each question:
+
+   * Random numbers are generated.
+   * The correct result is calculated.
+   * User input is collected.
+   * If the answer is correct, the score increases; if incorrect, the screen color changes as a warning.
+
+4. **Result Screen**
+
+   * Total number of questions
+   * Number of correct answers
+   * Number of incorrect answers
+   * Success or failure evaluation (with color output)
+
+---
+
+### ✅ Sample Game Flow
 
 ```
-Lutfen Cevablamak İstediniz Soruların Sayısını Giriniz 
+Please enter how many questions you'd like to answer:  
 > 3
 
 -----------------------------------------
-       Math Oyunla Hoşgeldiniz 
+       Welcome to Math Game
 -----------------------------------------
-{    1.KOLAY,  2.ORTA , 3.ZOR , 4.MİX        }
-LUTFEN SORULARIN SEVİYESİNİ SEÇİNİZ : 1
+{    1.EASY,  2.MEDIUM , 3.HARD , 4.MIX        }
+PLEASE SELECT DIFFICULTY LEVEL: 1
 
-{    1.TOPLAMA,  2.ÇIKARTMA , 3.ÇARPIMA , 4.BÖLME, 5.MİX        }
-LUTFEN SORULARIN TİPİNİ SEÇİNİZ : 5
+{    1.ADDITION,  2.SUBTRACTION , 3.MULTIPLICATION , 4.DIVISION, 5.MIX }
+PLEASE SELECT QUESTION TYPE: 5
 
-1. SORU : 12*4 ? 
+QUESTION 1: 12 * 4 ? 
 > 48
-Cevabınız Doğru
+Your answer is correct.
 
-2. SORU : 8-14 ?
+QUESTION 2: 8 - 14 ?
 > -6
-Cevabınız Doğru
+Your answer is correct.
 
-3. SORU : 3+9 ?
+QUESTION 3: 3 + 9 ?
 > 13
-Yalnış Cevab
+Wrong answer.
 
-Sorulan Soruların Sayısı : 3  
-Sorulan DOğru Soruların Sayısı : 2  
-Sorulan Yalnış Soruların Sayısı : 1  
-Başardınız ! ✅
+Total Questions: 3  
+Correct Answers: 2  
+Incorrect Answers: 1  
+You passed! ✅
 ```
 
 ---
 
-### 🎯 Amaç
+### 🎯 Purpose
 
-Bu proje ile kullanıcı:
+With this project, the user can:
 
-* Dört işlem pratiği yapar,
-* Seviye ve tür bazlı soru çözerek zorluk ayarı ile çalışır,
-* Hatalarını görerek öğrenme şansı yakalar.
+* Practice basic arithmetic operations,
+* Solve questions tailored by difficulty and type,
+* Learn from their mistakes with immediate feedback.
 
-Ayrıca geliştirici olarak:
+Additionally, for the developer:
 
-* Fonksiyonlara ayrılmış modüler yapı,
-* Kullanıcı girişi doğrulama (validasyon),
-* Rastgele sayı üretimi (`rand()`),
-* Temiz kullanıcı deneyimi için renkli ekran desteği (`system("color")`)
-* `switch-case`, `char` işlemleri gibi C++ temelleri
-  üzerinde kapsamlı bir pekiştirme kazanılır.
-
----
-
-### 🗂️ Dosya Bilgisi
-
-* **Dosya Adı**: `math_quiz_game.cpp`
-* **Kategori**: Konsol Eğitim Oyunu
-* **Seviye**: Orta Seviye
+* Modular structure through separate functions,
+* Input validation,
+* Use of random number generation (`rand()`),
+* Colorful output for better user experience (`system("color")`),
+* Reinforcement of core C++ concepts like `switch-case`, `char` processing, etc.
 
 ---
 
-### 🔧 Geliştirme Önerileri
+### 🗂️ File Information
 
-* **Zaman sınırı** eklenerek refleks testi yapılabilir.
-* **Skor kaydı** dosyaya yazılarak geçmiş performans gösterilebilir.
-* **Seçim menüsü görselleştirilebilir** (örneğin ASCII kutucuklar).
-* **Negatif bölme hatalarına** karşı koruma eklenebilir (`number2 != 0`).
-* **Sesli geri bildirim** (beep sesi veya "Correct!" / "Wrong!") eklenebilir.
+* **File Name**: `math_quiz_game.cpp`
+* **Category**: Console Educational Game
+* **Level**: Intermediate
 
 ---
 
-Bu proje hem oyunlaştırma hem de algoritmik düşünmeyi birlikte sunan başarılı bir öğrenim aracıdır.
+### 🔧 Suggestions for Improvement
+
+* Add **time limits** for reflex training.
+* Save **score history** to a file for performance tracking.
+* Visualize the **menu selection** (e.g., ASCII boxes).
+* Add **division protection** to prevent errors (`number2 != 0`).
+* Include **audio feedback** (beep sound or "Correct!" / "Wrong!" alerts).
+
+---
