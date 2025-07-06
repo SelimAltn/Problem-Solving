@@ -1,21 +1,21 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan bir dizi boyutu alarak 1 ile 100 arasında rastgele sayılardan oluşan bir dizi (`arri1`) oluşturur. Ardından, bu dizideki **asal sayı** olan elemanları başka bir diziye (`arri2`) kopyalar. Son olarak her iki dizi de ekrana yazdırılır.
+This program creates an array (`arri1`) filled with random numbers between 1 and 100, based on a size provided by the user. Then, it copies all **prime numbers** from this array into a second array (`arri2`). Finally, both arrays are printed to the screen.
 
 ---
 
-### 📌 Programın İşleyişi
+### 📌 Program Workflow
 
-1. Kullanıcıdan dizinin boyutu alınır (`1–100` arası).
-2. `arri1` dizisi rastgele `1–100` arasında sayılarla doldurulur.
-3. Her bir eleman için asal sayı kontrolü yapılır:
+1. The user is prompted to enter the array size (between `1–100`).
+2. The `arri1` array is filled with random numbers ranging from `1–100`.
+3. Each element is checked to determine if it is a prime number:
 
-   * Eğer sayı asal ise `arri2` dizisine eklenir.
-4. Hem orijinal (`arri1`) hem de sadece asal sayılardan oluşan (`arri2`) diziler ekrana yazdırılır.
+   * If the number is prime, it is added to the `arri2` array.
+4. Both the original array (`arri1`) and the filtered prime number array (`arri2`) are printed.
 
+---
 
-
-### ✅ Örnek Çıktı
+### ✅ Sample Output
 
 ```
 enter arri size : 
@@ -26,13 +26,13 @@ Arri 2 :{ 13,29,41,2,17}
 
 ---
 
-### 🎯 Amaç
+### 🎯 Objective
 
-Bu problem kullanıcıya:
+This problem aims to teach the user:
 
-* Asal sayı kontrolü algoritması,
-* Rastgele dizi oluşturma,
-* Filtreleme mantığı ile yeni dizi üretme,
-* Fonksiyonel ve modüler programlama (enum kullanımı dâhil)
+* Prime number checking algorithm,
+* Random array generation,
+* Creating a new array using filtering logic,
+* Functional and modular programming (including the use of enums),
 
-gibi temel ve orta seviye algoritma yeteneklerini kazandırmayı amaçlar. Özellikle **asal sayı filtreleme** uygulamalarda sıkça karşılaşılan mantıksal bir problemdir.
+It especially focuses on **prime number filtering**, which is a common logical task in programming applications.
