@@ -1,21 +1,23 @@
-### 💡 Problem Tanımı
 
-Bu program, kullanıcıdan bir sayı alarak 1’den o sayıya kadar olan sayıları içeren bir dizi oluşturur. Daha sonra bu diziyi **rastgele bir şekilde karıştırır (shuffle)** ve hem orijinal hem de karıştırılmış halini ekrana yazdırır.
 
----
+### 💡 Problem Description
 
-### 📌 Programın İşleyişi
-
-1. Kullanıcıdan dizinin boyutu alınır (`1–100`).
-2. `Arry1Sayileri` fonksiyonu ile 1'den başlayarak sıralı bir sayı dizisi oluşturulur.
-3. `Arry2` fonksiyonu, dizinin elemanlarını rastgele şekilde yer değiştirerek diziyi karıştırır.
-4. `PrintMatris` fonksiyonu, hem orijinal hem de karıştırılmış diziyi ekrana yazdırır.
-
-> Not: Karıştırma işlemi `swap(a, b)` ile rastgele iki indeks arasında yapılır.
+This program takes a number from the user and creates an array containing numbers from 1 to that number. Then, it **shuffles** the array randomly and prints both the original and the shuffled versions to the screen.
 
 ---
 
-### ✅ Örnek Çıktı
+### 📌 Program Flow
+
+1. The program gets the array size from the user (`1–100`).
+2. The `Arry1Sayileri` function creates a sequential array starting from 1.
+3. The `Arry2` function randomly swaps elements in the array to shuffle it.
+4. The `PrintMatris` function prints both the original and the shuffled arrays.
+
+> Note: The shuffle is done using `swap(a, b)` between two random indices.
+
+---
+
+### ✅ Sample Output
 
 ```
 enter a number 
@@ -26,12 +28,12 @@ Arri2 :
 5 3 10 1 8 9 2 7 6 4 
 ```
 
-> Not: Çıktı her çalıştırmada farklı olacaktır çünkü karıştırma işlemi rastgeledir.
+> Note: The output will vary with each run because the shuffle is random.
 
 ---
 
-### 🎯 Amaç
+### 🎯 Purpose
 
-* Dizi oluşturma ve sıralama bilgisi kazanmak,
-* Rastgele sayılarla diziyi karıştırma (shuffle) algoritmasını öğrenmek,
-* Fonksiyonlar ve referans kullanımı (`swap`) ile bellekteki değerlerin nasıl değiştirileceğini kavramak.
+* To gain understanding of array creation and sequencing,
+* To learn the shuffle algorithm using random numbers,
+* To understand how values in memory change using functions and references (`swap`).
