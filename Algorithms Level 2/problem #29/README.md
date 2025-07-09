@@ -1,35 +1,36 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan bir dizi boyutu alır ve 1 ile 100 arasında rastgele sayılarla bir dizi oluşturur. Ardından bu dizideki **asal sayıları** tespit ederek ayrı bir diziye kopyalar ve her iki diziyi ekrana yazdırır.
+This program prompts the user to enter an array size and generates an array filled with random numbers between 1 and 100. It then **detects the prime numbers** in the array, copies them into a separate array, and prints both arrays.
 
-📌 **Programın İşleyişi:**
+📌 **Program Flow:**
 
-1. Kullanıcıdan dizi boyutu alınır (`1–100` arası).
-2. İlk dizi rastgele sayılarla (`1–100` arası) doldurulur.
-3. `kontrol()` fonksiyonu kullanılarak her sayının asal olup olmadığı kontrol edilir.
-4. Asal sayılar ikinci diziye aktarılır.
-5. Her iki dizi ekrana yazdırılır.
+1. The user enters the size of the array (between `1–100`).
+2. The first array is filled with random numbers (between `1–100`).
+3. The `kontrol()` function checks whether each number is a prime.
+4. Prime numbers are copied into a second array.
+5. Both arrays are printed to the screen.
 
-📌 **Asal Sayı Kontrolü:**
-Bir sayının asal olması için sadece 1 ve kendisine bölünebilmesi gerekir. Program, 2’den sayının yarısına kadar olan bölme işlemleriyle asal sayı kontrolü yapar.
+📌 **Prime Number Check:**
+
+A number is considered prime if it is divisible only by 1 and itself. The program checks primality by attempting to divide the number by all integers from 2 up to half of the number.
 
 ---
 
-### ✅ Örnek Çıktı
+### ✅ Sample Output
 
 ```
 enter a Arry size ? 
 10
-asıl matris : 
+original array : 
 56 13 9 23 44 17 20 89 7 38 
-2. : 
+2nd array : 
 13 23 17 89 7 
 ```
 
-> Not: Sayılar her çalıştırmada farklı üretilecektir.
+> Note: The numbers will be randomly generated on each execution.
 
 ---
 
-### 🎯 Amaç
+### 🎯 Objective
 
-Dizi içerisindeki asal sayıların filtrelenmesini öğretmek; enum kullanımı, fonksiyonel ayrım, dizilerde kopyalama ve kullanıcı girdisine göre dinamik işlem yapmayı pekiştirmek.
+To teach how to filter prime numbers from an array; reinforce the use of enums, functional decomposition, array copying, and dynamic processing based on user input.
