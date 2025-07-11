@@ -1,2 +1,3 @@
-### Problem Tanımı
-Bir C++ programı yazarak, 1'den başlayarak kullanıcının girdiği bir sayıya kadar olan asal sayıları bulan ve ekrana yazdıran bir program oluşturunuz. Program, kullanıcının girdiği sayıya kadar olan asal sayıları bulmalı ve bu asal sayıları ekrana listelemelidir.
+### 💡 Problem Description
+Write a C++ program that finds and prints all prime numbers from 1 up to a number entered by the user.
+The program should determine all prime numbers up to the user's input and display them on the screen as a list.
