@@ -1,17 +1,17 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan bir **tam sayı** alır ve bu sayıyı **basamaklarına ayırarak** her bir basamağı **alt alta olacak şekilde ekrana yazdırır**.
+This program takes an **integer** from the user and **separates its digits**, printing each digit **on a new line**.
 
-📌 Programın adımları:
+📌 Program Steps:
 
-1. Kullanıcıdan bir sayı alınır.
-2. Bu sayı `string` veri tipine dönüştürülür.
-3. Sayının her basamağı tek tek okunarak ekrana yazdırılır.
+1. Read an integer input from the user.
+2. Convert the number to a `string` data type.
+3. Iterate through each digit and print it on a separate line.
 
-🔍 Örnek:
+🔍 Example:
 
-* Giriş: `573`
-* Çıktı:
+* Input: `573`
+* Output:
 
   ```
   5
@@ -19,4 +19,4 @@ Bu program, kullanıcıdan bir **tam sayı** alır ve bu sayıyı **basamakları
   3
   ```
 
-Amaç, bir sayının rakamlarını ayırmak ve her bir rakamı yeni satıra yazdırmaktır.
+🎯 The goal is to split the number into its individual digits and print each one on a new line.

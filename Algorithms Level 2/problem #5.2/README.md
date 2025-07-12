@@ -1,17 +1,17 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan bir **tam sayı** alır ve bu sayının **her bir basamağını sondan başlayarak** alt alta ekrana yazdırır.
+This program takes an **integer** input from the user and prints **each digit** of the number **starting from the last digit**, one per line.
 
-📌 Programın işleyişi:
+📌 Program Flow:
 
-1. Kullanıcıdan bir sayı alınır.
-2. Sayı, **mod alma (`%`) ve bölme (`/`) işlemleri** ile basamaklarına ayrılır.
-3. Her basamak sırayla yazdırılır (en sondaki rakamdan başlayarak).
+1. The user enters an integer.
+2. The number is separated into its digits using **modulus (`%`) and division (`/`) operations**.
+3. Each digit is printed line by line (starting from the last digit).
 
-🔍 Örnek:
+🔍 Example:
 
-* Giriş: `573`
-* Çıktı:
+* Input: `573`
+* Output:
 
   ```
   3
@@ -19,4 +19,4 @@ Bu program, kullanıcıdan bir **tam sayı** alır ve bu sayının **her bir bas
   5
   ```
 
-Amaç, sayının basamaklarını matematiksel yöntemle ayırmak ve her birini yeni satıra yazdırmaktır.
+🎯 The goal is to separate the digits of a number using a mathematical method and print each digit on a new line.

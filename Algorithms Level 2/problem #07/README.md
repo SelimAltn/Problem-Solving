@@ -1,17 +1,17 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan bir **tam sayı** alır ve bu sayının **tersini oluşturarak** ekrana yazdırır.
+This program takes an **integer** input from the user and prints its **reversed form**.
 
-📌 Programın işleyişi:
+📌 Program Flow:
 
-1. Kullanıcıdan bir sayı alınır.
-2. Sayının basamakları sondan başa doğru alınarak yeni bir sayı oluşturulur.
-3. Bu ters çevrilmiş sayı ekrana yazdırılır.
+1. Read an integer from the user.
+2. Extract the digits from the end and build a new number in reverse order.
+3. Print the reversed number.
 
-🔍 Örnek:
+🔍 Example:
 
-* Giriş: `573`
-* Ters çevrilmiş hali: `375`
-* Çıktı: `375`
+* Input: `573`
+* Reversed: `375`
+* Output: `375`
 
-Amaç, verilen sayının rakamlarının yerlerini tersine çevirerek yeni bir sayı elde etmektir.
+🎯 The goal is to reverse the digits of a given number and generate a new number with the reversed digits.

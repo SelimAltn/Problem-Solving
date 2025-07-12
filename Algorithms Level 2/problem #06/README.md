@@ -1,17 +1,17 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan bir **tam sayı** alır ve bu sayının **basamakları toplamını** hesaplayarak ekrana yazdırır.
+This program takes an **integer** input from the user and calculates the **sum of its digits**, then prints the result.
 
-📌 Programın işleyişi:
+📌 Program Flow:
 
-1. Kullanıcıdan bir sayı alınır.
-2. Sayının her bir basamağı mod (`%`) ve bölme (`/`) işlemleri ile elde edilir.
-3. Tüm basamaklar toplanarak toplam değer ekrana yazdırılır.
+1. Read an integer from the user.
+2. Use **modulus (`%`) and division (`/`) operations** to extract each digit.
+3. Sum all the digits and display the total on the screen.
 
-🔍 Örnek:
+🔍 Example:
 
-* Giriş: `573`
-* Hesap: `5 + 7 + 3 = 15`
-* Çıktı: `15`
+* Input: `573`
+* Calculation: `5 + 7 + 3 = 15`
+* Output: `15`
 
-Amaç, bir sayının tüm basamaklarını toplamak ve sonucu kullanıcıya göstermektir.
+🎯 The goal is to calculate the sum of all digits in a number and display the result to the user.
