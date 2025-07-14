@@ -1,28 +1,26 @@
-### 💡 Problem Tanımı
+💡 Problem Description
 
-Bu program, kullanıcıdan **1 ile 26 arasında** bir sayı alır ve bu sayıdan itibaren geriye doğru azalan şekilde, her satırda ilgili **büyük harfin (ASCII)** tekrarlandığı bir desen oluşturur.
+This program takes a number between 1 and 26 from the user and prints a reversed character pattern, where each line contains repetitions of an uppercase letter (based on ASCII) in decreasing order.
 
-📌 **Programın Kuralları:**
+📌 Program Rules:
+	•	Input range: 1 ≤ number ≤ 26 (as there are 26 letters in the English alphabet).
+	•	Starting from the nth letter from ‘A’, the pattern prints downward.
+	•	On each line, the corresponding letter is printed multiple times equal to the line number (from bottom to top).
 
-* Giriş aralığı: 1 ≤ sayı ≤ 26 (çünkü İngilizce alfabede 26 harf vardır).
-* En üst satırda 'A' harfinden itibaren `n` kadar ilerleyip o harften başlanır.
-* Her satırda, o satıra karşılık gelen harf tekrar edilerek yazdırılır.
+⸻
 
----
+✅ Sample Output
 
-### ✅ Örnek Çıktı
-
-```
 enter a number 
 3
- 
-C 
-BB 
-AAA 
-```
 
----
+C  
+BB  
+AAA  
 
-### 🎯 Amaç
 
-ASCII karakterleriyle çalışarak kullanıcıya harf ve karakter işlemlerini öğretmek; ayrıca iç içe döngülerle ters sıralı karakter desenleri oluşturma mantığını kavratmak.
+⸻
+
+🎯 Objective
+
+To teach the use of ASCII characters in programming and help the user understand how to work with nested loops to create reverse-ordered character patterns.
