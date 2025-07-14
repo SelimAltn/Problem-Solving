@@ -1,35 +1,35 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan bir tam sayı alarak bu sayının bir **palindrom sayı** olup olmadığını kontrol eder.
+This program takes an integer input from the user and checks whether the number is a **palindrome**.
 
-📌 **Palindrom Sayı Nedir?**
-Bir sayı, tersten okunduğunda kendisiyle aynıysa bu sayı **palindrom** olarak kabul edilir.
+📌 **What is a Palindrome Number?**
+A number is considered a **palindrome** if it reads the same **forward and backward**.
 
-📌 **Programın İşleyişi:**
+📌 **Program Flow:**
 
-* Kullanıcıdan sayı alınır.
-* Sayının tersi hesaplanır.
-* Ters sayı ile orijinal sayı karşılaştırılır.
-* Eşitse “is polindrome”, değilse “is not polindrome” çıktısı verilir.
+* The user enters a number.
+* The reverse of the number is calculated.
+* The reversed number is compared with the original number.
+* If they are equal, the output is “is palindrome”; otherwise, “is not palindrome”.
 
 ---
 
-### ✅ Örnek Çıktı
+### ✅ Sample Output
 
 ```
 enter a number 
 12321
-12321 is polindrome
+12321 is palindrome
 ```
 
 ```
 enter a number 
 457
-457 is not polindrome
+457 is not palindrome
 ```
 
 ---
 
-### 🎯 Amaç
+### 🎯 Objective
 
-Kullanıcının girdiği sayının palindrom olup olmadığını belirleyerek temel döngü, koşul ve sayı manipülasyonu mantığını pekiştirmek.
+To strengthen the understanding of loops, conditionals, and number manipulation by checking whether the given number is a palindrome.
