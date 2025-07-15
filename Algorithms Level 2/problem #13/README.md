@@ -1,29 +1,29 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan **pozitif bir tam sayı** alır ve 1’den başlayarak girilen sayıya kadar, her satırda o sayının tekrarlandığı bir **yükselen sayı desenini** ekrana yazdırır.
+This program prompts the user to enter a **positive integer**, and prints an **ascending number pattern** starting from 1 up to the entered number. On each line, the current number is repeated as many times as the line number.
 
-📌 **Programın Kuralları:**
+📌 **Program Rules:**
 
-* Kullanıcı yalnızca pozitif sayı girebilir.
-* Her satırda satır numarası kadar tekrar eden rakam yazılır.
-* Alt alta ilerleyen bir piramit deseni oluşur.
+* The user must enter a positive number.
+* Each line contains the digit repeated as many times as the current line number.
+* The output forms a pyramid-like pattern.
 
 ---
 
-### ✅ Örnek Çıktı
+### ✅ Sample Output
 
 ```
 enter a number 
 4
- 
-1 
-22 
-333 
-4444 
+
+1  
+22  
+333  
+4444  
 ```
 
 ---
 
-### 🎯 Amaç
+### 🎯 Objective
 
-Kullanıcının döngülerle satır-sütun mantığını kavramasını ve karakter/sayı desenleri oluşturmasını sağlamaktır.
+To help the user understand the row-column logic with loops and to practice creating numeric or character-based patterns.

@@ -1,16 +1,16 @@
-### 💡 Problem Tanımı
+### 💡 Problem Description
 
-Bu program, kullanıcıdan **pozitif bir tam sayı** alır ve bu sayıdan başlayarak 1’e kadar aşağıya doğru azalan, her satırda aynı sayının tekrarlandığı bir **sayı desenini** ekrana yazdırır.
+This program prompts the user to enter a **positive integer**, and then prints a **number pattern** starting from that number down to 1. On each line, the current number is repeated as many times as its value.
 
-📌 **Programın Kuralları:**
+📌 **Program Rules:**
 
-* Kullanıcı yalnızca pozitif sayı girebilir. Geçersiz girişlerde uyarı verilir.
-* Dış döngü ile `n`'den `1`’e kadar gidilir.
-* Her satırda, o anki sayı kadar aynı sayı yan yana yazılır.
+* The user must enter a positive number. Invalid input should trigger a warning.
+* An outer loop counts down from `n` to `1`.
+* On each line, the current number is printed multiple times—equal to its value—horizontally.
 
 ---
 
-### ✅ Örnek Çıktı
+### ✅ Sample Output
 
 ```
 enter a number 
@@ -23,6 +23,6 @@ enter a number
 
 ---
 
-### 🎯 Amaç
+### 🎯 Objective
 
-Kullanıcı girdisine bağlı olarak iç içe döngü kullanımını ve sayı desenleri oluşturmayı uygulamak.
+To practice using nested loops and generating number patterns based on user input.
