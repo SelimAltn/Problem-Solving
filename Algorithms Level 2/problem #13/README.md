@@ -1,4 +1,4 @@
-### 💡 Problem Description
+ ### 💡 Problem Description
 
 This program prompts the user to enter a **positive integer**, and prints an **ascending number pattern** starting from 1 up to the entered number. On each line, the current number is repeated as many times as the line number.
 
