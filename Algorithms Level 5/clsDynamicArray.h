@@ -73,11 +73,11 @@ public:
         delete[] OrginalArray;
         OrginalArray = _TempArray;
     }
-    T getItem(int Index)
+    T GetItem(int Index)
     {
         return OrginalArray[Index];
     }
-    void Reveres()
+    void Reverse()
     {
         for (int i = 0; i < _Size / 2; i++)
         {
