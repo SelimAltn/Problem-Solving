@@ -6,233 +6,277 @@
 #include "clsDynamicArray.h"
 #include "clsMyQueueArr.h"
 #include "clsMyStackArr.h"
+#include "clsMyString.h"
+#include "clsQueueLine.h"
 using namespace std;
 
 int main()
 {
-    /*
-    clsMyQueue <int> Queue;
-    Queue.push(10);
-    Queue.push(20);
-    Queue.push(30);
-    Queue.push(40);
-    Queue.push(50);
-    cout<<"Queue : \n";
-    Queue.Print();
-    cout<<endl <<"-----------------------"<<endl;
-    cout<<"Queue Size : "<<Queue.Size()<<endl;
-    cout<<"Queue front : "<<Queue.front()<<endl;
-    cout<<"Queue back : "<<Queue.back()<<endl;
+  /*
+  clsMyQueue <int> Queue;
+  Queue.push(10);
+  Queue.push(20);
+  Queue.push(30);
+  Queue.push(40);
+  Queue.push(50);
+  cout<<"Queue : \n";
+  Queue.Print();
+  cout<<endl <<"-----------------------"<<endl;
+  cout<<"Queue Size : "<<Queue.Size()<<endl;
+  cout<<"Queue front : "<<Queue.front()<<endl;
+  cout<<"Queue back : "<<Queue.back()<<endl;
 
-    Queue.pop();
-    cout<<"queue after pop() \n";
-    Queue.Print();
+  Queue.pop();
+  cout<<"queue after pop() \n";
+  Queue.Print();
 
-    cout<<"\n\n Item (2) : "<<Queue.GetItem(2)<<endl;
-    Queue.Reverse();
-    cout<<"Queue after reverse : "<<endl;
-    Queue.Print();
+  cout<<"\n\n Item (2) : "<<Queue.GetItem(2)<<endl;
+  Queue.Reverse();
+  cout<<"Queue after reverse : "<<endl;
+  Queue.Print();
 
-    Queue.UpdateItem(2,600);
-    cout<<"queue after updating item (2) to 600 : "<<endl;
-    Queue.Print();
+  Queue.UpdateItem(2,600);
+  cout<<"queue after updating item (2) to 600 : "<<endl;
+  Queue.Print();
 
-    Queue.InsertAfter(2,800);
-    cout<<"Queue Insertint 800 after Item(2) : "<<endl;
-    Queue.Print();
-    Queue.InsertAtFront(1000);
-    cout<<"Queue after Insertint 1000 at front : "<<endl;
-    Queue.Print();
+  Queue.InsertAfter(2,800);
+  cout<<"Queue Insertint 800 after Item(2) : "<<endl;
+  Queue.Print();
+  Queue.InsertAtFront(1000);
+  cout<<"Queue after Insertint 1000 at front : "<<endl;
+  Queue.Print();
 
-    Queue.InsertAtBack(2000);
-    cout<<"Queue after Insertint 2000 at back : "<<endl;
-    Queue.Print();
+  Queue.InsertAtBack(2000);
+  cout<<"Queue after Insertint 2000 at back : "<<endl;
+  Queue.Print();
 
-    Queue.Clear();
-    cout<<"Queue after clear : "<<endl;
-    Queue.Print();
+  Queue.Clear();
+  cout<<"Queue after clear : "<<endl;
+  Queue.Print();
 
-    cout<<Queue.IsEmpty()<<endl;
+  cout<<Queue.IsEmpty()<<endl;
 
-    clsMyStack <int> MyStack;
+  clsMyStack <int> MyStack;
 
-    MyStack.push(10);
-    MyStack.push(20);
-    MyStack.push(30);
-    MyStack.push(40);
-    MyStack.push(50);
-
-
-    cout << "\nStack: \n";
-    MyStack.Print();
-
-    cout << "\nStack Size: " << MyStack.Size();
-    cout << "\nStack Top: " << MyStack.Top();
-    cout << "\nStack Bottom: " << MyStack.Bottom();
-
-    MyStack.pop();
-
-    cout << "\n\nStack after pop() : \n";
-    MyStack.Print();
-
-    //Extension #1
-    cout << "\n\n Item(2) : " << MyStack.GetItem(2);
-
-    //Extension #2
-    MyStack.Reverse();
-    cout << "\n\nStack after reverse() : \n";
-    MyStack.Print();
-
-    //Extension #3
-    MyStack.UpdateItem(2, 600);
-    cout << "\n\nStack after updating Item(2) to 600 : \n";
-    MyStack.Print();
-
-    //Extension #4
-    MyStack.InsertAfter(2, 800);
-    cout << "\n\nStack after Inserting 800 after Item(2) : \n";
-    MyStack.Print();
+  MyStack.push(10);
+  MyStack.push(20);
+  MyStack.push(30);
+  MyStack.push(40);
+  MyStack.push(50);
 
 
-    //Extension #5
-    MyStack.InsertAtFront(1000);
-    cout << "\n\nStack after Inserting 1000 at top: \n";
-    MyStack.Print();
+  cout << "\nStack: \n";
+  MyStack.Print();
 
-    //Extension #6
-    MyStack.InsertAtBack(2000);
-    cout << "\n\nStack after Inserting 2000 at bottom: \n";
-    MyStack.Print();
+  cout << "\nStack Size: " << MyStack.Size();
+  cout << "\nStack Top: " << MyStack.Top();
+  cout << "\nStack Bottom: " << MyStack.Bottom();
 
-    //Extension #7
-    MyStack.Clear();
-    cout << "\n\nStack after Clear(): \n";
-    MyStack.Print();
+  MyStack.pop();
+
+  cout << "\n\nStack after pop() : \n";
+  MyStack.Print();
+
+  //Extension #1
+  cout << "\n\n Item(2) : " << MyStack.GetItem(2);
+
+  //Extension #2
+  MyStack.Reverse();
+  cout << "\n\nStack after reverse() : \n";
+  MyStack.Print();
+
+  //Extension #3
+  MyStack.UpdateItem(2, 600);
+  cout << "\n\nStack after updating Item(2) to 600 : \n";
+  MyStack.Print();
+
+  //Extension #4
+  MyStack.InsertAfter(2, 800);
+  cout << "\n\nStack after Inserting 800 after Item(2) : \n";
+  MyStack.Print();
 
 
+  //Extension #5
+  MyStack.InsertAtFront(1000);
+  cout << "\n\nStack after Inserting 1000 at top: \n";
+  MyStack.Print();
 
-    clsDynamicArray<int> MyDynamicArray(5);
-    cout << "\nIs Empty?  " << MyDynamicArray.IsEmpty();
-    cout << "\nArray Size: " << MyDynamicArray.Size() << "\n";
+  //Extension #6
+  MyStack.InsertAtBack(2000);
+  cout << "\n\nStack after Inserting 2000 at bottom: \n";
+  MyStack.Print();
 
-    MyDynamicArray.SetItem(0, 10);
-    MyDynamicArray.SetItem(1, 20);
-    MyDynamicArray.SetItem(2, 30);
-    MyDynamicArray.SetItem(3, 40);
-    MyDynamicArray.SetItem(4, 50);
-
-    cout << "\nArray Items: \n";
-
-    MyDynamicArray.PrintArr();
+  //Extension #7
+  MyStack.Clear();
+  cout << "\n\nStack after Clear(): \n";
+  MyStack.Print();
 
 
 
-    MyDynamicArray.PrintArr();
-    MyDynamicArray.InsertAtBeginning(400);
-    MyDynamicArray.PrintArr();
-    MyDynamicArray.InsertBefore(2,500);
-    MyDynamicArray.PrintArr();
-    MyDynamicArray.InsertAfter(6,600);
-    MyDynamicArray.PrintArr();
-    MyDynamicArray.InsertAtEnd(1000);
-    MyDynamicArray.PrintArr();
+  clsDynamicArray<int> MyDynamicArray(5);
+  cout << "\nIs Empty?  " << MyDynamicArray.IsEmpty();
+  cout << "\nArray Size: " << MyDynamicArray.Size() << "\n";
+
+  MyDynamicArray.SetItem(0, 10);
+  MyDynamicArray.SetItem(1, 20);
+  MyDynamicArray.SetItem(2, 30);
+  MyDynamicArray.SetItem(3, 40);
+  MyDynamicArray.SetItem(4, 50);
+
+  cout << "\nArray Items: \n";
+
+  MyDynamicArray.PrintArr();
 
 
-    clsMyQueueArr <int> Queue;
-    Queue.push(10);
-    Queue.push(20);
-    Queue.push(30);
-    Queue.push(40);
-    Queue.push(50);
-    cout<<"Queue : \n";
-    Queue.Print();
-    cout<<endl <<"-----------------------"<<endl;
-    cout<<"Queue Size : "<<Queue.Size()<<endl;
-    cout<<"Queue front : "<<Queue.front()<<endl;
-    cout<<"Queue back : "<<Queue.back()<<endl;
 
-    Queue.pop();
-    cout<<"queue after pop() \n";
-    Queue.Print();
-
-    cout<<"\n\n Item (2) : "<<Queue.GetItem(2)<<endl;
-    Queue.Reverse();
-    cout<<"Queue after reverse : "<<endl;
-    Queue.Print();
-
-    Queue.UpdateItem(2,600);
-    cout<<"queue after updating item (2) to 600 : "<<endl;
-    Queue.Print();
-
-    Queue.InsertAfter(2,800);
-    cout<<"Queue Insertint 800 after Item(2) : "<<endl;
-    Queue.Print();
-    Queue.InsertAtFront(1000);
-    cout<<"Queue after Insertint 1000 at front : "<<endl;
-    Queue.Print();
-
-    Queue.InsertAtBack(2000);
-    cout<<"Queue after Insertint 2000 at back : "<<endl;
-    Queue.Print();
-
-    Queue.Clear();
-    cout<<"Queue after clear : "<<endl;
-    Queue.Print();
-
-    cout<<Queue.IsEmpty()<<endl;
-  */
-  clsMyStackArr <int> MyStack;
-
-    MyStack.push(10);
-    MyStack.push(20);
-    MyStack.push(30);
-    MyStack.push(40);
-    MyStack.push(50);
+  MyDynamicArray.PrintArr();
+  MyDynamicArray.InsertAtBeginning(400);
+  MyDynamicArray.PrintArr();
+  MyDynamicArray.InsertBefore(2,500);
+  MyDynamicArray.PrintArr();
+  MyDynamicArray.InsertAfter(6,600);
+  MyDynamicArray.PrintArr();
+  MyDynamicArray.InsertAtEnd(1000);
+  MyDynamicArray.PrintArr();
 
 
-    cout << "\nStack: \n";
-    MyStack.Print();
+  clsMyQueueArr <int> Queue;
+  Queue.push(10);
+  Queue.push(20);
+  Queue.push(30);
+  Queue.push(40);
+  Queue.push(50);
+  cout<<"Queue : \n";
+  Queue.Print();
+  cout<<endl <<"-----------------------"<<endl;
+  cout<<"Queue Size : "<<Queue.Size()<<endl;
+  cout<<"Queue front : "<<Queue.front()<<endl;
+  cout<<"Queue back : "<<Queue.back()<<endl;
 
-    cout << "\nStack Size: " << MyStack.Size();
-    cout << "\nStack Top: " << MyStack.Top();
-    cout << "\nStack Bottom: " << MyStack.Bottom();
+  Queue.pop();
+  cout<<"queue after pop() \n";
+  Queue.Print();
 
-    MyStack.pop();
+  cout<<"\n\n Item (2) : "<<Queue.GetItem(2)<<endl;
+  Queue.Reverse();
+  cout<<"Queue after reverse : "<<endl;
+  Queue.Print();
 
-    cout << "\n\nStack after pop() : \n";
-    MyStack.Print();
+  Queue.UpdateItem(2,600);
+  cout<<"queue after updating item (2) to 600 : "<<endl;
+  Queue.Print();
 
-    //Extension #1
-    cout << "\n\n Item(2) : " << MyStack.GetItem(2);
+  Queue.InsertAfter(2,800);
+  cout<<"Queue Insertint 800 after Item(2) : "<<endl;
+  Queue.Print();
+  Queue.InsertAtFront(1000);
+  cout<<"Queue after Insertint 1000 at front : "<<endl;
+  Queue.Print();
 
-    //Extension #2
-    MyStack.Reverse();
-    cout << "\n\nStack after reverse() : \n";
-    MyStack.Print();
+  Queue.InsertAtBack(2000);
+  cout<<"Queue after Insertint 2000 at back : "<<endl;
+  Queue.Print();
 
-    //Extension #3
-    MyStack.UpdateItem(2, 600);
-    cout << "\n\nStack after updating Item(2) to 600 : \n";
-    MyStack.Print();
+  Queue.Clear();
+  cout<<"Queue after clear : "<<endl;
+  Queue.Print();
 
-    //Extension #4
-    MyStack.InsertAfter(2, 800);
-    cout << "\n\nStack after Inserting 800 after Item(2) : \n";
-    MyStack.Print();
+  cout<<Queue.IsEmpty()<<endl;
+
+clsMyStackArr <int> MyStack;
+
+  MyStack.push(10);
+  MyStack.push(20);
+  MyStack.push(30);
+  MyStack.push(40);
+  MyStack.push(50);
 
 
-    //Extension #5
-    MyStack.InsertAtFront(1000);
-    cout << "\n\nStack after Inserting 1000 at top: \n";
-    MyStack.Print();
+  cout << "\nStack: \n";
+  MyStack.Print();
 
-    //Extension #6
-    MyStack.InsertAtBack(2000);
-    cout << "\n\nStack after Inserting 2000 at bottom: \n";
-    MyStack.Print();
+  cout << "\nStack Size: " << MyStack.Size();
+  cout << "\nStack Top: " << MyStack.Top();
+  cout << "\nStack Bottom: " << MyStack.Bottom();
 
-    //Extension #7
-    MyStack.Clear();
-    cout << "\n\nStack after Clear(): \n";
-    MyStack.Print();
+  MyStack.pop();
+
+  cout << "\n\nStack after pop() : \n";
+  MyStack.Print();
+
+  //Extension #1
+  cout << "\n\n Item(2) : " << MyStack.GetItem(2);
+
+  //Extension #2
+  MyStack.Reverse();
+  cout << "\n\nStack after reverse() : \n";
+  MyStack.Print();
+
+  //Extension #3
+  MyStack.UpdateItem(2, 600);
+  cout << "\n\nStack after updating Item(2) to 600 : \n";
+  MyStack.Print();
+
+  //Extension #4
+  MyStack.InsertAfter(2, 800);
+  cout << "\n\nStack after Inserting 800 after Item(2) : \n";
+  MyStack.Print();
+
+
+  //Extension #5
+  MyStack.InsertAtFront(1000);
+  cout << "\n\nStack after Inserting 1000 at top: \n";
+  MyStack.Print();
+
+  //Extension #6
+  MyStack.InsertAtBack(2000);
+  cout << "\n\nStack after Inserting 2000 at bottom: \n";
+  MyStack.Print();
+
+  //Extension #7
+  MyStack.Clear();
+  cout << "\n\nStack after Clear(): \n";
+  MyStack.Print();
+
+  clsMyString S1 ;
+  S1.SetValue("Selim1");
+  cout<<S1.Value()<<endl;
+
+  S1.SetValue("Selim2");
+  cout<<S1.Value()<<endl;
+
+  S1.SetValue("Selim3");
+  cout<<S1.Value()<<endl;
+
+  S1.SetValue("Selim4");
+  cout<<S1.Value()<<endl;
+
+  S1.Undo();
+  cout<<S1.Value()<<endl;
+
+  S1.Undo();
+  cout<<S1.Value()<<endl;
+
+  S1.Undo();
+  cout<<S1.Value()<<endl;
+
+
+
+  S1.Redo();
+  cout<<S1.Value()<<endl;
+
+   S1.Undo();
+  cout<<S1.Value()<<endl;
+
+  S1.Redo();
+  cout<<S1.Value()<<endl;
+   */
+  clsQueueLine NakitIslemler("A0", 10);
+  NakitIslemler.IssueTicket();
+  NakitIslemler.IssueTicket();
+  NakitIslemler.IssueTicket();
+  NakitIslemler.IssueTicket();
+  NakitIslemler.IssueTicket();
+  NakitIslemler.printInfo();
+  NakitIslemler.PrintTicketsLineRTL();
 }

@@ -10,10 +10,11 @@ protected:
     clsDblLinkedList<T> _List;
 
 public:
-    void Print()
+    void Print(string delim = " ")
     {
-        _List.PrintList();
+        _List.PrintList(delim);
     }
+    
 
     void push(T value)
     {

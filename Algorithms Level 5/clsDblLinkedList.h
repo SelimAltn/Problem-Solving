@@ -144,6 +144,16 @@ public:
         }
         cout << "NULL " << endl;
     }
+    void PrintList(string delim =" ")
+    {
+        Node *current = _head;
+        while (current != NULL)
+        {
+            cout << current->value << delim;
+            current = current->next;
+        }
+        cout<<endl;
+    }
     int Size()
     {
 
@@ -180,19 +190,23 @@ public:
     {
         if (Index > _Size - 1 || Index < 0)
             return NULL;
-        int counter = 0; // head = 0
+
+        int counter = 0;
         Node *current = _head;
-        while (current != NULL && (current->next != NULL))
+
+        while (current != NULL)
         {
             if (counter == Index)
             {
-                break;
+                return current;
             }
             current = current->next;
             counter++;
         }
-        return current;
+
+        return NULL; // sadece güvenlik için
     }
+
     T GetItem(int Index)
     {
         Node *ItemNode = GetNode(Index);
@@ -224,7 +238,7 @@ public:
             InsertAfter(ItemNode, value);
             return true;
         }
-        else 
+        else
             return false;
     }
 
